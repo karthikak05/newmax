@@ -3,7 +3,7 @@ import { Select, MenuItem, FormControl, InputLabel } from '@mui/material';
 
 const Dropdown = ({ label, value, onChange, options }) => {
     return (
-        <FormControl fullWidth variant="outlined" style={{minWidth:'300px'}}>
+        <FormControl fullWidth variant="outlined" style={{minWidth:'20vw'}}>
             <InputLabel id={`${label}-label`}>{label}</InputLabel>
             <Select
                 labelId={`${label}-label`}
