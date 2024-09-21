@@ -1,0 +1,48 @@
+@import "/styles/variables.scss";
+@import "/styles/app.scss";
+
+.navbar{
+    @extend .flexRow !optional;
+    justify-content: space-between;
+    align-items: center;
+    font-size: $font-size-nav;
+    padding:1.5rem 2rem;
+    background-color:#FEFEFE;
+    box-shadow: 0 4px 8px rgba(73, 73, 73, 0.2); 
+
+    .imgContainer{
+        height: 26px;
+        width: 195px;
+        img{
+            object-fit: contain;
+        }
+    }
+
+    .itemsContainer{
+        cursor: pointer;
+        @extend .flexRow !optional;
+        gap:3rem;
+        justify-content: center;
+        .active{
+            color: $color-primary;
+        }
+    }
+
+    .buttons{
+       @extend .flexRow !optional;
+       gap:1rem;
+       button{
+        cursor: pointer;
+        position: relative;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        &:hover{
+            svg{
+                stroke: white;
+            }
+        }
+       }
+    }
+}

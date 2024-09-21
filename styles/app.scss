@@ -1,0 +1,40 @@
+@import "./mixins.scss";
+@import "./variables.scss";
+
+.flexRow{
+    display: flex;
+    flex-direction: row;
+}
+.flexCol{
+    display: flex;
+    flex-direction: column;
+}
+.imgContainer{
+    overflow: hidden;
+    img{
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}
+.outlinedButton{
+    border: 1px solid $color-primary;
+    border-radius: .5rem;
+    padding: 1rem;
+    background-color: transparent;
+    color: $color-primary;
+    transition: all .3s ease-in-out;
+}
+.outlinedButton:hover{
+    @extend .filledButton !optional;
+}
+.filledButton{
+    background-color: $color-primary;
+    color: white;
+    padding: 1rem;
+    border: none;
+    border-radius: .5rem;
+    &:hover{
+       background-color: #c51c09;
+    }
+}

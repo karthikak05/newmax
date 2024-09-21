@@ -1,0 +1,38 @@
+$xxs-screen : 380px;
+$xs-screen: 480px;
+$small-screen: 576px;
+$medium-screen: 768px;
+$large-screen: 992px;
+$xlarge-screen: 1200px;
+
+@mixin respond-to($breakpoint) {
+    @if $breakpoint == smallmobiles{
+        @media only screen and (max-width:$xs-screen) {
+          @content;
+        }
+      }
+  @else if $breakpoint == mobiles{
+    @media only screen and (max-width:$small-screen) {
+      @content;
+    }
+  }
+    //This will apply for screen sizes upto 768
+  @else if $breakpoint == xs {
+    @media only screen and (max-width:$medium-screen) {
+      @content;
+    }
+  }
+  //This will apply for screen sizes upto 992
+  @else if $breakpoint == medium {
+    @media only screen and (
+        max-width: $large-screen) {
+      @content;
+    }
+  } @else if $breakpoint == large {
+    @media only screen and (min-width: $large-screen) {
+      @content;
+    }
+  } @else {
+    @error "Invalid breakpoint provided. Please use 'small', 'medium', or 'large'.";
+  }
+}
