@@ -1,0 +1,89 @@
+@import "/styles/app.scss";
+@import "/styles/variables.scss";
+
+.hero{
+    .scrollContainer{
+        height: 90vh;
+        margin: 2vh 5vw 0 5vw;
+        border-radius: 1rem;
+        @extend .flexRow !optional;
+        overflow-x: hidden;
+        gap: 2rem;
+        scroll-snap-type: x mandatory;
+        &::-webkit-scrollbar{
+            display: none;
+        } 
+        position: relative;
+
+
+        .arrowContainer{
+            border: 2px solid white;
+            padding: .5rem;
+            height: 15px;
+            width: 15px;
+            border-radius: 50%;
+            position: sticky;
+            top: 50%;
+            left: 10%;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            .arrow{
+                color: white;
+            }
+            cursor: pointer;
+        }
+
+        .arrowContainer2{
+           position: sticky;
+           top: 50%;
+           right: 10%;
+           border: 2px solid white;
+           padding: .5rem;
+           height: 15px;
+           width: 15px;
+           border-radius: 50%;
+           display: flex;
+           align-items: center;
+           justify-content: flex-end;
+           .arrow2{
+            color: white;
+            transform: rotate(180deg);
+           }
+           cursor: pointer;
+        }
+
+        .disabled{
+            display: none;
+        }
+
+        .itemContainer{
+            scroll-snap-align: start;
+            height: 100%;
+            min-width:100%;
+            background-image: url("/hero-slider/hero-1.jpeg");
+            color: white; 
+            @extend .flexCol !optional;
+            align-items: center;
+            justify-content: center;
+            .content{
+                // border: 1px solid red;
+                width: 58%;
+                text-align: center;
+                h1{
+                    padding-top: 2rem;
+                    font-size: $font-size-hero;
+                } 
+                p{
+                    width: 60%;
+                    margin: auto;
+                }    
+                .newmax{
+                    background-color: $color-primary;
+                    padding: 0.5rem 1rem;
+                    border-radius: .5rem;
+                }
+            }
+        }
+    }
+}

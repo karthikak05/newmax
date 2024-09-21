@@ -1,13 +1,12 @@
 html,
 body {
-  max-width: 100vw;
-  overflow-x: hidden;
   font-family:var(--font-nunito-sans);
 }
 
 body {
   background-color: white;
   color: black;
+  scroll-behavior: smooth;
 } 
 
 *{

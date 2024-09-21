@@ -28,13 +28,6 @@
 .outlinedButton:hover{
     @extend .filledButton !optional;
 }
-.filledButton{
+.containedBtn{
     background-color: $color-primary;
-    color: white;
-    padding: 1rem;
-    border: none;
-    border-radius: .5rem;
-    &:hover{
-       background-color: #c51c09;
-    }
 }
