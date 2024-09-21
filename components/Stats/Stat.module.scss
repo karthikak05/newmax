@@ -2,7 +2,6 @@
 @import "/styles/variables.scss";
 
 .stats{
-    height: 100vh;
     text-align: center;
 
     .numbers{
@@ -35,6 +34,7 @@
         }
     }
     .statsContents{
+        margin-top: 10vh;
         @extend .flexRow !optional;
         justify-content: space-between;
         align-items: center;
