@@ -29,7 +29,7 @@
     @extend .filledButton !optional;
 }
 .containedBtn{
-    background-color: $color-primary;
+    background-color: $color-primary !important;
 }
 .heading{
     font-size: $font-size-heading;
