@@ -1,0 +1,59 @@
+@import "/styles/app.scss";
+@import "/styles/variables.scss";
+
+.stats{
+    height: 100vh;
+    text-align: center;
+
+    .numbers{
+        background-color: $color-gray;
+        @extend .flexRow !optional;
+        justify-content: space-between;
+        align-items: center;
+        margin: 5vh 10vw 0 10vw;
+        padding: 1rem 2rem;
+        border-radius: 1rem;
+
+        p{
+            @extend .flexRow !optional;
+            align-items: center;
+            gap: 1rem;
+            b{
+                font-size: 64px;
+                color: $color-primary;
+                font-weight: 600;
+            }
+            font-size: 28px;
+        }
+    }
+
+    .textContent{
+        margin:10vh 2.5vw 0 2.5vw;
+        text-align: left;
+        p{
+            padding-top: 1rem;
+        }
+    }
+    .statsContents{
+        @extend .flexRow !optional;
+        justify-content: space-between;
+        align-items: center;
+        border: .5px solid rgba(128, 128, 128, 0.479);
+        padding: 3rem;
+        border-radius: .5rem;
+        .stat{
+            .imgContainer{
+                height: 50px;
+                width: 50px;
+                img{
+                    object-fit: contain
+                }
+            }
+            p{
+                width: 70%;
+            }
+            @extend .flexCol !optional;
+            gap:1rem;
+        }
+    }
+}

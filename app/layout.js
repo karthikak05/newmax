@@ -6,6 +6,10 @@ const nunito = localFont({
   variable: "--font-nunito-sans",
   weight: "normal",
 });
+const nunitoSemiBold = localFont({
+  src: "./fonts/NunitoSans-SemiBold.ttf", 
+  variable: "--semibold",
+});
 
 export const metadata = {
   title: "NewMax",
@@ -15,7 +19,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${nunito.variable}`}>
+      <body className={`${nunito.variable} ${nunitoSemiBold.variable}`}>
         {children}
       </body>
     </html>

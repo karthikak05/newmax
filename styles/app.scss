@@ -31,3 +31,10 @@
 .containedBtn{
     background-color: $color-primary;
 }
+.heading{
+    font-size: $font-size-heading;
+}
+.subHeading{
+    font-size: $font-size-subHeading;
+    font-family: var(--semibold);
+}
