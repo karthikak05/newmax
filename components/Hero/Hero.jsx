@@ -21,7 +21,7 @@ export default function Hero() {
     };
 
     const handleNext = () => {
-        if (activeContainer < heroContent.length ) {
+        if (activeContainer < heroContent.length-1 ) {
             scrollContainer.current.scrollBy({ left: 500, behavior: 'smooth' });
             setActiveContainer(activeContainer + 1);
         }else{
