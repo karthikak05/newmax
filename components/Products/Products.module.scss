@@ -1,0 +1,15 @@
+@import "/styles/app.scss";
+@import "/styles/variables.scss";
+
+.topProducts{
+    height: 100vh;
+    .headingDiv{
+        @extend .flexRow !optional;
+        justify-content: space-between;
+        button{
+            @extend .outlinedButton !optional;
+            border: 1px solid $color-primary;
+            width: 131px;
+        }
+    }
+}
