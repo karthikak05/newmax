@@ -49,14 +49,7 @@ export default function Hero() {
 
     return (
         <div className={styles.hero}>
-            <div className={styles.scrollContainer} ref={scrollContainer}>
-                <div 
-                    className={styles.arrowContainer}
-                    onClick={handlePrev}
-                >
-                    <ArrowBackIosIcon fontSize="small" color="primary" className={styles.arrow} />
-                </div>
-                
+            <div className={styles.scrollContainer} ref={scrollContainer}>                
                 {heroContent.map((item, i) => (
                     <div className={styles.itemContainer} key={i}>
                         <div className={styles.content}>
@@ -72,13 +65,6 @@ export default function Hero() {
                         <h1>{heroContent[heroContent.length - 1].heading}</h1>
                         <p>{heroContent[heroContent.length - 1].para}</p>
                     </div>
-                </div>
-
-                <div 
-                    className={styles.arrowContainer2}
-                    onClick={handleNext}
-                >
-                    <ArrowBackIosIcon fontSize="small" color="primary" className={styles.arrow2} />
                 </div>
             </div>
 
