@@ -19,7 +19,7 @@ export default function Stat() {
 
         <div className={styles.textContent}>
             <h2 className={styles.heading}>Enabling Visibility Engagement</h2>
-            <p>Enabling visibility and engagement empowers your team to communicate effectively and collaborate seamlessly, fostering a productive work environment where everyone is informed and involved.</p>
+            <p className={styles.textGray}>Enabling visibility and engagement empowers your team to communicate effectively and collaborate seamlessly, fostering a productive work environment where everyone is informed and involved.</p>
             <div className={styles.statsContents}>
                 {stats.map((stat,i)=>(
                     <div className={styles.outerStat} key={i}>

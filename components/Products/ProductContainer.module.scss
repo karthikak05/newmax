@@ -1,0 +1,37 @@
+@import "/styles/app.scss";
+
+.productContainer{
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding: 20px;
+    height: 528;
+    width: 424px;
+    .content{
+        @extend .flexCol !optional;
+        gap: .5rem;
+        .imgContainer{
+            height: 265px;
+            width: 384px;
+            img{
+                object-fit: cover;
+            }
+        }
+        .price{
+            color: $color-primary;
+            font-size: $font-size-nav;
+        }
+        .btnContainer{
+            height: 44px;
+            @extend .flexRow !optional;
+            justify-content: space-between;
+            button{
+                height: 100%;
+                width: 184px;
+                .oulinedButton{
+                    border: 1px solid $color-primary;
+                }
+            }
+        }
+    }
+    
+}
