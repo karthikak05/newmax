@@ -1,0 +1,54 @@
+@import "/styles/app.scss";
+@import "/styles/variables.scss";
+
+.testimonials{
+    min-height: 100vh;
+    text-align: center;
+    .subpara{
+        width: 30%;
+        margin: auto;
+        padding: 1rem;
+        .textRed{
+            font-weight: 600;
+        }
+    }
+    .outerContainer{
+        padding-top: 1rem;
+        @extend .flexRow !optional;
+        gap:2rem;
+        .item{
+            position: relative;
+            border:1px solid $color-text-gray;
+            border-radius: 10px;
+            padding: 1rem 2rem;
+            text-align: center;
+            // height: 252px;
+            // width: 424px;
+            .quote{
+                position: absolute;
+                top:0;
+                left: 40%;
+                font-size: 128px;
+                color: #b1b1b1;
+            }
+            .feedback{
+                padding-top: 70px;
+                padding-bottom: 50px;
+            }
+        }
+        .active{
+            border: 2px solid $color-primary;
+        }
+        .imgContainer{
+            position: absolute;
+            bottom: -47px;
+            left: 35%;
+            height: 94px;
+            width: 94px;
+            border-radius: 50%;
+            img{
+                object-fit: cover;
+            }
+        }
+    }
+}

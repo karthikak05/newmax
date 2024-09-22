@@ -3,6 +3,7 @@ import styles from "./page.module.scss";
 import Hero from "@/components/Hero/Hero";
 import Stat from "@/components/Stats/Stat";
 import Products from "@/components/Products/Products";
+import Testimonials from "@/components/Testimonials/Testimonials";
 
 export default function Home() {
   return (
@@ -21,6 +22,10 @@ export default function Home() {
 
         <section>
           <Products/>
+        </section>
+
+        <section>
+          <Testimonials/>
         </section>
 
       </main>
