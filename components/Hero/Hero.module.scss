@@ -6,7 +6,7 @@
     position: relative;
     .scrollContainer{
         height: 90vh;
-        margin: 2vh 2.5vw 0 2.5vw;
+        margin-top: 2vh;
         border-radius: 1rem;
         @extend .flexRow !optional;
         overflow-x: hidden;
@@ -92,28 +92,30 @@
         position: absolute;
         bottom: -10vh;
         left: 12vw;
-        border:2px solid gray;
         border-radius: 2rem;
-        background-color: transparent;
+        background-color: #d9d9dd2f;
         backdrop-filter: blur(10px);
         width: 70vw;
-        height: 20vh;
+        height: 170px;
         padding: 2rem;
+        box-shadow: 0 2px 4px rgb(0,0,0,.5);
         z-index: 99;
         .innerDiv{
             background-color: white;
-            height: 80%;
-            border: 1px solid gray;
+            height:140px;
             border-radius: .5rem;
             padding:2rem 0 0 5vw;
             .searchBtn{
-                padding: .5rem 5rem;
+                height: 52px;
+                width: 221px;
+                padding: 12px 60px;
                 font-size: 18px;
             }
         }
         .dropdownContainer{
             @extend .flexRow !optional;
             gap: 1rem;
+            padding-top: 1rem;
         }
     }
 }

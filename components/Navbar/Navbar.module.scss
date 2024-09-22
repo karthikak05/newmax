@@ -2,11 +2,12 @@
 @import "/styles/app.scss";
 
 .navbar{
+    height: 100px;
     @extend .flexRow !optional;
     justify-content: space-between;
     align-items: center;
     font-size: $font-size-nav;
-    padding:1.5rem 2rem;
+    padding:0 2rem;
     background-color:#FEFEFE;
     box-shadow: 0 2px 8px rgba(136, 136, 136, 0.2); 
     font-family: var(--semibold);

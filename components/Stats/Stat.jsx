@@ -11,7 +11,9 @@ export default function Stat() {
 
         <div className={styles.numbers}>
             <p><b>25+</b> Years</p>
+            <div className={styles.gradientDiv}></div>
             <p><b>120+</b> Countries</p>
+            <div className={styles.gradientDiv}></div>
             <p><b>3000+</b> Customers</p>
         </div>
 
@@ -20,11 +22,14 @@ export default function Stat() {
             <p>Enabling visibility and engagement empowers your team to communicate effectively and collaborate seamlessly, fostering a productive work environment where everyone is informed and involved.</p>
             <div className={styles.statsContents}>
                 {stats.map((stat,i)=>(
-                  <div key={i} className={styles.stat}>
-                    <div className={styles.imgContainer}><Image src={stat.image} alt={stat.heading} height={80} width={50}/></div>
-                    <h3>{stat.heading}</h3>
-                    <p>{stat.para}</p>
-                  </div>
+                    <div className={styles.outerStat} key={i}>
+                      <div className={styles.stat}>
+                        <div className={styles.imgContainer}><Image src={stat.image} alt={stat.heading} height={80} width={50}/></div>
+                        <h3>{stat.heading}</h3>
+                        <p>{stat.para}</p>
+                      </div>
+                      {i !== stats.length-1 && <div className={styles.gradientDiv}></div>}
+                    </div>
                 ))}
             </div>
         </div>

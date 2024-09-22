@@ -31,7 +31,7 @@ export default function Navbar() {
           </span>
           Cart
         </button>
-        <Button variant="contained" className={styles.containedBtn}>Contact Us</Button>
+        <Button  sx={{ textTransform: 'none' }} variant="contained" className={styles.containedBtn}>Contact Us</Button>
       </div>
     </nav>
   )

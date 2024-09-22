@@ -103,7 +103,7 @@ export default function Hero() {
                                 options={options2}
                             />
                         </div>
-                        <Button variant="contained" className={`${styles.containedBtn} ${styles.searchBtn}`}>Search</Button>
+                        <Button  sx={{ textTransform: 'none' }} variant="contained" className={`${styles.containedBtn} ${styles.searchBtn}`}>Search</Button>
                     </div>
                 </div>
             </div>
