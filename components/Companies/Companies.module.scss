@@ -1,0 +1,28 @@
+@import "/styles/app.scss";
+@import "/styles/variables.scss";
+
+.companies{
+    text-align: center;
+    .gridContainer{
+        margin-top: 1rem;
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        grid-template-rows: repeat(2,96px);
+        padding: 0 10vw;
+        gap: 1rem;
+        .imgContainer{
+            height: 96px;
+            width: 184px;
+            img{
+                object-fit: contain;
+            }
+        }
+        .secondRow {
+            grid-column: span 4;                    
+            display: grid;
+            grid-template-columns: repeat(4, 184px);  
+            margin: auto;                       
+            gap: 3rem;  
+        }
+    }
+}

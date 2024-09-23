@@ -4,6 +4,7 @@ import Hero from "@/components/Hero/Hero";
 import Stat from "@/components/Stats/Stat";
 import Products from "@/components/Products/Products";
 import Testimonials from "@/components/Testimonials/Testimonials";
+import Companies from "@/components/Companies/Companies";
 
 export default function Home() {
   return (
@@ -25,6 +26,7 @@ export default function Home() {
         </section>
 
         <section>
+          <Companies/>
           <Testimonials/>
         </section>
 
