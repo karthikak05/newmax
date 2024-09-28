@@ -5,6 +5,7 @@ import { productContainerDetails } from '@/data/ProductContainer';
 import ProductContainer from './ProductContainer';
 import Dropdown from '../DropDown/DropDown';
 import { options1 } from '@/data/DropDown';
+import { Button } from '@mui/material';
 
 export default function Products() {
     const [selectedValue, setSelectedValue] = useState('');
@@ -27,7 +28,7 @@ export default function Products() {
                         options={options1}
                     />
                     </div>
-                <button>View More</button>
+                    <Button  sx={{ textTransform: 'none' }} variant="contained" className={styles.containedBtn}>View More</Button>
             </div>
         </div>
 

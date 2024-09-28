@@ -40,5 +40,14 @@
         gap: 1rem;
         width: 50%;
         margin: auto;
+        .svgContainer{
+            border:1px solid #b1b1b1;
+            border-radius: 50%;
+            height: 46px;
+            width: 46px;
+            @extend .flexCol !optional;
+            justify-content: center;
+            align-items: center;
+        }
     }
 }

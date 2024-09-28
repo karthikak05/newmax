@@ -28,7 +28,7 @@ export default function Stat() {
                         <h3>{stat.heading}</h3>
                         <p>{stat.para}</p>
                       </div>
-                      {i !== stats.length-1 && <div className={styles.gradientDiv}></div>}
+                      {(i < stats.length-1 || i<1) && <div className={styles.gradientDiv}></div>}
                     </div>
                 ))}
             </div>

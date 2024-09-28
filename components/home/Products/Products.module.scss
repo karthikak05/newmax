@@ -5,15 +5,9 @@
     .headingDiv{
         @extend .flexRow !optional;
         justify-content: space-between;
-        button{
-            @extend .outlinedButton !optional;
-            border: 1px solid $color-primary;
-            width: 131px;
-        }
         .right{
             .dropdown{
                 width: 221px;
-                border: 1px solid red
             }
             @extend .flexRow !optional;
             gap:1rem;
@@ -26,5 +20,6 @@
         grid-template-columns: repeat(3,1fr);
         grid-template-rows: auto;
         gap: 1rem;
+        place-items: center;
     }
 }

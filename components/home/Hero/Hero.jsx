@@ -6,7 +6,7 @@ import { Button } from '@mui/material';
 import { options1,options2 } from '@/data/DropDown';
 import Dropdown from '../DropDown/DropDown';
 export default function Hero() {
-    const [activeContainer, setActiveContainer] = useState(0); // Start at 1 to show the first content
+    const [activeContainer, setActiveContainer] = useState(0);
     const scrollContainer = useRef(null);
     const [selectedValue1, setSelectedValue1] = useState('');
     const [selectedValue2, setSelectedValue2] = useState('');
@@ -20,8 +20,8 @@ export default function Hero() {
     };
 
     const handleNext = () => {
-        if (activeContainer < heroContent.length-1 ) {
-            scrollContainer.current.scrollBy({ left: 500, behavior: 'smooth' });
+        if (activeContainer < heroContent.length) {
+            scrollContainer.current.scrollBy({ left: 1000, behavior: 'smooth' });
             setActiveContainer(activeContainer + 1);
         }else{
             setTimeout(() => {
@@ -31,17 +31,10 @@ export default function Hero() {
         }
     };
 
-    const handlePrev = () => {
-        if (activeContainer > 0) {
-            scrollContainer.current.scrollBy({ left: -500, behavior: 'smooth' });
-            setActiveContainer(activeContainer - 1);
-        }
-    };
-
     useEffect(() => {
         const intervalId = setInterval(() => {
             handleNext();
-        }, 5000); 
+        }, 2000); 
 
         return () => clearInterval(intervalId);
     }, [activeContainer]); 
@@ -58,13 +51,6 @@ export default function Hero() {
                         </div>
                     </div>
                 ))}
-
-                <div className={styles.itemContainer} key={"last"} style={{ opacity: 0 }}>
-                    <div className={styles.content}>
-                        <h1>{heroContent[heroContent.length - 1].heading}</h1>
-                        <p>{heroContent[heroContent.length - 1].para}</p>
-                    </div>
-                </div>
             </div>
 
             {/* glassyDiv */}
@@ -74,7 +60,7 @@ export default function Hero() {
                     <div className={styles.dropdownContainer}>
                         <div className={styles.dropDown}>
                             <Dropdown 
-                                label="Select Company"
+                                label="Select Brand"
                                 value={selectedValue1}
                                 onChange={handleChange1}
                                 options={options1}
