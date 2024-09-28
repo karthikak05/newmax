@@ -34,7 +34,7 @@ export default function Hero() {
     useEffect(() => {
         const intervalId = setInterval(() => {
             handleNext();
-        }, 2000); 
+        }, 5000); 
 
         return () => clearInterval(intervalId);
     }, [activeContainer]); 

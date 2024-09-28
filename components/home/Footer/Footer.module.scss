@@ -4,9 +4,11 @@
 .footer{
     margin: 0 64px;
     .newsletter{
+        position: relative;
+        width: 100%;
         @extend .flexRow !optional;
         align-items: center;
-        justify-content: space-between;
+        gap: 1rem;
         padding-bottom: 10vh;
         border-bottom: 1px solid #C1B4B499;
         .left{
@@ -32,6 +34,10 @@
                 width: 424px;
                 border: 1px solid #9F9F9F;
             }
+        }
+        .socials{
+            position: absolute;
+            right: 5%;
         }
         .icons{
             padding-top: 1rem;
