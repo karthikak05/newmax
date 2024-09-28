@@ -17,7 +17,7 @@ export default function FAQ() {
     return (
         <div className={styles.faq}>
             <h1 className={styles.heading}>Frequently Asked Questions</h1>
-            <p className={styles.subpara}>Everything you need to know about the product and billing. Can't find the answer you're looking for? Please chat with our friendly team.</p>
+            <p className={styles.subpara}>Everything you need to know about the product and billing. Can&apos;t find the answer you&apos;re looking for? Please chat with our friendly team.</p>
             <div className={styles.faqContainer}>
                 {FAQS.map((item, i) => (
                     <div className={styles.quote} key={i} onClick={() => handleToggle(i)}>
