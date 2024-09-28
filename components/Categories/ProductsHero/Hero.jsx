@@ -2,7 +2,7 @@ import React from 'react'
 import styles from "./Hero.module.scss";
 import Image from 'next/image';
 
-export default function Hero() {
+export default function ProductsHero() {
   return (
     <div className={styles.main}>
         <div className={styles.circle1}></div>
