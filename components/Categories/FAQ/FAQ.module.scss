@@ -39,7 +39,6 @@
         }
 
         .answer {
-            padding-top: 1rem;
             overflow: hidden;
             max-height: 0;
             opacity: 0;
@@ -47,6 +46,7 @@
         }
 
         .open {
+            padding-top: 1rem;
             max-height: 500px; 
             opacity: 1;
         }
