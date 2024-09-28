@@ -1,0 +1,68 @@
+@import "/styles/app.scss";
+@import "/styles/variables.scss";
+
+.main{
+    margin: 0 64px 10vh 64px;
+    position: relative; 
+    margin-top: 5vh;
+    height: 360px;
+    border-radius: 1rem;
+    @extend .flexRow !optional;
+    align-items: center;
+    background-color: #161C2D;
+    color: white;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url("/bg.png");
+        background-repeat: repeat;
+        background-size: auto;
+        opacity: 0.06;  
+        z-index: 1;
+    }
+    .circle1{
+        position: absolute; 
+        left: -127px;
+        top: -106.97px;
+        height:363px;
+        width:363px;
+        background-color: rgba(255, 255, 255, 0.281);
+        opacity: 0.1;
+        border-radius: 50%;
+    }
+    .circle2{
+        height: 266px;
+        width: 266px;
+        left: -78.61px;
+        top: -58.58px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.281);
+        position: absolute;
+        opacity: 0.2;
+    }
+    .circle3{
+        height: 186px;
+        width: 186px;
+        top: -18.61px;
+        left: -38.64px;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.281);
+        position: absolute;
+        opacity: 0.3;
+    }
+    
+    .content{
+        margin-left: 10%;
+        max-width: 50%;
+    }
+    .imgContainer{
+        width: 488px;
+        height: 100%;
+    }
+}

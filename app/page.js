@@ -1,16 +1,13 @@
-import Navbar from "@/components/Navbar/Navbar";
 import styles from "./page.module.scss";
-import Hero from "@/components/Hero/Hero";
-import Stat from "@/components/Stats/Stat";
-import Products from "@/components/Products/Products";
-import Testimonials from "@/components/Testimonials/Testimonials";
-import Companies from "@/components/Companies/Companies";
-import Footer from "@/components/Footer/Footer";
+import Hero from "@/components/home/Hero/Hero";
+import Stat from "@/components/home/Stats/Stat";
+import Products from "@/components/home/Products/Products";
+import Testimonials from "@/components/home/Testimonials/Testimonials";
+import Companies from "@/components/home/Companies/Companies";
 
 export default function Home() {
   return (
     <div className={styles.page}>
-      <Navbar/>
       
       <main>
         
@@ -32,10 +29,7 @@ export default function Home() {
         </section>
 
       </main>
-
-      <footer>
-        <Footer/>
-      </footer>
+      
     </div>
   );
 }

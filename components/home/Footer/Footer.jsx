@@ -9,7 +9,7 @@ export default function Footer() {
     <div className={styles.footer}>
         {/* newsletter */}
         <div className={styles.newsletter}>
-            <div>
+            <div className={styles.left}>
                 <h3>Join Our News Letter</h3>
                 <p>We will send you a one nice letter once per week.  No spam.</p>
             </div>

@@ -4,16 +4,25 @@ import styles from "./Navbar.module.scss";
 import Image from 'next/image';
 import { navItems } from '@/data/NavItems';
 import { Button } from '@mui/material';
+import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
-  const [activeIndex,setActiveIndex] = useState(0);
+  const router = useRouter()
+  const [activeIndex,setActiveIndex] = useState(null);
 
   const handleClick = (i)=>{
-    setActiveIndex(i)
+    console.log(navItems[i].toLowerCase())
+    setActiveIndex(i);
+    router.push("/products");
+  }
+
+  const handleHome = ()=>{
+    router.push("/");
+    setActiveIndex(null)
   }
   return (
     <nav className={styles.navbar}>
-      <div className={styles.imgContainer}>
+      <div className={styles.imgContainer} onClick={handleHome} style={{cursor:"pointer"}}>
         <Image src="/logo.png" alt='logo' width={195} height={25}/>
       </div>
       <div className={styles.itemsContainer}>

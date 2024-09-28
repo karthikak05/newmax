@@ -1,5 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import Navbar from "@/components/home/Navbar/Navbar";
+import Footer from "@/components/home/Footer/Footer";
 
 const nunito = localFont({
   src: "./fonts/NunitoSans-Regular.ttf", 
@@ -20,7 +22,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${nunito.variable} ${nunitoSemiBold.variable}`}>
+        <Navbar/>
         {children}
+        <Footer/>
       </body>
     </html>
   );

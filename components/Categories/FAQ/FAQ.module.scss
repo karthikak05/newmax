@@ -1,0 +1,59 @@
+@import "/styles/app.scss";
+@import "/styles/variables.scss";
+
+.faq {
+    text-align: center;
+    padding-bottom: 15vh;
+
+    .subpara {
+        width: 50%;
+    }
+
+    .faqContainer {
+        @extend .flexCol !optional;
+        gap: 2rem;
+        align-items: center;
+        margin-top: 2rem;
+    }
+
+    .quote {
+        position: relative;
+        cursor: pointer;
+        text-align: left;
+        width: 50%;
+        border-radius: 1rem;
+        background-color: #D9D9D929;
+        padding: 1rem 2rem 1rem 5rem;
+
+        .minus {
+            position: absolute;
+            top: 1.2rem;
+            left: 1rem;
+            background-color: $color-primary;
+            height: 24px;
+            width: 24px;
+            border-radius: 50%;
+            svg {
+                transform: rotate(90deg);
+            }
+        }
+
+        .answer {
+            padding-top: 1rem;
+            overflow: hidden;
+            max-height: 0;
+            opacity: 0;
+            transition: max-height 0.3s ease, opacity 0.3s ease;
+        }
+
+        .open {
+            max-height: 500px; 
+            opacity: 1;
+        }
+
+        .closed {
+            max-height: 0;
+            opacity: 0;
+        }
+    }
+}

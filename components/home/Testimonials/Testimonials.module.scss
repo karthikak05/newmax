@@ -3,10 +3,9 @@
 
 .testimonials{
     text-align: center;
+    margin-top: 10vh;
     .subpara{
-        width: 30%;
-        margin: auto;
-        padding: 1rem;
+        @extend .subpara !optional;
         .textRed{
             font-weight: 600;
         }

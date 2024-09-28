@@ -9,13 +9,15 @@
         justify-content: space-between;
         padding-bottom: 10vh;
         border-bottom: 1px solid #C1B4B499;
+        .left{
+            width: 33%;
+        }
         h3{
             font-size: 24px;
             font-weight: 600;
         }
         p{
             padding-top: 1rem;
-            width: 80%;
         }
         .subscribeBtn{
             margin-left: 1rem;
@@ -30,7 +32,6 @@
                 width: 424px;
                 border: 1px solid #9F9F9F;
             }
-            margin: auto;
         }
         .icons{
             padding-top: 1rem;

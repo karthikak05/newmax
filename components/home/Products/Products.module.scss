@@ -10,6 +10,14 @@
             border: 1px solid $color-primary;
             width: 131px;
         }
+        .right{
+            .dropdown{
+                width: 221px;
+                border: 1px solid red
+            }
+            @extend .flexRow !optional;
+            gap:1rem;
+        }
     }
 
     .gridContainer{

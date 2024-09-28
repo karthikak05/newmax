@@ -1,0 +1,44 @@
+@import "/styles/app.scss";
+@import "/styles/variables.scss";
+
+.main{
+    text-align: center;
+    .subpara{
+        width: 40%;
+    }
+
+    .gridContainer{
+        padding-top: 1rem;
+        display: grid;
+        grid-template-columns: repeat(3,1fr);
+        grid-template-rows: auto;
+        gap: 1rem;
+    }
+
+    .item{
+        padding: 1rem;
+        border:1px solid gray;
+        width: fit-content;
+        border-radius: 1rem;
+        text-align: left;
+        @extend .flexCol !optional;
+        gap:1rem;
+        .imgContainer{
+            height: 256px;
+            width: 100%;
+            border-radius: 1rem;
+        }
+        .containedBtn{
+            width: fit-content;
+            align-self: center;
+        }
+    }
+    .viewMore{
+        @extend .flexCol !optional;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        width: 50%;
+        margin: auto;
+    }
+}

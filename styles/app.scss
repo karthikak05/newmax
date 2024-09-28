@@ -43,6 +43,11 @@
     font-size: $font-size-subHeading;
     font-family: var(--semibold);
 }
+.subpara{
+    width: 30%;
+    margin: auto;
+    padding: 1rem;
+}
 .textGray{
     color: $color-text-gray;
 }
@@ -54,4 +59,13 @@
     width: 1px;
     height: 63px;
     background: linear-gradient(180deg, rgba(176, 151, 151, 0.3) 0%, #B09797 51%, rgba(176, 151, 151, 0.3) 100%);
+}
+.svgContainer{
+    border:1px solid #b1b1b1;
+    border-radius: 50%;
+    height: 46px;
+    width: 46px;
+    @extend .flexCol !optional;
+    justify-content: center;
+    align-items: center;
 }

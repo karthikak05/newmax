@@ -9,16 +9,31 @@
     .content{
         @extend .flexCol !optional;
         gap: .5rem;
+        .best{
+            position: absolute;
+            top: 3%;
+            right: 3%;
+            background-color: #4CAF50;
+            border-radius: 3rem;
+            padding: 6px 12px;
+            color: white;
+        }
         .imgContainer{
+            position: relative;
             height: 265px;
-            width: 384px;
+            width: 100%;
             img{
                 object-fit: cover;
             }
         }
         .price{
             color: $color-primary;
-            font-size: $font-size-nav;
+            font-size: 32px;
+            font-weight: bold;
+            span{
+                color: rgba(128, 128, 128, 0.596);
+                font-size: 16px;
+            }
         }
         .btnContainer{
             height: 44px;
@@ -30,6 +45,9 @@
                 .oulinedButton{
                     border: 1px solid $color-primary;
                 }
+            }
+            .containedBtn{
+                width: 100%;
             }
         }
     }

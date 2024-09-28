@@ -2,7 +2,6 @@
 @import "/styles/variables.scss";
 
 .hero{
-    // border: 1px solid red;
     position: relative;
     .scrollContainer{
         height: 90vh;
@@ -74,6 +73,9 @@
             @extend .flexRow !optional;
             gap: 1rem;
             padding-top: 1rem;
+            .dropDown{
+                width: 35%;
+            }
         }
     }
 }
