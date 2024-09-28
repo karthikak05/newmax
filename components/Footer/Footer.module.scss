@@ -1,0 +1,70 @@
+@import "/styles/app.scss";
+@import "/styles/variables.scss";
+
+.footer{
+    margin: 0 64px;
+    .newsletter{
+        @extend .flexRow !optional;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: 10vh;
+        border-bottom: 1px solid #C1B4B499;
+        h3{
+            font-size: 24px;
+            font-weight: 600;
+        }
+        p{
+            padding-top: 1rem;
+            width: 80%;
+        }
+        .subscribeBtn{
+            margin-left: 1rem;
+            @extend .containedBtn !optional;
+            padding: 10px 20px !important;
+            height: 42px;
+        }
+        .inputDiv{
+            input{
+                padding: 10px 20px;
+                border-radius: 8px;
+                width: 424px;
+                border: 1px solid #9F9F9F;
+            }
+            margin: auto;
+        }
+        .icons{
+            padding-top: 1rem;
+            @extend .flexRow !optional;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+    }
+
+    // logo
+    .main{
+        padding: 2rem 1rem 3rem 1rem; 
+        @extend .flexRow !optional;
+        justify-content: space-between;
+        .logoDiv{
+            .imgContainer{
+                height: 40px;
+                width: 303px;
+                img{
+                    object-fit: contain;
+                }
+            }
+            p{
+                padding-top: 1rem;
+                width: 303px;
+            }
+        }
+        .itemHeading{
+            font-size: 24px;
+            padding-bottom: 2rem;
+        }
+        .itemText{
+            color: $color-text-gray;
+            padding-bottom: 1rem;
+        }
+    }
+}

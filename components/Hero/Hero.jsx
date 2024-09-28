@@ -2,7 +2,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './Hero.module.scss';
 import { heroContent } from '@/data/Hero';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Button } from '@mui/material';
 import { options1,options2 } from '@/data/DropDown';
 import Dropdown from '../DropDown/DropDown';
