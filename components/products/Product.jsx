@@ -6,7 +6,7 @@ import { options1,categories } from '@/data/DropDown';
 import Dropdown from '../home/DropDown/DropDown';
 
 export default function Product() {
-    const [currentProduct,setCurrentProduct] = useState(localStorage.getItem("currentProduct"));
+    const [currentProduct,setCurrentProduct] = useState(null);
     const [selectedBrand, setSelectedBrand] = useState('');
     const [selectedProduct, setSelectedProduct] = useState('');
 
@@ -22,6 +22,8 @@ export default function Product() {
       if( localStorage.getItem("currentProduct") == null){
         localStorage.setItem("currentProduct","PDA Accessories");
       }
+      const value = localStorage.getItem("currentProduct");
+      setCurrentProduct(value);
     },[]);
 
   return (
