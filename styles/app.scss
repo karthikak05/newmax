@@ -60,3 +60,10 @@
     height: 63px;
     background: linear-gradient(180deg, rgba(176, 151, 151, 0.3) 0%, #B09797 51%, rgba(176, 151, 151, 0.3) 100%);
 }
+
+.page{
+    section{
+        min-height: 100vh;
+        margin: 0 64px 10vh 64px;
+    }
+}

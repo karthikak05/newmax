@@ -1,11 +1,18 @@
+'use client'
 import React from 'react'
 import styles from "./Main.module.scss";
 import { Button } from '@mui/material';
 import Image from 'next/image';
 import { categoriesData } from '@/data/Categories';
-import ChevronRightOutlinedIcon from '@mui/icons-material/ChevronRightOutlined';
+import { useRouter } from 'next/navigation';
 
 export default function Main() {
+  const router = useRouter()
+
+  const handleClick = (category)=>{
+    localStorage.setItem("currentProduct",category);
+    router.push("/products");
+  }
   return (
     <div className={styles.main}>
         <h1 className={styles.heading}>Shipping Visibility & Engagement</h1>
@@ -17,7 +24,9 @@ export default function Main() {
                     <div className={styles.imgContainer}><Image src={data.image} alt={data.category} height={265} width={384}/></div>
                     <h2>{data.category}</h2>
                     <p>{data.para}</p>
+                    <div onClick={()=>handleClick(data.category)}>
                     <Button sx={{ textTransform: 'none' }} variant="contained" className={styles.containedBtn}>View Products</Button>
+                    </div>
                 </div>
             ))}
             <div className={styles.viewMore}>

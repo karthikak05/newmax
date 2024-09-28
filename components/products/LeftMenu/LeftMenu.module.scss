@@ -1,0 +1,23 @@
+@import "/styles/app.scss";
+@import "/styles/variables.scss";
+
+.main{
+    h1{
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #E7E7E7;
+    }
+    ul{
+        font-size: 16px;
+        font-weight: 500;
+        padding:1rem 0;
+        list-style: none;
+        li{
+            padding: .5rem;
+            border-radius: 10px;
+        }
+    }
+    .active{
+        background-color: $color-primary;
+        color: white;
+    }
+}

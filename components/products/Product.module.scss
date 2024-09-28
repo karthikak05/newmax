@@ -1,0 +1,43 @@
+@import "/styles/app.scss";
+@import "/styles/variables.scss";
+
+.main{
+    margin-top: 5vh;
+    .listing{
+        color: rgb(185, 185, 185);
+    }
+    .topContent{
+        .heading{
+            margin-top: 1rem;
+        }
+        width: 45%;
+    }
+
+    .mainContainer{
+        margin-top: 5vh;
+        @extend .flexRow !optional;
+        .leftMenu{
+            width: 20%;
+            height: 100%;
+            position: static;
+            border:1px solid #E7E7E7;
+            border-radius: 10px;
+            padding: 1rem;
+        }
+        .listings{
+            margin-left: 1%;
+            width: 75%;
+            overflow-y: hidden;
+            height: 80vh;
+
+            .dropDownContainer{
+                margin-top: 1rem;
+                @extend .flexRow !optional;
+                gap: 1rem;
+                .dropDown{
+                    width: 20vw;
+                }
+            }
+        }
+    }
+}

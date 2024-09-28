@@ -11,9 +11,9 @@ export default function Navbar() {
   const [activeIndex,setActiveIndex] = useState(null);
 
   const handleClick = (i)=>{
-    console.log(navItems[i].toLowerCase())
+    const link = navItems[i].toLowerCase();
     setActiveIndex(i);
-    router.push("/products");
+    router.push(link);
   }
 
   const handleHome = ()=>{
