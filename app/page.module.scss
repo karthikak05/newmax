@@ -1,6 +1,13 @@
 .page{
+    position: relative;
     section{
         min-height: 100vh;
         margin: 0 64px 10vh 64px;
+    }
+    .whatsapp{
+        width: fit-content;
+        position: fixed;
+        bottom: 10%;
+        right: 64px;
     }
 }

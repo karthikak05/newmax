@@ -4,6 +4,7 @@ import Stat from "@/components/home/Stats/Stat";
 import Products from "@/components/home/Products/Products";
 import Testimonials from "@/components/home/Testimonials/Testimonials";
 import Companies from "@/components/home/Companies/Companies";
+import Whatsapp from "@/components/home/Whatsapp/Whatsapp";
 
 export default function Home() {
   return (
@@ -28,8 +29,11 @@ export default function Home() {
           <Testimonials/>
         </section>
 
+        <div className={styles.whatsapp}>
+        <Whatsapp/>
+        </div>
+
       </main>
-      
     </div>
   );
 }

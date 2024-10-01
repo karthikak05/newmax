@@ -1,0 +1,21 @@
+.main{
+    .svg{
+        background-color: #57F573;
+        height: 60px;
+        width: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        float: right;
+    }
+    .help{
+        .newmax{
+            font-weight: 600;
+        }
+        width: fit-content;
+        padding: 6px 20px;
+        border-radius: 4px;
+        background-color: #FEE1DE;
+    }
+}
