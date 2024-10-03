@@ -2,10 +2,7 @@
 @import "/styles/variables.scss";
 
 .main{
-    h1{
-        padding-bottom: 1rem;
-        border-bottom: 1px solid #E7E7E7;
-    }
+
     ul{
         font-size: 16px;
         font-weight: 500;
@@ -20,4 +17,30 @@
         background-color: $color-primary;
         color: white;
     }
+    .headingContainer{
+        @extend .flexRow !optional;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        border-bottom: 1px solid #E7E7E7;
+        padding: 1rem 0;
+        h1{
+            font-size: 20px;
+        }
+    }
+    .activeArrow {
+        transform: rotate(180deg);
+    }
+    .companyItem{
+        transition: all 0.3s ease-in-out;
+        &:hover{
+            background-color: $color-primary;
+            color: white;
+        }
+    }
+    .activeCompany{
+        background-color: $color-primary;
+        color: white;
+    }
+      
 }

@@ -15,7 +15,7 @@ export default function Testimonials() {
         <p className={styles.subpara}>Discover how <span className={styles.textRed}>NewMax</span> has empowered customers with quality parts and valuable training experiences.</p>
         <div className={styles.outerContainer}>
             {testimonials.map((item,i)=>(
-                <div key={i}  className={`${styles.item} ${i === active ? styles.active : ''}`}>
+                <div key={i}  className={`${styles.item} ${i === active ? styles.active : ''}`} onMouseEnter={()=>handleActive(i)} onMouseLeave={()=>handleActive(0)}>
                     <h1 className={styles.quote}>“</h1>
                     <p className={styles.feedback}>{item.feedback}</p>
                     <div className={styles.imgContainer}><Image src={item.image} alt="feedback-image" height={94} width={94}/></div>

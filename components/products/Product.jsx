@@ -6,7 +6,7 @@ import { options1,categories } from '@/data/DropDown';
 import Dropdown from '../home/DropDown/DropDown';
 
 export default function Product() {
-    const [currentProduct,setCurrentProduct] = useState(null);
+    const [currentCategory,setCurrentCategory] = useState(null);
     const [selectedBrand, setSelectedBrand] = useState('');
     const [selectedProduct, setSelectedProduct] = useState('');
 
@@ -19,18 +19,18 @@ export default function Product() {
       setSelectedProduct(event.target.value)
     }
     useEffect(()=>{
-      if( localStorage.getItem("currentProduct") == null){
-        localStorage.setItem("currentProduct","PDA Accessories");
+      if( localStorage.getItem("currentCategory") == null){
+        localStorage.setItem("currentCategory","PDA Accessories");
       }
-      const value = localStorage.getItem("currentProduct");
-      setCurrentProduct(value);
+      const value = localStorage.getItem("currentCategory");
+      setCurrentCategory(value);
     },[]);
 
   return (
     <div className={styles.main}>
-        <span className={styles.listing}>Home / Products /<b className={styles.textRed}> {currentProduct}</b></span>
+        <span className={styles.listing}>Home / Products /<b className={styles.textRed}> {currentCategory}</b></span>
         <div className={styles.topContent}>
-        <h1 className={styles.heading}>{currentProduct}</h1>
+        <h1 className={styles.heading}>{currentCategory}</h1>
         <p className={styles.para}>Experience real-time tracking, proactive communication, and efficient problem-solving for your PDA accessory shipments. Enjoy a seamless and hassle-free delivery experience.</p>
         </div>
 
@@ -46,25 +46,15 @@ export default function Product() {
             <h2>Find the product you need</h2>
             
             {/* dropdown */}
-            <div className={styles.dropDownContainer}>
             <div className={styles.dropDown}>
                 <Dropdown 
-                  label="Select Category"
+                  label="Choose Products"
                   value={selectedProduct}
                   onChange={handleProductChange}
                   options={categories}
                 />
               </div>
-              <div className={styles.dropDown}>
-                <Dropdown 
-                  label="Select Brand"
-                  value={selectedBrand}
-                  onChange={handleBrandChange}
-                  options={options1}
-                />
-                </div>
             </div>
-          </div>
           {/* eofpr */}
         </div>
     </div>

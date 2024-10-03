@@ -10,7 +10,7 @@ export default function Main() {
   const router = useRouter()
 
   const handleClick = (category)=>{
-    localStorage.setItem("currentProduct",category);
+    localStorage.setItem("currentCategory",category);
     router.push("/products");
   }
   return (

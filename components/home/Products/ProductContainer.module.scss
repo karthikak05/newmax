@@ -4,8 +4,8 @@
     border: 1px solid gray;
     border-radius: 10px;
     padding: 20px;
-    height: 528;
-    width: 424px;
+    // height: 528;
+    // width: 424px;
     .content{
         @extend .flexCol !optional;
         gap: .5rem;
@@ -41,7 +41,7 @@
             justify-content: space-between;
             button{
                 height: 100%;
-                width: 184px;
+                // width: 184px;
                 .oulinedButton{
                     border: 1px solid $color-primary;
                 }
