@@ -7,13 +7,16 @@ import { useRouter } from 'next/navigation';
 
 export default function Total() {
   const router = useRouter();
-  const [deliveryType,setDeliveryType] = useState("free");
+  const [deliveryType,setDeliveryType] = useState(null);
   const types = ['Free','Express']
 
   useEffect(()=>{
     const delivery = localStorage.getItem("deliveryType");
     if( delivery!==null)  setDeliveryType(delivery);
-    else  localStorage.setItem("deliveryType","Free");
+    else{
+      localStorage.setItem("deliveryType","Free");
+      setDeliveryType("Free")
+    }
 
   },[])
   return (
