@@ -1,6 +1,23 @@
+@import "/styles/app.scss";
+@import "/styles/variables.scss";
+
 .page{
     section{
         min-height: 100vh;
+        margin: 0 64px 10vh 64px;
+    }
+
+    .main{
+        text-align: center;
+        margin-top: 2rem;
+        .flexContainer{
+            @extend .flexRow !optional;
+            gap:1rem;
+            margin-top: 1rem;
+        }
+    }
+
+    .recommended{
         margin: 0 64px 10vh 64px;
     }
 }

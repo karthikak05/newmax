@@ -1,0 +1,13 @@
+@import "/styles/app.scss";
+@import "/styles/variables.scss";
+
+.main{
+    @extend .lightBorder !optional;
+    width: 50%;
+    min-height: 100vh;
+    padding: 20px;
+    text-align: left;
+    h2{
+        font-size: 28px;
+    }
+}
