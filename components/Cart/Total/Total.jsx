@@ -25,7 +25,7 @@ export default function Total() {
 
       <div className={styles.type}>
         {types.map((type,i)=>(
-          <p key={i} className={type === deliveryType ? styles.active : ""}>{type}</p>
+          <p key={i} className={type === deliveryType ? styles.active : ""} onClick={()=>setDeliveryType(type)}>{type}</p>
         ))}
       </div>
 
