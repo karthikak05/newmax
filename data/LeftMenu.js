@@ -10,12 +10,12 @@ export const LeftMenu = [
         "models": ""
     },
     {
-        "heading": "Barcode Printer",
+        "heading": "Barcode Printer Accessories",
         "companies": ["Zebra", "HoneyWell", "DataMax", "Toshiba"],
         "models": ""
     },
     {
-        "heading": "Card Printer",
+        "heading": "Card Printer Accessories",
         "companies": [],
         "models": ""
     },

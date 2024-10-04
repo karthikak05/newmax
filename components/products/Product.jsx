@@ -7,23 +7,39 @@ import Dropdown from '../home/DropDown/DropDown';
 
 export default function Product() {
     const [currentCategory,setCurrentCategory] = useState(null);
-    const [selectedBrand, setSelectedBrand] = useState('');
+    const [selectedBrand, setSelectedBrand] = useState(null);
     const [selectedProduct, setSelectedProduct] = useState('');
 
 
-    const handleBrandChange = (event) => {
-      setSelectedBrand(event.target.value);
+
+    const handleBrandChange = (value) => {
+      setSelectedBrand(value);
+      localStorage.setItem("activeCompanyIndex", value); 
     };
+
+    const handleCategoryChange = (value)=>{
+      setCurrentCategory(value);
+      localStorage.setItem("currentCategory",value)
+    }
 
     const handleProductChange = (event)=>{
       setSelectedProduct(event.target.value)
-    }
+    };
+
     useEffect(()=>{
-      if( localStorage.getItem("currentCategory") == null){
-        localStorage.setItem("currentCategory","PDA Accessories");
+      const category = localStorage.getItem("currentCategory") 
+      if(category !== null)   setCurrentCategory(category);
+      else{
+        setCurrentCategory("PDA Accessories");
+        localStorage.setItem("currentCategory","PDA Accessories")
       }
-      const value = localStorage.getItem("currentCategory");
-      setCurrentCategory(value);
+      const activeCompanyIndex = localStorage.getItem("activeCompanyIndex");
+      if (activeCompanyIndex !== null) {
+        setSelectedBrand(activeCompanyIndex);
+      } else {
+        setSelectedBrand(0); 
+        localStorage.setItem("activeCompanyIndex", 0); 
+      }
     },[]);
 
   return (
@@ -38,7 +54,12 @@ export default function Product() {
 
           {/* leftmenu */}
           <div className={styles.leftMenu}>
-            <LeftMenu />
+            <LeftMenu 
+            currentCategory={currentCategory}
+            currentBrand={selectedBrand}
+            handleBrandChange={handleBrandChange}
+            handleCategoryChange={handleCategoryChange}
+            />
           </div>
 
           {/* products */}
