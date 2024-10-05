@@ -3,7 +3,6 @@ import styles from "./LeftMenu.module.scss";
 import { LeftMenu } from '@/data/LeftMenu';
 
 export default function LeftMenuComponent({currentCategory,currentBrand,handleBrandChange,handleCategoryChange}) {
-    console.log(currentBrand)
 
     return (
         <div className={styles.main}>

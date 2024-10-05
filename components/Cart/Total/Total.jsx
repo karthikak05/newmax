@@ -5,7 +5,7 @@ import { Button } from '@mui/material';
 import { Router } from 'next/router';
 import { useRouter } from 'next/navigation';
 
-export default function Total() {
+export default function Total({handleCheckedOut}) {
   const router = useRouter();
   const [deliveryType,setDeliveryType] = useState(null);
   const types = ['Free','Express']
@@ -38,7 +38,7 @@ export default function Total() {
       <div className={styles.total}><h2>Total</h2><p>$80.00</p></div>
 
       <div className={styles.buttons}>
-      <Button  sx={{ textTransform: 'none' }} variant="contained" className={styles.checkout}>Proceed To Checkout</Button>
+      <Button  sx={{ textTransform: 'none' }} variant="contained" className={styles.checkout} onClick={()=>(handleCheckedOut(true))}>Proceed To Checkout</Button>
       <Button  sx={{ textTransform: 'none' }} variant="outlined" className={styles.outlined} onClick={()=>router.push("/products")}>Continue Shoppping</Button>
       </div>
     </div>
