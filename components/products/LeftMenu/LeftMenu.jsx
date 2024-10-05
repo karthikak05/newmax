@@ -3,6 +3,7 @@ import styles from "./LeftMenu.module.scss";
 import { LeftMenu } from '@/data/LeftMenu';
 
 export default function LeftMenuComponent({currentCategory,currentBrand,handleBrandChange,handleCategoryChange}) {
+    console.log(currentBrand)
 
     return (
         <div className={styles.main}>
@@ -27,7 +28,7 @@ export default function LeftMenuComponent({currentCategory,currentBrand,handleBr
                     {(category.heading === currentCategory && category.companies.length>0) && (
                         <ul className={styles.companyList}>
                             {category.companies.map((company, i) => (
-                                <li key={i} className={`${styles.companyItem} ${i === currentBrand ? styles.activeCompany: ""}`} onClick={()=>handleBrandChange(i)}>
+                                <li key={i} className={`${styles.companyItem} ${company === currentBrand ? styles.activeCompany: ""}`} onClick={()=>handleBrandChange(company)}>
                                     {company}
                                 </li>
                             ))}
