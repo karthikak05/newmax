@@ -1,0 +1,23 @@
+@import "/styles/app.scss";
+@import "/styles/variables.scss";
+
+.main{
+    background-color: #062A4D;
+    border-radius: 1rem;
+    width: 100%;
+    @extend .flexRow !optional;
+    align-items: center;
+    margin-top: 2rem;
+    color: white;
+    .text{
+        border: 1px solid red;
+        padding: 2rem;
+        .heading{
+            font-size: 48px;
+        }
+    }
+    .imgContainer{
+        height: 100%;
+        width: 40%;
+    }
+}

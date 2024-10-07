@@ -11,7 +11,7 @@ export default function Navbar() {
   const [activeIndex,setActiveIndex] = useState(null);
 
   const handleClick = (i)=>{
-    const link = navItems[i].toLowerCase();
+    const link = navItems[i].toLowerCase().replace(/\s+/g, '-');
     setActiveIndex(i);
     router.push(link);
   }
