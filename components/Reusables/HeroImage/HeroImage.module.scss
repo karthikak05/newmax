@@ -1,0 +1,36 @@
+@import "/styles/app.scss";
+@import "/styles/variables.scss";
+
+    .imageDiv{
+        background-color: #062A4D;
+        border-radius: 1rem;
+        width: 100%;
+        @extend .flexRow !optional;
+        align-items: center;
+        margin-top: 2rem;
+        color: white;
+        position: relative;
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: var(--bg-image);;
+            background-repeat: repeat;
+            background-size: auto;
+            opacity: 0.05;  
+            z-index: 1;
+        }
+    }
+    .text{
+        padding-left: 10%;
+        .heading{
+            font-size: 48px;
+        }
+    }
+    .imgContainer{
+        height:95%;
+        width: 50%;
+    }

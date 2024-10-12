@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './CheckoutForm.module.scss';
 import Image from 'next/image';
-import { Button } from '@mui/material';
 
 export default function CheckoutForm({ handleCheckedOut }) {
   return (

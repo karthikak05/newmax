@@ -20,6 +20,10 @@ export default function Navbar() {
     router.push("/");
     setActiveIndex(null)
   }
+  const handleContact = ()=>{
+    router.push("/contact-us");
+    console.log("in")
+  }
   return (
     <nav className={styles.navbar}>
       <div className={styles.imgContainer} onClick={handleHome} style={{cursor:"pointer"}}>
@@ -40,7 +44,9 @@ export default function Navbar() {
           </span>
           Cart
         </button>
-        <Button  sx={{ textTransform: 'none' }} variant="contained" className={styles.containedBtn}>Contact Us</Button>
+        <div onClick={handleContact}>
+          <Button sx={{ textTransform: 'none' }} variant="contained" className={styles.containedBtn} >Contact Us</Button>
+        </div>
       </div>
     </nav>
   )
