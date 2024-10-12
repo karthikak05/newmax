@@ -2,6 +2,7 @@
 @import "/styles/variables.scss";
 
 .main{
+    margin: 0 64px 10vh 64px;
     .imageDiv{
         background-color: #062A4D;
         border-radius: 1rem;
@@ -34,13 +35,5 @@
     .imgContainer{
         height:95%;
         width: 50%;
-    }
-    .textContainer{
-        margin-top: 10vh;
-        line-height: 1.5;
-        .para{
-            margin-top: 1rem;
-            color: #494949;
-        }
     }
 }
