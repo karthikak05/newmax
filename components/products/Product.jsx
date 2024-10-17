@@ -2,14 +2,17 @@
 import React, { useEffect, useState } from 'react'
 import styles from "./Product.module.scss";
 import LeftMenu from './LeftMenu/LeftMenu';
-import { options1,categories } from '@/data/DropDown';
+import { categories } from '@/data/DropDown';
 import Dropdown from '../home/DropDown/DropDown';
+import useStorage from '@/firebase/useStorage';
+import Image from 'next/image';
 
 export default function Product() {
+    const {fetchImages } = useStorage();
     const [currentCategory,setCurrentCategory] = useState(null);
     const [selectedBrand, setSelectedBrand] = useState(null);
     const [selectedProduct, setSelectedProduct] = useState('');
-
+    const [imageUrls,setImageUrls] = useState([])
 
 
     const handleBrandChange = (value) => {
@@ -40,6 +43,14 @@ export default function Product() {
         setSelectedBrand(0); 
         localStorage.setItem("activeCompanyIndex", "Zebra"); 
       }
+
+      const loadImages = async ()=>{
+        console.log("calling")
+        const imageUrls = await fetchImages("/Card Printer Accessories/HC100")
+        console.log(imageUrls);
+        setImageUrls(imageUrls)
+      }
+      loadImages()
     },[]);
 
   return (
@@ -77,6 +88,13 @@ export default function Product() {
               </div>
             </div>
           {/* eofpr */}
+        </div>
+        <div>
+          {imageUrls.map((image,i)=>(
+            <div key={i}>
+              <Image src={image} alt={image} height={300} width={300}/>
+            </div>
+          ))}
         </div>
     </div>
   )
