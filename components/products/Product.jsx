@@ -29,27 +29,35 @@ export default function Product() {
       setSelectedProduct(event.target.value)
     };
 
-    useEffect(()=>{
-      const category = localStorage.getItem("currentCategory") 
-      if(category !== null)   setCurrentCategory(category);
-      else{
-        setCurrentCategory("PDA Accessories");
-        localStorage.setItem("currentCategory","PDA Accessories")
+    useEffect(() => {
+      if (typeof window !== 'undefined') {
+        // This code will run only on the client-side
+    
+        const category = localStorage.getItem("currentCategory");
+        if (category !== null) {
+          setCurrentCategory(category);
+        } else {
+          setCurrentCategory("PDA Accessories");
+          localStorage.setItem("currentCategory", "PDA Accessories");
+        }
+    
+        const activeCompanyIndex = localStorage.getItem("activeCompanyIndex");
+        if (activeCompanyIndex !== null) {
+          setSelectedBrand(activeCompanyIndex);
+        } else {
+          setSelectedBrand(0);
+          localStorage.setItem("activeCompanyIndex", "Zebra");
+        }
+    
+        const loadImages = async () => {
+          const imageUrls = await fetchImages("/Card Printer Accessories/HC100");
+          setImageUrls(imageUrls);
+        };
+    
+        loadImages();
       }
-      const activeCompanyIndex = localStorage.getItem("activeCompanyIndex");
-      if (activeCompanyIndex !== null) {
-        setSelectedBrand(activeCompanyIndex);
-      } else {
-        setSelectedBrand(0); 
-        localStorage.setItem("activeCompanyIndex", "Zebra"); 
-      }
-
-      const loadImages = async ()=>{
-        const imageUrls = await fetchImages("/Card Printer Accessories/HC100")
-        setImageUrls(imageUrls)
-      }
-      loadImages()
-    },[]);
+    }, [fetchImages]);
+    
 
   return (
     <div className={styles.main}>
