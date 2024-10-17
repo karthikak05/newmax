@@ -45,9 +45,7 @@ export default function Product() {
       }
 
       const loadImages = async ()=>{
-        console.log("calling")
         const imageUrls = await fetchImages("/Card Printer Accessories/HC100")
-        console.log(imageUrls);
         setImageUrls(imageUrls)
       }
       loadImages()
