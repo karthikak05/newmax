@@ -30,9 +30,7 @@ export default function Product() {
     };
 
     useEffect(() => {
-      if (typeof window !== 'undefined') {
-        // This code will run only on the client-side
-    
+      if (typeof window !== 'undefined') {   
         const category = localStorage.getItem("currentCategory");
         if (category !== null) {
           setCurrentCategory(category);

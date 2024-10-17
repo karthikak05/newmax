@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import styles from "./products.module.scss";
 import Product from '../../components/products/Product';
