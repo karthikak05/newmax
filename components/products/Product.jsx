@@ -17,17 +17,21 @@ export default function Product() {
 
     const handleBrandChange = (value) => {
       setSelectedBrand(value);
-      localStorage.setItem("activeCompanyIndex", value); 
-    };
-
-    const handleCategoryChange = (value)=>{
+      if (typeof window !== 'undefined') {
+          localStorage.setItem("activeCompanyIndex", value);
+      }
+  };
+  
+  const handleCategoryChange = (value) => {
       setCurrentCategory(value);
-      localStorage.setItem("currentCategory",value)
-    }
-
-    const handleProductChange = (event)=>{
-      setSelectedProduct(event.target.value)
-    };
+      if (typeof window !== 'undefined') {
+          localStorage.setItem("currentCategory", value);
+      }
+  };
+  
+  const handleProductChange = (event) => {
+      setSelectedProduct(event.target.value);
+  };  
 
     useEffect(() => {
       if (typeof window !== 'undefined') {   
