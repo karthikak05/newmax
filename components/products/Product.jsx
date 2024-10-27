@@ -5,6 +5,7 @@ import styles from "./Product.module.scss";
 import Image from 'next/image';
 import LeftMenu from './LeftMenu/LeftMenu';
 import Dropdown from '../home/DropDown/DropDown';
+import { categories } from '@/data/DropDown';
 const useStorage = dynamic(() => import('@/firebase/useStorage'), { ssr: false });
 
 export default function Product() {
