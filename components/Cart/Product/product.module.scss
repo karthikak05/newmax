@@ -4,19 +4,22 @@
 .main{
     @extend .lightBorder !optional;
     width: 50%;
-    min-height: 100vh;
+    height: 100vh;
+    overflow-y: scroll;
     padding: 20px;
     text-align: left;
     h2{
         font-size: 28px;
+        border-bottom: 1px solid #E4E4E4;
+        padding-bottom: 1rem;
     }
     .itemsContainer{
-        border-top: 1px solid #E4E4E4;
-        border-bottom: 1px solid #E4E4E4;
         padding: 1rem 0;
        .item{
             @extend .flexRow !optional;
             justify-content: space-between;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #E4E4E4;
             .imgContainer{
                 height: 161px;
                 width: 234px;

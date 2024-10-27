@@ -10,8 +10,12 @@ export default function Total({handleCheckedOut}) {
   const { total } = useCartStore();
   const deliveryFee = 10;
   const Tax = 20;
+  const ExpressFee = 5;
   const [currency,setCurrency] = useState("USD") 
   const [currencySymbol,setCurrecySymbol] = useState("$") ;
+  const router = useRouter();
+  const [deliveryType,setDeliveryType] = useState(null);
+  const types = ['Free','Express'];
 
   useEffect(()=>{
     let currencyValue = localStorage.getItem("currency");
@@ -20,9 +24,12 @@ export default function Total({handleCheckedOut}) {
     if( currencySymbol )  setCurrecySymbol(currencySymbol);  
   },[]);
 
-  const router = useRouter();
-  const [deliveryType,setDeliveryType] = useState(null);
-  const types = ['Free','Express']
+
+  const calculateTotal = ()=>{
+    let totalAmount = total + deliveryFee + Tax;
+    if( deliveryType === 'Express') totalAmount += ExpressFee;
+    return totalAmount;
+  }
 
   useEffect(()=>{
     const delivery = localStorage.getItem("deliveryType");
@@ -46,10 +53,13 @@ export default function Total({handleCheckedOut}) {
       <div className={styles.calc}>
         <div className={styles.subtotal}><h2>SubTotal</h2><p>${total}</p></div>
         <div className={styles.gray}><p>Delivery</p><p>+{currencySymbol}{deliveryFee}</p></div>
+        {deliveryType === "Express" &&
+          <div className={styles.gray}><p>Express</p><p>+{currencySymbol}{ExpressFee}</p></div>
+        }
         <div className={styles.gray}><p>Tax</p><p>+{currencySymbol}{Tax}</p></div>
       </div>
 
-      <div className={styles.total}><h2>Total</h2><p>${total+deliveryFee+Tax}</p></div>
+      <div className={styles.total}><h2>Total</h2><p>${calculateTotal()}</p></div>
 
       <div className={styles.buttons}>
       <Button  sx={{ textTransform: 'none' }} variant="contained" className={styles.checkout} onClick={()=>(handleCheckedOut(true))}>Proceed To Checkout</Button>
