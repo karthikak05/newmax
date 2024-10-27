@@ -4,14 +4,18 @@ import Image from 'next/image';
 import { Button } from '@mui/material';
 
 export default function ProductContainer({ url }) {
-  const [currency,setCurrentCurrency] = useState("USD")
+  const [currency,setCurrentCurrency] = useState("USD");
+  const [currecySymbol,setCurrecySymbol] = useState("$");
   function extractNameAndPrice(url) {
     const decodedString = decodeURIComponent(url);
     const nameWithPrice = decodedString.substring(decodedString.lastIndexOf('/') + 1);
-    const name = nameWithPrice.substring(0, nameWithPrice.indexOf('(')).trim();
+    const name = nameWithPrice.substring(0, nameWithPrice.lastIndexOf('(')).trim();
     
-    const priceMatch = nameWithPrice.match(/\((\$\d+)\)/);
-    const price = priceMatch ? priceMatch[1] : null;
+    let price = nameWithPrice.substring(nameWithPrice.lastIndexOf('(')+2,nameWithPrice.lastIndexOf(')'));
+    console.log(nameWithPrice+":"+price)
+    // price = price.join('') 
+    // price = price.substring(1,price.length);
+    // console.log(price);
     
     return { name, price };
   }
@@ -25,7 +29,7 @@ export default function ProductContainer({ url }) {
       </div>
       <div className={styles.content}>
         <p>{name}</p>
-        <h2>{currency}{price}/<span> per quantity</span></h2>
+        <h2>{currency} {currecySymbol}{price}/<span> per quantity</span></h2>
       </div>
       <Button  sx={{ textTransform: 'none' }} variant="contained" className={styles.cart}>Add To Cart</Button>
     </div>

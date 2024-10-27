@@ -67,7 +67,6 @@ export default function Product() {
         }
         
         const loadImages = async () => {
-          console.log(selectedProduct);
           let imageUrls = null;
           if( selectedProduct !==null){
             imageUrls = await fetchImages(`/Card Printer Accessories/${selectedProduct}`);
