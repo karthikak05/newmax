@@ -1,8 +1,11 @@
 'use client';
 import React from 'react';
 import styles from "./products.module.scss";
-import Product from '../../components/products/Product';
-
+import dynamic from 'next/dynamic';
+const Product = dynamic(
+    ()=> import("../../components/products/Product"),
+    {ssr: false}
+)
 const Products = () => {
     return (
         <main className={styles.page}>
