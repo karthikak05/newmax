@@ -11,19 +11,19 @@ const Cart = () => {
 
     const handleCheckedOut = (value)=>{
         setIsCheckedOut(value);
-        localStorage.setItem("isCheckedOut",value)
-        console.log(value)
+        localStorage.setItem("isCheckedOut", JSON.stringify(value));
     }
 
     useEffect(()=>{
         const checkout = localStorage.getItem("isCheckedOut");
-        if( checkout !== null)  setIsCheckedOut(checkout);
-        else localStorage.setItem("isCheckedOut",false);
+        if( checkout !== null){
+            setIsCheckedOut(JSON.parse(checkout));
+        }else{setIsCheckedOut(checkout);}
+        console.log(isCheckedOut)
     },[])
 
     return (
         <main className={styles.page}>
-        
             {!isCheckedOut ? (
                 <>
                     <section className={styles.main}>
