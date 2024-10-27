@@ -71,3 +71,19 @@
     border: 1px solid $border-gray;
     border-radius: 1rem;
 }
+.popup{
+    @extend .flexRow !optional;
+    gap: .5rem;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top:1%;
+    left: 40%;
+    background-color: $color-primary;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    width: fit-content;
+    padding: 1rem .5rem;
+    border-radius: .5rem;
+}
