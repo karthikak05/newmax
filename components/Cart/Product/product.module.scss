@@ -8,7 +8,7 @@
     overflow-y: scroll;
     padding: 20px;
     text-align: left;
-    h2{
+    .heading{
         font-size: 28px;
         border-bottom: 1px solid #E4E4E4;
         padding-bottom: 1rem;
@@ -18,7 +18,7 @@
        .item{
             @extend .flexRow !optional;
             justify-content: space-between;
-            padding-bottom: 1rem;
+            padding: 1rem 0;
             border-bottom: 1px solid #E4E4E4;
             .imgContainer{
                 height: 161px;

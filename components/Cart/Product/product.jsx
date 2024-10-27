@@ -25,7 +25,7 @@ export default function Product() {
 
   return (
     <div className={styles.main}>
-        <h2>Cart Details</h2>
+        <h2 className={styles.heading}>Cart Details</h2>
       <div className={styles.itemsContainer}>
         {cartItems.map((item,i)=>(
           <div className={styles.item} key={i}>

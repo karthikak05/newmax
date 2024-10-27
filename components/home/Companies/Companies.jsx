@@ -3,7 +3,7 @@ import styles from "./Companies.module.scss";
 import Image from 'next/image';
 
 export default function Companies() {
-    const images = ["honeywell.png","zebra.jpeg","bluebird.png","uruvo.png","datalogic.png","chainway.jpeg","uruvo-china.png","sunmi.png"]
+    const images = ["honeywell.png","zebra.jpeg","bluebird.png","uruvo.png","datalogic.png","chainway.jpeg","Newland.png","sunmi.png"]
   return (
     <div className={styles.companies}>
         <h1 className={styles.heading}>Partnering with the Best Brands</h1>

@@ -9,7 +9,6 @@
         @extend .flexRow !optional;
         align-items: center;
         justify-content: space-between;
-        gap: 1rem;
         padding-bottom: 10vh;
         border-bottom: 1px solid #C1B4B499;
         .left{
@@ -32,9 +31,10 @@
             input{
                 padding: 10px 20px;
                 border-radius: 8px;
-                width: 424px;
+                width: 70%;
                 border: 1px solid #9F9F9F;
             }
+            width: 40%;
         }
         .icons{
             padding-top: 1rem;
