@@ -48,7 +48,9 @@ export default function Product() {
           setSelectedBrand(activeCompanyIndex);
         } else {
           setSelectedBrand(0);
+          if (typeof window !== 'undefined') {
           localStorage.setItem("activeCompanyIndex", "Zebra");
+          }
         }
     
         const loadImages = async () => {
