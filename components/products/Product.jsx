@@ -1,37 +1,36 @@
 'use client'
 import React, { useEffect, useState } from 'react'
+import dynamic from 'next/dynamic'
 import styles from "./Product.module.scss";
-import LeftMenu from './LeftMenu/LeftMenu';
-import { categories } from '@/data/DropDown';
-import Dropdown from '../home/DropDown/DropDown';
-import useStorage from '@/firebase/useStorage';
 import Image from 'next/image';
+import LeftMenu from './LeftMenu/LeftMenu';
+import Dropdown from '../home/DropDown/DropDown';
+const useStorage = dynamic(() => import('@/firebase/useStorage'), { ssr: false });
 
 export default function Product() {
-    const {fetchImages } = useStorage();
-    const [currentCategory,setCurrentCategory] = useState(null);
+    const { fetchImages } = useStorage();
+    const [currentCategory, setCurrentCategory] = useState(null);
     const [selectedBrand, setSelectedBrand] = useState(null);
     const [selectedProduct, setSelectedProduct] = useState('');
-    const [imageUrls,setImageUrls] = useState([])
-
+    const [imageUrls, setImageUrls] = useState([])
 
     const handleBrandChange = (value) => {
       setSelectedBrand(value);
       if (typeof window !== 'undefined') {
           localStorage.setItem("activeCompanyIndex", value);
       }
-  };
+    };
   
-  const handleCategoryChange = (value) => {
+    const handleCategoryChange = (value) => {
       setCurrentCategory(value);
       if (typeof window !== 'undefined') {
           localStorage.setItem("currentCategory", value);
       }
-  };
+    };
   
-  const handleProductChange = (event) => {
+    const handleProductChange = (event) => {
       setSelectedProduct(event.target.value);
-  };  
+    };  
 
     useEffect(() => {
       if (typeof window !== 'undefined') {   
@@ -48,9 +47,7 @@ export default function Product() {
           setSelectedBrand(activeCompanyIndex);
         } else {
           setSelectedBrand(0);
-          if (typeof window !== 'undefined') {
           localStorage.setItem("activeCompanyIndex", "Zebra");
-          }
         }
     
         const loadImages = async () => {
@@ -73,7 +70,7 @@ export default function Product() {
 
         <div className={styles.mainContainer}>
 
-          {/* leftmenu */}
+          {/* Left Menu */}
           <div className={styles.leftMenu}>
             <LeftMenu 
             currentCategory={currentCategory}
@@ -83,11 +80,11 @@ export default function Product() {
             />
           </div>
 
-          {/* products */}
+          {/* Products */}
           <div className={styles.listings}>
             <h2>Find the product you need</h2>
             
-            {/* dropdown */}
+            {/* Dropdown */}
             <div className={styles.dropDown}>
                 <Dropdown 
                   label="Choose Products"
@@ -96,13 +93,12 @@ export default function Product() {
                   options={categories}
                 />
               </div>
-            </div>
-          {/* eofpr */}
+          </div>
         </div>
         <div>
-          {imageUrls.map((image,i)=>(
+          {imageUrls.map((image, i) => (
             <div key={i}>
-              <Image src={image} alt={image} height={300} width={300}/>
+              <Image src={image} alt={image} height={300} width={300} />
             </div>
           ))}
         </div>
