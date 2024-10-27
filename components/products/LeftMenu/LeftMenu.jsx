@@ -2,14 +2,17 @@ import React from 'react';
 import styles from "./LeftMenu.module.scss";
 import { LeftMenu } from '@/data/LeftMenu';
 
-export default function LeftMenuComponent({currentCategory,currentBrand,handleBrandChange,handleCategoryChange}) {
-
+export default function LeftMenuComponent({currentCategory,currentBrand,handleBrandChange,handleCategoryChange,handleActiveIndexChange}) {
+    const changeCategory = (heading,index)=>{
+        handleCategoryChange(heading);
+        handleActiveIndexChange(index);
+    }
     return (
         <div className={styles.main}>
             {LeftMenu.map((category, index) => (
                 <div key={index} className={styles.category}>
                     <div className={styles.headingContainer}
-                    onClick={() => handleCategoryChange(category.heading)}
+                    onClick={() => changeCategory(category.heading,index)}
                     >
                         <h1 
                             className={category.heading === currentCategory ? `${styles.activeCategory}` : ""}

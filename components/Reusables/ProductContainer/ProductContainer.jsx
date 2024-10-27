@@ -11,7 +11,6 @@ export default function ProductContainer({ url }) {
     const name = nameWithPrice.substring(0, nameWithPrice.indexOf('(')).trim();
     
     const priceMatch = nameWithPrice.match(/\((\$\d+)\)/);
-    console.log(priceMatch)
     const price = priceMatch ? priceMatch[1] : null;
     
     return { name, price };

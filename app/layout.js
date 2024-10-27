@@ -22,7 +22,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${nunito.variable} ${nunitoSemiBold.variable}`}>
+        <div className="navbar">
         <Navbar/>
+        </div>
         {children}
         <Footer/>
       </body>

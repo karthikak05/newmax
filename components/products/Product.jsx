@@ -4,16 +4,17 @@ import React, { useEffect, useState } from 'react'
 import styles from "./Product.module.scss";
 import LeftMenu from './LeftMenu/LeftMenu';
 import Dropdown from '../home/DropDown/DropDown';
-import { categories } from '@/data/DropDown';
 import useStorage from '@/firebase/useStorage'; 
 import ProductContainer from '../Reusables/ProductContainer/ProductContainer';
+import { LeftMenu as DropDownData } from '@/data/LeftMenu';
 
 export default function Product() {
     const { fetchImages } = useStorage();
     const [currentCategory, setCurrentCategory] = useState(null);
     const [selectedBrand, setSelectedBrand] = useState(null);
-    const [selectedProduct, setSelectedProduct] = useState('');
-    const [imageUrls, setImageUrls] = useState([])
+    const [activeIndex,setActiveIndex] = useState(0);
+    const [selectedProduct, setSelectedProduct] = useState(DropDownData[activeIndex].models[0].label);
+    const [imageUrls, setImageUrls] = useState([]);
 
     const handleBrandChange = (value) => {
       setSelectedBrand(value);
@@ -29,9 +30,16 @@ export default function Product() {
       }
     };
   
-    const handleProductChange = (event) => {
-      setSelectedProduct(event.target.value);
+    const handleProductChange = (e) => {
+      setSelectedProduct(e.target.value);
     };  
+
+    const handleActiveIndexChange = (index)=>{
+      setActiveIndex(index);
+      if (typeof window !== 'undefined') {
+        localStorage.setItem("activeIndex", value);
+      }
+    }
 
     useEffect(() => {
       if (typeof window !== 'undefined') {   
@@ -50,15 +58,26 @@ export default function Product() {
           setSelectedBrand(0);
           localStorage.setItem("activeCompanyIndex", "Zebra");
         }
-    
+
+        const activeIndex = localStorage.getItem("activeIndex");
+        if(activeIndex !== null){
+          setActiveIndex(activeIndex)
+        }else{
+          localStorage.setItem("activeIndex", 0);
+        }
+        
         const loadImages = async () => {
-          const imageUrls = await fetchImages("/Card Printer Accessories/HC100");
+          console.log(selectedProduct);
+          let imageUrls = null;
+          if( selectedProduct !==null){
+            imageUrls = await fetchImages(`/Card Printer Accessories/${selectedProduct}`);
+          }
           setImageUrls(imageUrls)
         };
     
         loadImages();
       }
-    }, []);
+    }, [selectedProduct]);
     
 
   return (
@@ -78,6 +97,7 @@ export default function Product() {
             currentBrand={selectedBrand}
             handleBrandChange={handleBrandChange}
             handleCategoryChange={handleCategoryChange}
+            handleActiveIndexChange={handleActiveIndexChange}
             />
           </div>
 
@@ -91,7 +111,7 @@ export default function Product() {
                   label="Choose Products"
                   value={selectedProduct}
                   onChange={handleProductChange}
-                  options={categories}
+                  options={DropDownData[activeIndex].models}
                 />
               </div>
             
