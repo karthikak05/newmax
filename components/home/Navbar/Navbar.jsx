@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from "./Navbar.module.scss";
 import Image from 'next/image';
 import { navItems } from '@/data/NavItems';
@@ -26,6 +26,12 @@ export default function Navbar() {
     router.push("/contact-us");
     console.log("in")
   }
+
+  useEffect(()=>{
+    localStorage.setItem("currency", "USD");
+    localStorage.setItem("currencySymbol", "$");
+  },[]);
+  
   return (
     <nav className={styles.navbar}>
       <div className={styles.imgContainer} onClick={handleHome} style={{cursor:"pointer"}}>

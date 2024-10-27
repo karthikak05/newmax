@@ -16,7 +16,7 @@ const fetchImages = async (folderPath) => {
             return url;
         })
         );
-        console.log(imageUrls)
+        // console.log(imageUrls)
         return imageUrls;
     } catch (error) {
         console.error("Error fetching images:", error);

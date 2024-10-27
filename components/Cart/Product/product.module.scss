@@ -10,4 +10,65 @@
     h2{
         font-size: 28px;
     }
+    .itemsContainer{
+        border-top: 1px solid #E4E4E4;
+        border-bottom: 1px solid #E4E4E4;
+        padding: 1rem 0;
+       .item{
+            @extend .flexRow !optional;
+            justify-content: space-between;
+            .imgContainer{
+                height: 161px;
+                width: 234px;
+                border: 1px solid #E4E4E4;
+                border-radius: 10px;
+            }
+            .contentMain{
+                margin-top: 1rem;
+                @extend .flexCol !optional;
+                justify-content: space-between;
+                .name{
+                    font-size: 16px;
+                }
+                .pricing{
+                    font-size: 24px;
+                    color: $color-primary;
+                    margin-top: 1rem;
+                    span{
+                        font-size: 16px;
+                        color: gray;
+                    }
+                }
+                .buttons{
+                    color: black;
+                    @extend .flexRow !optional;
+                    gap: 1rem;
+                    .plus,.minus{
+                        cursor: pointer;
+                        font-size: 16px;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                    }
+                    .minus{
+                        svg{
+                            transform: rotate(90deg);
+                        }
+                    }
+                    div{
+                        border: 1px solid #E4E4E4;
+                        border-radius: 4px;
+                        padding:3px 7px;
+                    }
+                }
+            }
+            .subTotal{
+                font-size: 15px;
+                .price{
+                    font-size: 18px;
+                    color: $color-primary;
+                }
+            }
+       } 
+    }
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from "./ProductContainer.module.scss";
 import Image from 'next/image';
 import { Button } from '@mui/material';
@@ -6,15 +6,34 @@ import { useCartStore } from '@/store/cartStore';
 import { encryptData,decryptData } from '@/store/dataHandler';
 
 export default function ProductContainer({ url }) {
-  const { cartItems, total, add, remove, clearCart, isLoading } = useCartStore();
+  const { add, remove, clearCart, isLoading } = useCartStore();
   const [currency,setCurrentCurrency] = useState("USD");
   const [currecySymbol,setCurrecySymbol] = useState("$");
+
+  useEffect(()=>{
+    const currency = localStorage.getItem("currency");
+    if (currency !== null) {
+      setCurrentCurrency(currency);
+    } else {
+      setCurrentCurrency("USD");
+      localStorage.setItem("currency", "USD");
+    };
+
+    const storedSymbol = localStorage.getItem("currencySymbol");
+    if (storedSymbol !== null) {
+        setCurrecySymbol(storedSymbol);
+    } else {
+        setCurrecySymbol("$");
+        localStorage.setItem("currencySymbol", "$");
+    }
+  },[])
 
   const handleCart = async () => {
     try {
       const item = {
         name,
         price,
+        imageUrl: url,
         timestamp: Date.now() 
       };
 

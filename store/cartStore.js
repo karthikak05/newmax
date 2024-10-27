@@ -49,6 +49,7 @@ export const useCartStore = create((set, get) => ({
 
   // Initialize store from IndexedDB
   initializeCart: async () => {
+    console.log("in");
     try {
       const items = await CartStorage.getAllItems();
       const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -104,12 +105,25 @@ export const useCartStore = create((set, get) => ({
 
   remove: async (name) => {
     try {
-      await CartStorage.removeItem(name);
       const state = get();
-      const updatedCartItems = state.cartItems.filter((item) => item.name !== name);
-      const newTotal = state.calculateTotal(updatedCartItems);
-      const newTotalQuantity = state.calculateTotalQuantity(updatedCartItems);
-      set({ cartItems: updatedCartItems, total: newTotal, totalQuantity: newTotalQuantity });
+      const itemToRemove = state.cartItems.find((item) => item.name === name);
+
+      if (itemToRemove.quantity > 1) {
+        itemToRemove.quantity--;
+        await CartStorage.updateItem(itemToRemove);
+        let updatedCartItems = state.cartItems.filter((item) => item.name !== name);
+        updatedCartItems = [...updatedCartItems,itemToRemove];
+        const newTotal = state.calculateTotal(updatedCartItems);
+        const newTotalQuantity = state.calculateTotalQuantity(updatedCartItems);
+        set({ cartItems: updatedCartItems, total: newTotal, totalQuantity: newTotalQuantity });
+      } else {
+        const updatedCartItems = state.cartItems.filter((item) => item.name !== name);
+        const newTotal = state.calculateTotal(updatedCartItems);
+        const newTotalQuantity = state.calculateTotalQuantity(updatedCartItems);
+        set({ cartItems: updatedCartItems, total: newTotal, totalQuantity: newTotalQuantity });
+        await CartStorage.removeItem(name);
+      }
+  
     } catch (error) {
       console.error('Failed to remove item from cart:', error);
     }
@@ -132,5 +146,6 @@ export const useCartStore = create((set, get) => ({
 
 
 if (typeof window !== 'undefined') {
+  console.log("initilaztion")
   useCartStore.getState().initializeCart();
 }
