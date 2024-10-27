@@ -1,0 +1,36 @@
+@import "/styles/app.scss";
+@import "/styles/variables.scss";
+
+.main{
+    border: 1px solid #FDC1BA;
+    padding: 12px;
+    border-radius: 1rem;
+    height: 100%;
+    @extend .flexCol !optional;
+    justify-content: space-between;
+    .imgContainer{
+        height: 195px;
+        width: 100%;
+        border-radius: inherit;
+        // border:1px solid rgb(185, 185, 185);
+    }
+    .content{
+        h2{
+            color: $color-primary;
+            font-weight: 600;
+            font-size: 24px;
+            margin: 5px 0;
+            span{
+                color: gray;
+                font-size: 14px;
+            }
+        }
+    }
+    .cart{
+        background-color: $color-primary;
+        color: white;
+        width: 100%;
+        padding: 10px 24px;
+        border-radius: 8px;
+    }
+}

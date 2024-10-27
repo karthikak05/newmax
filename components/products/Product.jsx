@@ -2,11 +2,11 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 import styles from "./Product.module.scss";
-import Image from 'next/image';
 import LeftMenu from './LeftMenu/LeftMenu';
 import Dropdown from '../home/DropDown/DropDown';
 import { categories } from '@/data/DropDown';
 import useStorage from '@/firebase/useStorage'; 
+import ProductContainer from '../Reusables/ProductContainer/ProductContainer';
 
 export default function Product() {
     const { fetchImages } = useStorage();
@@ -53,7 +53,7 @@ export default function Product() {
     
         const loadImages = async () => {
           const imageUrls = await fetchImages("/Card Printer Accessories/HC100");
-          setImageUrls(imageUrls);
+          setImageUrls(imageUrls)
         };
     
         loadImages();
@@ -94,15 +94,19 @@ export default function Product() {
                   options={categories}
                 />
               </div>
-          </div>
-        </div>
-        <div>
-          {imageUrls.map((image, i) => (
-            <div key={i}>
-              <Image src={image} alt={image} height={300} width={300} />
+            
+            {/* grid */}
+            <div className={styles.gridContainer}>
+              {imageUrls.map((image, i) => (
+                <div key={i}>
+                  <ProductContainer url={image}/>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+
         </div>
+
     </div>
   )
 }
