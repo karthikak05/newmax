@@ -7,6 +7,7 @@ import Dropdown from '../home/DropDown/DropDown';
 import useStorage from '@/firebase/useStorage'; 
 import ProductContainer from '../Reusables/ProductContainer/ProductContainer';
 import { LeftMenu as DropDownData } from '@/data/LeftMenu';
+import CustomLoader from '../Reusables/CustomLoader';
 
 export default function Product() {
     const { fetchImages } = useStorage();
@@ -15,6 +16,7 @@ export default function Product() {
     const [activeIndex,setActiveIndex] = useState(0);
     const [selectedProduct, setSelectedProduct] = useState(DropDownData[activeIndex].models[0].label);
     const [imageUrls, setImageUrls] = useState([]);
+    const [isLoading,setIsLoading] = useState(false)
 
     const handleBrandChange = (value) => {
       setSelectedBrand(value);
@@ -69,14 +71,17 @@ export default function Product() {
         const loadImages = async () => {
           let imageUrls = null;
           if( selectedProduct !==null){
+            setIsLoading(true)
             imageUrls = await fetchImages(`/Card Printer Accessories/${selectedProduct}`);
-          }
-          setImageUrls(imageUrls)
+          };
+          localStorage.setItem(selectedProduct,imageUrls);
+          setImageUrls(imageUrls);
+          setIsLoading(false)
         };
     
         loadImages();
       }
-    }, [selectedProduct]);
+    }, [selectedProduct,]);
     
 
   return (
@@ -115,13 +120,17 @@ export default function Product() {
               </div>
             
             {/* grid */}
-            <div className={styles.gridContainer}>
+            {isLoading ? (
+              <div className={styles.loader}><CustomLoader color="red"/></div>
+            ):(
+              <div className={styles.gridContainer}>
               {imageUrls.map((image, i) => (
                 <div key={i}>
                   <ProductContainer url={image}/>
                 </div>
               ))}
             </div>
+            )}
           </div>
 
         </div>

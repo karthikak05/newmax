@@ -91,7 +91,7 @@ export default function ContactForm() {
 
            {isLoading ? (
             <div className={styles.loader}>
-                <CustomLoader/>
+                <CustomLoader color="white"/>
                 <h2>Please wait while we deliver you email.</h2>
             </div>
            ):(

@@ -8,6 +8,7 @@
         width: 100%;
         @extend .flexRow !optional;
         align-items: center;
+        gap: 1rem;
         justify-content: space-between;
         padding-bottom: 10vh;
         border-bottom: 1px solid #C1B4B499;

@@ -50,15 +50,6 @@ export default function ProductContainer({ url }) {
     }
   };
 
-  const getStoredCart = () => {
-    const encryptedCart = localStorage.getItem("cart");
-    if (encryptedCart) {
-      const decryptedCart = decryptData(encryptedCart);
-      return decryptedCart;
-    }
-    return null;
-  }
-
   function extractNameAndPrice(url) {
     const decodedString = decodeURIComponent(url);
     const nameWithPrice = decodedString.substring(decodedString.lastIndexOf('/') + 1);
