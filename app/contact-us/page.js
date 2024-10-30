@@ -12,7 +12,6 @@ export default function page() {
         <section>
             <ContactForm/>
             <div className={styles.Recommended}>
-                <h2>Recommended Products</h2>
                 <RcProducts/>
             </div>
         </section>
