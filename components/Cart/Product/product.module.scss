@@ -15,6 +15,9 @@
     }
     .itemsContainer{
         padding: 1rem 0;
+        .empty{
+            margin-top: 1rem;
+        }
        .item{
             @extend .flexRow !optional;
             justify-content: space-between;
