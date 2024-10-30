@@ -15,7 +15,6 @@ const Procuerment = () => {
 
             <section>
                 <div>
-                    <h2>Recommended Products</h2>
                     <RcProducts/>
                 </div>
                 <FAQ/>

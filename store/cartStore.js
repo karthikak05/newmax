@@ -49,7 +49,7 @@ export const useCartStore = create((set, get) => ({
 
   // Initialize store from IndexedDB
   initializeCart: async () => {
-    console.log("in");
+    // console.log("in");
     try {
       const items = await CartStorage.getAllItems();
       const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
@@ -146,6 +146,5 @@ export const useCartStore = create((set, get) => ({
 
 
 if (typeof window !== 'undefined') {
-  console.log("initilaztion")
   useCartStore.getState().initializeCart();
 }

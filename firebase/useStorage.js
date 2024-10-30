@@ -13,10 +13,10 @@ const fetchImages = async (folderPath) => {
         const imageUrls = await Promise.all(
         result.items.map(async (itemRef) => {
             const url = await getDownloadURL(itemRef);
+            // console.log(url)
             return url;
         })
         );
-        // console.log(imageUrls)
         return imageUrls;
     } catch (error) {
         console.error("Error fetching images:", error);

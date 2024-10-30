@@ -2,7 +2,21 @@
 @import "/styles/variables.scss";
 
 .main{
-    min-height: 375px;
+    height: fit-content;
+    padding: 1rem;
     width: 100%;
-    border: 1px solid $border-gray;
+    // border: 1px solid $border-gray;
+    border-radius: 1rem;
+    .heading{
+        font-size: 40px;
+        margin-bottom: 1rem;
+    }
+    .itemsContainer{
+        @extend .flexRow !optional;
+        justify-content: space-between;
+        .item{
+            height: fit-content;
+        }
+    }
+
 }

@@ -36,7 +36,6 @@ const Cart = () => {
                     </section>
 
                     <div className={styles.recommended}>
-                        <h2>Recommended Products</h2>
                         <RcProducts/>
                     </div>
                 </>
