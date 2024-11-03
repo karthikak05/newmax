@@ -15,7 +15,7 @@ export const footerData = [
         heading: "Categories",
         items: ["PDA Accessories", "Scanner Accessories", "Mobile Computers", "Card Printer Accessories", "POS Printer Accessories"],
         new: false,
-        link: "/categories"
+        link: "/products"
     },
     {
         heading: "About Us",
