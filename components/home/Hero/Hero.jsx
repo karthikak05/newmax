@@ -3,20 +3,23 @@ import React, { useEffect, useRef, useState } from 'react';
 import styles from './Hero.module.scss';
 import { heroContent } from '@/data/Hero';
 import { Button } from '@mui/material';
-import { options1,options2 } from '@/data/DropDown';
+import { options1,categories } from '@/data/DropDown';
 import Dropdown from '../DropDown/DropDown';
+import { useRouter } from 'next/navigation';
+
 export default function Hero() {
+    const router = useRouter();
     const [activeContainer, setActiveContainer] = useState(0);
     const scrollContainer = useRef(null);
-    const [selectedValue1, setSelectedValue1] = useState('');
-    const [selectedValue2, setSelectedValue2] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState('');
+    const [selectedProduct, setSelectedProduct] = useState('');
 
-    const handleChange1 = (event) => {
-        setSelectedValue1(event.target.value);
+    const handleCategory = (event) => {
+        setSelectedCategory(event.target.value);
     };
 
-    const handleChange2 = (event) => {
-        setSelectedValue2(event.target.value);
+    const handleProduct = (event) => {
+        setSelectedProduct(event.target.value);
     };
 
     const handleNext = () => {
@@ -30,6 +33,13 @@ export default function Hero() {
             }, 500);
         }
     };
+
+    const handleClick = ()=>{
+        if( typeof window !== undefined){
+            localStorage.setItem('currentCategory',selectedCategory);
+        }
+        router.push("/products")
+    }
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -60,21 +70,21 @@ export default function Hero() {
                     <div className={styles.dropdownContainer}>
                         <div className={styles.dropDown}>
                             <Dropdown 
-                                label="Select Brand"
-                                value={selectedValue1}
-                                onChange={handleChange1}
-                                options={options1}
+                                label="Select Category"
+                                value={selectedCategory}
+                                onChange={handleCategory}
+                                options={categories}
                             />
                         </div>
-                        <div className={styles.dropDown}>
+                        {/* <div className={styles.dropDown}>
                             <Dropdown 
                                 label="Select Product"
-                                value={selectedValue2}
-                                onChange={handleChange2}
-                                options={options2}
+                                value={selectedProduct}
+                                onChange={handleProduct}
+                                options={options1}
                             />
-                        </div>
-                        <Button  sx={{ textTransform: 'none' }} variant="contained" className={`${styles.containedBtn} ${styles.searchBtn}`}>Search</Button>
+                        </div> */}
+                        <Button  sx={{ textTransform: 'none' }} variant="contained" className={`${styles.containedBtn} ${styles.searchBtn}`} onClick={handleClick}>Search</Button>
                     </div>
                 </div>
             </div>
