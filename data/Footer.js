@@ -3,24 +3,28 @@ export const footerData = [
         heading: "Products",
         items: ["Mobile Spare Parts", "Computer Spare Parts", "Accessories", "Tools & Equipment", "Bulk Orders"],
         new: true,
-        link: "/products"
+        link: "/products",
+        headerName : "Products"
     },
     {
         heading: "Industries",
         items: ["Retail", "Transportation", "Distribution", "Manufacturing"],
         new: false,
-        link: "/contact-us"
+        link: "/custom-procurement",
+        headerName : "Custom Procurement"
     },
     {
         heading: "Categories",
         items: ["PDA Accessories", "Scanner Accessories", "Mobile Computers", "Card Printer Accessories", "POS Printer Accessories"],
         new: false,
-        link: "/products"
+        link: "/categories",
+        headerName : "Categories"
     },
     {
         heading: "About Us",
         items: ["Our Mission", "Team Members", "Contact Info"],
         new: false,
-        link: "/about-us"
+        link: "/about-us",
+        headerName : "About Us"
     }
 ];

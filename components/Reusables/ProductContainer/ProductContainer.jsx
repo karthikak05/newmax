@@ -32,7 +32,7 @@ export default function ProductContainer({ url }) {
     try {
       const item = {
         name,
-        numericPrice,
+        price:numericPrice,
         imageUrl: url,
         timestamp: Date.now() 
       };

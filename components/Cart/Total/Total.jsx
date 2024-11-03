@@ -62,7 +62,7 @@ export default function Total({handleCheckedOut}) {
       <div className={styles.total}><h2>Total</h2><p>${calculateTotal()}</p></div>
 
       <div className={styles.buttons}>
-      <Button  sx={{ textTransform: 'none' }} variant="contained" className={styles.checkout} onClick={()=>(handleCheckedOut(true))}>Proceed To Checkout</Button>
+      <Button  sx={{ textTransform: 'none' }} variant="contained" className={styles.checkout} onClick={()=>(handleCheckedOut(true))} disabled={total===0}>Proceed To Checkout</Button>
       <Button  sx={{ textTransform: 'none' }} variant="outlined" className={styles.outlined} onClick={()=>router.push("/products")}>Continue Shoppping</Button>
       </div>
     </div>

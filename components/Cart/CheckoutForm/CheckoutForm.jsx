@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './CheckoutForm.module.scss';
 import Image from 'next/image';
 import { useCartStore } from '@/store/cartStore';
@@ -35,7 +35,7 @@ export default function CheckoutForm({ handleCheckedOut }) {
       .map(item => `Product: ${item.name}, Quantity: ${item.quantity}, Price: $${item.price}`)
       .join("\n"); // Join each item with a new line for better readability
   };
-  console.log(convertToString(cartItems))
+  console.log(cartItems,total)
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent the default form submission

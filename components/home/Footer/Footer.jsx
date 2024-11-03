@@ -6,17 +6,21 @@ import Image from 'next/image';
 import { footerData } from '@/data/Footer';
 import { useRouter } from 'next/navigation';
 import CustomLoader from '@/components/Reusables/CustomLoader';
+import { commonStore } from '@/store/commonProps';
 
 export default function Footer() {
     const [email,setEmail] = useState("");
     const [showSuccessPopup, setShowSuccessPopup] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const router = useRouter();
+    const { setActiveHeader } = commonStore();
 
     const handleSocials = (link)=>{
         window.open(link,'_blank');
     }
-    const handleClick = (link)=>{
+    const handleClick = (link,item)=>{
+        localStorage.setItem('activeHeader',item);
+        setActiveHeader(item)
         if(link!== ""){
             router.push(link)
         }
@@ -102,7 +106,7 @@ export default function Footer() {
             </div>
             {/* listings */}
             {footerData.map((data,i)=>(
-                <div key={i} className={styles.itemContainer} onClick={()=>handleClick(data.link)}>
+                <div key={i} className={styles.itemContainer} onClick={()=>handleClick(data.link,data.headerName)}>
                     <h3 className={styles.itemHeading}>{data.heading}</h3>
                     {data.items.map((item,index)=>(
                         <p key={index} className={styles.itemText}>{item}</p>

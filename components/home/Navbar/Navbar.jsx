@@ -6,30 +6,38 @@ import { navItems } from '@/data/NavItems';
 import { Button } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import { useCartStore } from '@/store/cartStore';
+import { commonStore } from '@/store/commonProps';
 
 export default function Navbar() {
   const totalQuantity = useCartStore((state) => state.getTotalQuantity());
   const router = useRouter()
-  const [activeIndex,setActiveIndex] = useState(null);
+  const { activeHeader, setActiveHeader } = commonStore();
 
-  const handleClick = (i)=>{
+  const handleClick = (i,item)=>{
+    localStorage.setItem('activeHeader',item);
     const link = navItems[i].toLowerCase().replace(/\s+/g, '-');
-    setActiveIndex(i);
+    setActiveHeader(item);
     router.push(link);
   }
 
   const handleHome = ()=>{
     router.push("/");
-    setActiveIndex(null)
+    setActiveHeader(null)
   }
   const handleContact = ()=>{
     router.push("/contact-us");
-    console.log("in")
   }
 
   useEffect(()=>{
     localStorage.setItem("currency", "USD");
     localStorage.setItem("currencySymbol", "$");
+    const value = localStorage.getItem("activeHeader");
+    if( value !== null){
+      setActiveHeader(value);
+    }else{
+      setActiveHeader(null);
+      localStorage.setItem('activeHeader',null);
+    }
   },[]);
   
   return (
@@ -39,7 +47,7 @@ export default function Navbar() {
       </div>
       <div className={styles.itemsContainer}>
         {navItems.map((item,i)=>(
-          <p className={activeIndex === i ? styles.active : ''} key={i} onClick={()=>handleClick(i)}>{item}</p>
+          <p className={activeHeader === item ? styles.active : ''} key={i} onClick={()=>handleClick(i,item)}>{item}</p>
         ))}
       </div>
       <div className={styles.buttons}>

@@ -28,7 +28,7 @@ export default function Product() {
         <h2 className={styles.heading}>Cart Details</h2>
       <div className={styles.itemsContainer}>
         {cartItems.length === 0 ? (
-          <h2 className={styles.empty}>No items in cart.<br/>Please add some first and come back.</h2>
+          <h2 className={styles.empty}>No items in cart.<br/>Please add some products and come back.</h2>
         ): (
             cartItems.map((item,i)=>(
             <div className={styles.item} key={i}>
