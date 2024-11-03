@@ -11,7 +11,7 @@ export default function RcProducts() {
       <div className={styles.itemsContainer}>
       {recommended.map((url,i)=>(
         <div className={styles.item} key={i}>
-          <ProductContainer url={url}/>
+          <ProductContainer url={url} popover={false}/>
         </div>
       ))}
       </div>

@@ -5,7 +5,7 @@ import { Button } from '@mui/material';
 import { useCartStore } from '@/store/cartStore';
 import { encryptData,decryptData } from '@/store/dataHandler';
 
-export default function ProductContainer({ url }) {
+export default function ProductContainer({ url,popover,isPopped,setIsPopped }) {
   const { add, remove, clearCart, isLoading } = useCartStore();
   const [currency,setCurrentCurrency] = useState("USD");
   const [currecySymbol,setCurrecySymbol] = useState("$");
@@ -68,7 +68,7 @@ export default function ProductContainer({ url }) {
   const { name, numericPrice } = extractNameAndPrice(url);
 
   return (
-    <div className={styles.main}>
+    <div className={styles.main} onClick={()=>setIsPopped(url)}>
       <div className={styles.imgContainer}>
         <Image src={url} alt="product-image" height={300} width={300} />
       </div>

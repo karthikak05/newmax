@@ -7,6 +7,7 @@ import ProductContainer from '../Reusables/ProductContainer/ProductContainer';
 import { LeftMenu as DropDownData } from '@/data/LeftMenu';
 import CustomLoader from '../Reusables/CustomLoader';
 import { Button } from '@mui/material';
+import Image from 'next/image';
 
 export default function Product() {
     const { fetchImages } = useStorage();
@@ -17,7 +18,13 @@ export default function Product() {
     const [imageUrls, setImageUrls] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1); 
+    const [isPopped,setIsPopped] = useState(null);
     const imagesPerPage = 9;
+
+    const handlePopped = (url)=>{
+        console.log(url)
+        setIsPopped(url)
+    }
 
     const handleBrandChange = (value) => {
         setSelectedBrand(value);
@@ -193,9 +200,19 @@ export default function Product() {
                             <h2 className={styles.error}>Error fetching products.Please try again</h2>
                         ) : (
                             <div className={styles.gridContainer}>
+                            {isPopped!==null && (
+                                <div className={styles.bg}>
+                                    <div onClick={()=>handlePopped(null)}>
+                                        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M16 16L12 12M12 12L8 8M12 12L16 8M12 12L8 16" stroke="#F8F8F8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    <div className={styles.imgContainer2}><Image src={isPopped} alt="bg-cover" height={600} width={600}/></div>
+                                </div>
+                            )}
                             {currentImages.map((image, i) => (
                                 <div key={i} className={styles.item}>
-                                    <ProductContainer url={image} />
+                                    <ProductContainer url={image} popover={true} isPopped={isPopped} setIsPopped={handlePopped}/>
                                 </div>
                             ))}
                         </div>

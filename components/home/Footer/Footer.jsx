@@ -77,9 +77,7 @@ export default function Footer() {
                             <Button type='submit' sx={{ textTransform: 'none' }} variant='contained' className={styles.subscribeBtn}>Subscribe</Button>
                     </form>
                 </div>
-            )
-
-            }
+            )}
             <div className={styles.socials}>
                 <h3>Follow us on</h3>
                 <div className={styles.icons}>
