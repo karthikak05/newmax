@@ -32,7 +32,7 @@ export default function ProductContainer({ url }) {
     try {
       const item = {
         name,
-        price,
+        numericPrice,
         imageUrl: url,
         timestamp: Date.now() 
       };
@@ -56,12 +56,16 @@ export default function ProductContainer({ url }) {
     const name = nameWithPrice.substring(0, nameWithPrice.lastIndexOf('(')).trim();
     
     let price = nameWithPrice.substring(nameWithPrice.lastIndexOf('(')+2,nameWithPrice.lastIndexOf(')'));
-    // console.log(nameWithPrice+":"+price)
-   
-    return { name, price };
+    let numericPrice = '';
+    for (let ch of price) {
+        if (!isNaN(ch) && ch !== ' ') { 
+            numericPrice += ch;
+        }
+    }   
+    return { name, numericPrice };
   }
 
-  const { name, price } = extractNameAndPrice(url);
+  const { name, numericPrice } = extractNameAndPrice(url);
 
   return (
     <div className={styles.main}>
@@ -70,7 +74,7 @@ export default function ProductContainer({ url }) {
       </div>
       <div className={styles.content}>
         <p>{name}</p>
-        <h2>{currency} {currecySymbol}{price}/<span> per quantity</span></h2>
+        <h2>{currency} {currecySymbol}{numericPrice}/<span> per quantity</span></h2>
       </div>
       <div className={styles.btnContainer} onClick={handleCart}><Button  sx={{ textTransform: 'none' }} variant="contained" className={styles.cart}>Add To Cart</Button></div>
     </div>

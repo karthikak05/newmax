@@ -53,6 +53,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        position: relative;
         .checkoutForm {
             display: flex;
             flex-wrap: wrap;
@@ -111,5 +112,10 @@
                 }
             }
         }        
+    }
+    .successPopup{
+        @extend .popup !optional;
+        top: 0;
+        left: 25%;
     }
 }

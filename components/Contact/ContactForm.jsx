@@ -25,22 +25,30 @@ export default function ContactForm() {
         event.preventDefault();
         setIsLoading(true);
 
-        const data = {
-            service_id: 'contact_us_newmax',
-            template_id: 'contact_us_form',
-            user_id: "XHmmT9b5Tw7bY1p2k",
-            template_params: {
-                name,
-                from_mail: email,
-                mobile,
-                city,
-                message: description
-            }
-        };
+        // const data = {
+        //     service_id: 'contact_us_newmax',
+        //     template_id: 'contact_us_form',
+        //     user_id: "XHmmT9b5Tw7bY1p2k",
+        //     template_params: {
+        //         name,
+        //         from_mail: email,
+        //         mobile,
+        //         city,
+        //         message: description
+        //     }
+        // };
 
+
+        const data = {
+            name,
+            from_mail: email,
+            mobile,
+            city,
+            message: description
+        }
         try {
             setIsLoading(true);
-            const response = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
+            const response = await fetch('https://formspree.io/f/mbljgqzj', {
                 method: 'POST',
                 body: JSON.stringify(data),
                 headers: {
