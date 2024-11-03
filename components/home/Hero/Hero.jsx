@@ -43,7 +43,7 @@ export default function Hero() {
         <div className={styles.hero}>
             <div className={styles.scrollContainer} ref={scrollContainer}>                
                 {heroContent.map((item, i) => (
-                    <div className={styles.itemContainer} key={i}>
+                    <div className={styles.itemContainer} key={i} style={{ backgroundImage: `url(${item.image})` }}>
                         <div className={styles.content}>
                             {i === 0 && <h2>Welcome to <span className={styles.newmax}>NewMax</span></h2>}
                             <h1>{item.heading}</h1>
