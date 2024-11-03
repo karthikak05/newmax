@@ -4,15 +4,27 @@ import styles from "./Products.module.scss";
 import { productContainerDetails } from '@/data/ProductContainer';
 import ProductContainer from './ProductContainer';
 import Dropdown from '../DropDown/DropDown';
-import { options1 } from '@/data/DropDown';
 import { Button } from '@mui/material';
+import { categories } from '@/data/DropDown';
+import {useRouter} from 'next/navigation'
 
 export default function Products() {
+    const router = useRouter()
     const [selectedValue, setSelectedValue] = useState('');
 
 
     const handleChange = (event) => {
         setSelectedValue(event.target.value);
+        if (typeof window !== 'undefined') {
+            localStorage.setItem('currentCategory',event.target.value)   
+        }
+    };
+
+    const handleClick = ()=>{
+        if(selectedValue === ""){
+            localStorage.setItem('currentCategory','PDA Accessories')
+        }
+        router.push("/products")
     };
 
     return (
@@ -22,13 +34,13 @@ export default function Products() {
             <div className={styles.right}>
                 <div className={styles.dropdown}>
                     <Dropdown 
-                        label="Honeywell"
+                        label="Categories"
                         value={selectedValue}
                         onChange={handleChange}
-                        options={options1}
+                        options={categories}
                     />
                     </div>
-                    <Button  sx={{ textTransform: 'none' }} variant="contained" className={styles.containedBtn}>View More</Button>
+                    <Button  sx={{ textTransform: 'none' }} variant="contained" className={styles.containedBtn} onClick={handleClick}>View More</Button>
             </div>
         </div>
 

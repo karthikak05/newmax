@@ -32,7 +32,7 @@ export default function Main() {
             <div className={styles.viewMore}>
               <h2>View More</h2>
               <p>Explore a wider range of accessories and components for mobile computers, handheld devices, PDAs, and AIDC devices.</p>
-              <div className={styles.svgContainer}>
+              <div className={styles.svgContainer} onClick={()=>(router.push("/products"))}>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9 5L16 12L9 19" stroke="#B1B1B1" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                 </svg>

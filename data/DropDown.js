@@ -13,11 +13,11 @@ const options2 = [
 ];
 
 const categories = [
-    { value: 1, label: 'PDA Accessories' },
-    { value: 2, label: 'Scanner Accessories' },
-    { value: 3, label: 'Barcode Printer Accessories' },
-    { value: 4, label: 'Card Printer Accessories' },
-    { value: 5, label: 'Mobile Computers' },
+    { value: 'PDA Accessories', label: 'PDA Accessories' },
+    { value: 'Scanner Accessories', label: 'Scanner Accessories' },
+    { value: 'Barcode Printer Accessories', label: 'Barcode Printer Accessories' },
+    { value: 'Card Printer Accessories', label: 'Card Printer Accessories' },
+    { value: 'Mobile Computers', label: 'Mobile Computers' },
 ];
 
 

@@ -36,7 +36,6 @@ export default function Form() {
             zipCode,
             description: caseDescription,
         };
-        console.log(formData)
 
 
         try {
@@ -48,7 +47,6 @@ export default function Form() {
         
             if (response.ok) {
                 setShowSuccessPopup(true);
-                console.log("in")
             } else {
                 throw new Error('EmailJS failed to send email');
             }

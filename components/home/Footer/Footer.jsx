@@ -1,14 +1,56 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import styles from "./Footer.module.scss";
 import { Button } from '@mui/material';
 import Image from 'next/image';
 import { footerData } from '@/data/Footer';
+import { useRouter } from 'next/navigation';
+import CustomLoader from '@/components/Reusables/CustomLoader';
 
 export default function Footer() {
+    const [email,setEmail] = useState("");
+    const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const router = useRouter();
+
     const handleSocials = (link)=>{
         window.open(link,'_blank');
     }
+    const handleClick = (link)=>{
+        if(link!== ""){
+            router.push(link)
+        }
+    }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        setIsLoading(true);
+
+        const formData = {
+            email,
+        }
+
+        try {
+            const response = await fetch('https://formspree.io/f/xkgnjppo', { 
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData),
+            });
+        
+            if (response.ok) {
+                setShowSuccessPopup(true);
+            } else {
+                throw new Error('EmailJS failed to send email');
+            }
+        } catch (error) {
+            console.error("EmailJS error:", error);
+        } finally {
+            setIsLoading(false);
+            setEmail("");
+            setTimeout(() => setShowSuccessPopup(false), 3000);
+        }
+
+    };
   return (
     <div className={styles.footer}>
         {/* newsletter */}
@@ -17,12 +59,23 @@ export default function Footer() {
                 <h3>Join Our News Letter</h3>
                 <p>We will send you a one nice letter once per week.  No spam.</p>
             </div>
-            <div className={styles.inputDiv}>
-                <label htmlFor="email">
-                <input type="text" id='email' name='email' placeholder='Your Email Address'/>
-                </label>
-                <Button sx={{ textTransform: 'none' }} variant='contained' className={styles.subscribeBtn}>Subscribe</Button>
-            </div>
+            {isLoading ? (
+                <div className={styles.loader}>
+                        <CustomLoader color="red"/>
+                        <h2>Adding you to our subscribers list..</h2>
+                </div>
+            ):(
+                <div className={styles.inputDiv}>
+                    <form method='post' action='submit' onSubmit={handleSubmit}>
+                            <label htmlFor="email">
+                                <input type="text" id='email' name='email' placeholder='Your Email Address' onChange={()=>(setEmail(event.target.value))} required/>
+                            </label>
+                            <Button type='submit' sx={{ textTransform: 'none' }} variant='contained' className={styles.subscribeBtn}>Subscribe</Button>
+                    </form>
+                </div>
+            )
+
+            }
             <div className={styles.socials}>
                 <h3>Follow us on</h3>
                 <div className={styles.icons}>
@@ -49,7 +102,7 @@ export default function Footer() {
             </div>
             {/* listings */}
             {footerData.map((data,i)=>(
-                <div key={i} className={styles.itemContainer}>
+                <div key={i} className={styles.itemContainer} onClick={()=>handleClick(data.link)}>
                     <h3 className={styles.itemHeading}>{data.heading}</h3>
                     {data.items.map((item,index)=>(
                         <p key={index} className={styles.itemText}>{item}</p>
