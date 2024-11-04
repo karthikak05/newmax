@@ -16,15 +16,16 @@ export default function Product() {
     const [activeIndex, setActiveIndex] = useState(0);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [imageUrls, setImageUrls] = useState([]);
+    const [dropDownValues, setDropDownValues] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1); 
-    const [isPopped,setIsPopped] = useState(null);
+    const [isPopped, setIsPopped] = useState(null);
     const imagesPerPage = 9;
 
-    const handlePopped = (url)=>{
-        console.log(url)
-        setIsPopped(url)
-    }
+    const handlePopped = (url) => {
+        console.log(url);
+        setIsPopped(url);
+    };
 
     const handleBrandChange = (value) => {
         setSelectedBrand(value);
@@ -60,7 +61,7 @@ export default function Product() {
     const loadImages = async () => {
         let imageUrls = null;
         let url = '';
-        const isProductsAvailable = DropDownData[activeIndex].models.length > 0;
+        const isProductsAvailable = dropDownValues.length > 0;
         if ((isProductsAvailable && selectedProduct !== null) || !isProductsAvailable) {
             setIsLoading(true);
             url = "/" + currentCategory;
@@ -68,9 +69,16 @@ export default function Product() {
             if (hasSubBrands.includes(currentCategory)) {
                 url += "/" + selectedBrand;
             }
-            if (DropDownData[activeIndex].models.length > 0) {
+            if (dropDownValues.length > 0) {
                 url += "/" + selectedProduct;
             }
+            const checkifUrlsExist = localStorage.getItem(url);
+            if( url !== null){
+                console.log(checkifUrlsExist);
+                imageUrls = checkifUrlsExist;
+            }else{
+                // imageUrls = await fetchImages(url);
+            } 
             imageUrls = await fetchImages(url);
             localStorage.setItem(url, imageUrls);
             setImageUrls(imageUrls);
@@ -89,17 +97,18 @@ export default function Product() {
                 localStorage.setItem("currentCategory", "PDA Accessories");
             }
 
-            const activeCompanyIndex = localStorage.getItem("activeCompanyIndex");
+            let activeCompanyIndex = localStorage.getItem("activeCompanyIndex");
             if (activeCompanyIndex !== null) {
                 setSelectedBrand(activeCompanyIndex);
             } else {
                 setSelectedBrand(0);
                 localStorage.setItem("activeCompanyIndex", "Zebra");
+                activeCompanyIndex = "Zebra";
             }
 
             let activeIndex = localStorage.getItem("activeIndex");
             if (activeIndex !== null) {
-                setActiveIndex(activeIndex);
+                setActiveIndex(Number(activeIndex));
             } else {
                 localStorage.setItem("activeIndex", 0);
                 activeIndex = 0;
@@ -110,19 +119,32 @@ export default function Product() {
                 setSelectedProduct(selectedProduct);
             } else {
                 let value = null;
-                console.log(DropDownData[activeIndex])
-                if( DropDownData[activeIndex].models.length > 0 )   value = DropDownData[activeIndex].models[0].value;
+                if (DropDownData[activeIndex].models.length > 0) {
+                    value = DropDownData[activeIndex].models[0].value;
+                }
                 setSelectedProduct(value);
                 localStorage.setItem("selectedProduct", value);
             }
 
+            // console.log(DropDownData[activeIndex].models)
+            if (activeIndex === "0") {
+                console.log("in")
+                const filteredModels = DropDownData[activeIndex].models.filter(
+                    model => model.company === activeCompanyIndex
+                );
+                setDropDownValues(filteredModels);
+            } else {
+                setDropDownValues(DropDownData[activeIndex].models);
+            }
+            console.log(dropDownValues)
             loadImages();
         }
-    }, [selectedBrand,selectedProduct]);
+    }, [selectedBrand,activeIndex]);
+
 
     const handleSearch = () => {
         if (selectedProduct === null) {
-            alert();
+            alert("Please select a product.");
         }
         loadImages();
     };
@@ -173,15 +195,15 @@ export default function Product() {
                     <h2>Find the product you need</h2>
 
                     {/* Dropdown */}
-                    {DropDownData[activeIndex].models.length > 0 && (
+                    {dropDownValues.length > 0 && (
                         <div className={styles.dropDown}>
                             <div className={styles.dropDownContainer}>
                                 <Dropdown
-                                label="Choose Products"
-                                value={selectedProduct}
-                                onChange={handleProductChange}
-                                options={DropDownData[activeIndex].models}
-                            />
+                                    label="Choose Products"
+                                    value={selectedProduct}
+                                    onChange={handleProductChange}
+                                    options={dropDownValues}
+                                />
                             </div>
                             <Button
                                 sx={{ textTransform: 'none' }}
@@ -199,46 +221,50 @@ export default function Product() {
                         <div className={styles.loader}><CustomLoader color="red" /></div>
                     ) : (
                         imageUrls.length === 0 ? (
-                            <h2 className={styles.error}>Error fetching products.Please try again</h2>
+                            <h2 className={styles.error}>Error fetching products. Please try again.</h2>
                         ) : (
                             <div className={styles.gridContainer}>
-                            {isPopped!==null && (
-                                <div className={styles.bg}>
-                                    <div className={styles.imgContainer}>
-                                    <div onClick={()=>handlePopped(null)} className={styles.close}>
-                                        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M16 16L12 12M12 12L8 8M12 12L16 8M12 12L8 16" stroke="#F8F8F8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-                                        </svg>
+                                {isPopped !== null && (
+                                    <div className={styles.bg}>
+                                        <div className={styles.imgContainer}>
+                                            <div onClick={() => handlePopped(null)} className={styles.close}>
+                                                <svg width="52" height="52" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M16 16L12 12M12 12L8 8M12 12L16 8M12 12L8 16" stroke="#F8F8F8" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                                                </svg>
+                                            </div>
+                                            <Image src={isPopped} alt="bg-cover" height={300} width={300} />
+                                        </div>
                                     </div>
-                                        <Image src={isPopped} alt="bg-cover" height={300} width={300}/></div>
-                                </div>
-                            )}
-                            {currentImages.map((image, i) => (
-                                <div key={i} className={styles.item}>
-                                    <ProductContainer url={image} popover={true} isPopped={isPopped} setIsPopped={handlePopped}/>
-                                </div>
-                            ))}
-                        </div>
+                                )}
+                                {currentImages.map((image, i) => (
+                                    <div key={i} className={styles.item}>
+                                        <ProductContainer url={image} popover={handlePopped} />
+                                    </div>
+                                ))}
+                            </div>
                         )
                     )}
 
-                    {!isLoading && imageUrls.length > 0 && (
-                        <div className={styles.pagination}>
-                            <Button sx={{ textTransform: 'none' }} onClick={handlePrevPage}  className={`${styles.prev} ${currentPage === 1 ? styles.disabled : ''}`}>
-                                <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10.56 12L11.5 11.06L8.44667 8L11.5 4.94L10.56 4L6.56 8L10.56 12Z" fill="#505050"/>
-                                </svg>
-                                    Previous
-                            </Button>
-                                <span className={styles.pages}>{currentPage}/{totalPages}</span>
-                            <Button sx={{ textTransform: 'none' }} onClick={handleNextPage}  className={`${styles.next} ${currentPage === totalPages  ? styles.disabled : ''}`}>
-                                Next
-                                <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M10.56 12L11.5 11.06L8.44667 8L11.5 4.94L10.56 4L6.56 8L10.56 12Z" fill="#505050"/>
-                                </svg>
-                            </Button>
-                        </div>
-                    )}
+                    {/* Pagination */}
+                    <div className={styles.pagination}>
+                        <Button
+                            variant="outlined"
+                            className={styles.paginationBtn}
+                            disabled={currentPage === 1}
+                            onClick={handlePrevPage}
+                        >
+                            Previous
+                        </Button>
+                        <span>{currentPage} of {totalPages}</span>
+                        <Button
+                            variant="outlined"
+                            className={styles.paginationBtn}
+                            disabled={currentPage === totalPages}
+                            onClick={handleNextPage}
+                        >
+                            Next
+                        </Button>
+                    </div>
                 </div>
             </div>
         </div>

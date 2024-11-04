@@ -18,7 +18,6 @@ export default function Product() {
     if (currencyValue) setCurrency(currencyValue);
     if (currencySymbol) setCurrencySymbol(currencySymbol);
 
-    // Initialize input values for each item
     const initialValues = {};
     cartItems.forEach(item => {
       initialValues[item.name] = item.quantity;
