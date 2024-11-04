@@ -31,13 +31,6 @@ export default function Navbar() {
   useEffect(()=>{
     localStorage.setItem("currency", "USD");
     localStorage.setItem("currencySymbol", "$");
-    const value = localStorage.getItem("activeHeader");
-    if( value !== null){
-      setActiveHeader(value);
-    }else{
-      setActiveHeader(null);
-      localStorage.setItem('activeHeader',null);
-    }
   },[]);
   
   return (

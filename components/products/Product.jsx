@@ -207,7 +207,7 @@ export default function Product() {
                                             <path d="M16 16L12 12M12 12L8 8M12 12L16 8M12 12L8 16" stroke="#F8F8F8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
                                         </svg>
                                     </div>
-                                    <div className={styles.imgContainer2}><Image src={isPopped} alt="bg-cover" height={600} width={600}/></div>
+                                    <div className={styles.imgContainer}><Image src={isPopped} alt="bg-cover" height={300} width={300}/></div>
                                 </div>
                             )}
                             {currentImages.map((image, i) => (
