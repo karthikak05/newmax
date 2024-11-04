@@ -35,7 +35,10 @@
                 @extend .flexCol !optional;
                 justify-content: space-between;
                 .inputBox{
-                    width: fit-content;
+                    width: 50px;
+                    text-align: center;
+                    border: 1px solid #494949;
+                    border-radius: 5px;
                 }
                 .name{
                     font-size: 16px;
