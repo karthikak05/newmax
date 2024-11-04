@@ -8,11 +8,18 @@
     overflow-y: scroll;
     padding: 20px;
     text-align: left;
-    .heading{
-        font-size: 28px;
+    .headingContainer{
+        @extend .flexRow !optional;
+        justify-content: space-between;
         border-bottom: 1px solid #E4E4E4;
         padding-bottom: 1rem;
-    }
+        .heading{
+            font-size: 28px;
+        }
+        button{
+            width: 150px;
+        }
+    }   
     .itemsContainer{
         padding: 1rem 0;
         .empty{
@@ -23,8 +30,9 @@
             justify-content: space-between;
             padding: 1rem 0;
             border-bottom: 1px solid #E4E4E4;
+            position: relative;
             .imgContainer{
-                height: 161px;
+                height: 100%;
                 width: 234px;
                 border: 1px solid #E4E4E4;
                 border-radius: 10px;
@@ -34,6 +42,26 @@
                 margin-left: 1rem;
                 @extend .flexCol !optional;
                 justify-content: space-between;
+                gap: 1rem;
+                .btnMain{
+                    @extend .flexCol !optional;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 1rem;
+                    width: 100%;
+                    .removeItem{
+                        width: 150px;
+                        font-size: 14px;
+                        border: none;
+                        background-color: $color-primary;
+                        color:white;
+                        font-weight: 600;
+                        padding: 6px 12px;
+                        border-radius: 4px;
+                        text-align: center;
+                        cursor: pointer;
+                    }
+                }
                 .inputBox{
                     width: 50px;
                     text-align: center;

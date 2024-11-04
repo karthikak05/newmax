@@ -102,6 +102,22 @@ export const useCartStore = create((set, get) => ({
       console.error('Failed to add item to cart:', error);
     }
   },
+  
+  removeItem: async (name) => {
+    try {
+      const state = get();
+      const updatedCartItems = state.cartItems.filter((item) => item.name !== name);
+      
+      await CartStorage.removeItem(name); // Remove item from IndexedDB
+
+      const newTotal = state.calculateTotal(updatedCartItems);
+      const newTotalQuantity = state.calculateTotalQuantity(updatedCartItems);
+
+      set({ cartItems: updatedCartItems, total: newTotal, totalQuantity: newTotalQuantity });
+    } catch (error) {
+      console.error('Failed to remove item from cart:', error);
+    }
+  },
 
   remove: async (name) => {
     try {
