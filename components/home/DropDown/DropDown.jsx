@@ -18,6 +18,11 @@ const Dropdown = ({ label, value, onChange, options }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  useEffect(()=>{
+      setFilteredOptions(options);
+      setSearchTerm('');
+  },[options])
+
   const handleSearchChange = (e) => {
     const term = e.target.value.toLowerCase();
     setSearchTerm(term);

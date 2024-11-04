@@ -136,10 +136,11 @@ export default function Product() {
             } else {
                 setDropDownValues(DropDownData[activeIndex].models);
             }
-            console.log(dropDownValues)
             loadImages();
         }
     }, [selectedBrand,activeIndex]);
+
+    // console.log(dropDownValues)
 
 
     const handleSearch = () => {
