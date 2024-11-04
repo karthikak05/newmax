@@ -6,7 +6,7 @@ import { useCartStore } from '@/store/cartStore';
 import { encryptData,decryptData } from '@/store/dataHandler';
 
 export default function ProductContainer({ url,popover,isPopped,setIsPopped }) {
-  const { add, remove, clearCart, isLoading } = useCartStore();
+  const { add } = useCartStore();
   const [currency,setCurrentCurrency] = useState("USD");
   const [currecySymbol,setCurrecySymbol] = useState("$");
 
