@@ -41,6 +41,12 @@
                 width: 30vw;
                 @extend .flexRow !optional;
                 gap: 1rem;
+                .dropDownContainer{
+                    width: 60%;
+                    height: 52px;
+                    display: flex;
+                    justify-content: center;
+                }
                 .containedBtn{
                     width: 10vw;
                 }

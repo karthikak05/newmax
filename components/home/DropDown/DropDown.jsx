@@ -1,52 +1,72 @@
-import React, { useState, useEffect } from 'react';
-import { Select, MenuItem, FormControl, InputLabel, TextField } from '@mui/material';
-import ArrowDropDownCircleOutlinedIcon from '@mui/icons-material/ArrowDropDownCircleOutlined';
+import React, { useState, useRef, useEffect } from 'react';
+import styles from './Dropdown.module.scss';
 
 const Dropdown = ({ label, value, onChange, options }) => {
-    const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredOptions, setFilteredOptions] = useState(options);
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
-    // Handle the search input change
-    const handleSearchChange = (event) => {
-        console.log(event.target.value)
-        setSearchTerm(event.target.value);
-        console.log(searchTerm);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
     };
 
-    const filteredOptions = searchTerm.length >= 2 
-        ? options.filter(option => option.label.toLowerCase().includes(searchTerm.toLowerCase()))
-        : options;
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
-    return (
-        <FormControl fullWidth variant="outlined" style={{ width: "100%" }}>
-            <InputLabel id={`${label}-label`}>{label}</InputLabel>
-            <Select
-                labelId={`${label}-label`}
-                value={value}
-                onChange={onChange}
-                label={label}
-                IconComponent={ArrowDropDownCircleOutlinedIcon}
-            >
-                {/* TextField for searching */}
-                <TextField
-                    variant="outlined"
-                    placeholder="Search..."
-                    value={searchTerm}
-                    onChange={handleSearchChange}
-                    style={{ margin: '8px', color: 'black' }} 
-                />
-                {/* Render filtered options or a message if none found */}
-                {filteredOptions.length > 0 ? (
-                    filteredOptions.map((option) => (
-                        <MenuItem key={option.value} value={option.value}>
-                            {option.label}
-                        </MenuItem>
-                    ))
-                ) : (
-                    <MenuItem disabled>No options found</MenuItem>
-                )}
-            </Select>
-        </FormControl>
+  const handleSearchChange = (e) => {
+    const term = e.target.value.toLowerCase();
+    setSearchTerm(term);
+    setFilteredOptions(
+      options.filter(option =>
+        option.label.toLowerCase().includes(term)
+      )
     );
+    setIsOpen(true); // Open dropdown when typing
+  };
+
+  const handleOptionClick = (option) => {
+    setSearchTerm(option.label); // Display selected option's label
+    onChange({ target: { value: option.value } }); // Update selected value
+    setIsOpen(false); // Close dropdown after selecting
+  };
+
+  return (
+    <div className={styles.dropdown} ref={dropdownRef}>
+      <div className={`${styles.inputContainer} ${searchTerm ? styles.filled : ''}`}>
+        <label className={styles.floatingLabel}>{label}</label>
+        <input
+          type="text"
+          className={styles.dropdownSearch}
+          value={searchTerm}
+          onChange={handleSearchChange}
+          onClick={() => setIsOpen(!isOpen)}
+          placeholder=" "
+        />
+      </div>
+      {isOpen && (
+        <ul className={styles.dropdownList}>
+          {filteredOptions.length > 0 ? (
+            filteredOptions.map((option, index) => (
+              <li
+                key={index}
+                className={styles.dropdownItem}
+                onClick={() => handleOptionClick(option)}
+              >
+                {option.label}
+              </li>
+            ))
+          ) : (
+            <li className={styles.dropdownNoOptions}>No options found</li>
+          )}
+        </ul>
+      )}
+    </div>
+  );
 };
 
 export default Dropdown;

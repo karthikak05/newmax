@@ -175,12 +175,14 @@ export default function Product() {
                     {/* Dropdown */}
                     {DropDownData[activeIndex].models.length > 0 && (
                         <div className={styles.dropDown}>
-                            <Dropdown
+                            <div className={styles.dropDownContainer}>
+                                <Dropdown
                                 label="Choose Products"
                                 value={selectedProduct}
                                 onChange={handleProductChange}
                                 options={DropDownData[activeIndex].models}
                             />
+                            </div>
                             <Button
                                 sx={{ textTransform: 'none' }}
                                 variant="contained"
