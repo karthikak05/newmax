@@ -8,6 +8,8 @@ import { LeftMenu as DropDownData } from '@/data/LeftMenu';
 import CustomLoader from '../Reusables/CustomLoader';
 import { Button } from '@mui/material';
 import Image from 'next/image';
+import { openDatabase } from '@/store/imageStore';
+import { getImageUrls } from '@/store/imageStore';
 
 export default function Product() {
     const { fetchImages } = useStorage();
@@ -32,6 +34,7 @@ export default function Product() {
         setSelectedProduct(null);
         if (typeof window !== 'undefined') {
             localStorage.setItem("activeCompanyIndex", value);
+            localStorage.setItem("selectedProduct", null);
         }
     };
 
@@ -41,6 +44,8 @@ export default function Product() {
         setSelectedProduct(null);
         if (typeof window !== 'undefined') {
             localStorage.setItem("currentCategory", value);
+            localStorage.setItem("activeCompanyIndex", "Zebra");
+            localStorage.setItem("selectedProduct", null);
         }
     };
 
@@ -58,32 +63,54 @@ export default function Product() {
         }
     };
 
-    const loadImages = async () => {
-        let imageUrls = null;
+    // const loadImages = async (selectedProductValue) => {
+    //     let imageUrls = null;
+    //     let url = '';
+    //     const isProductsAvailable = dropDownValues.length > 0;
+    //     // if ((isProductsAvailable && selectedProduct !== null) || !isProductsAvailable) {
+    //         setIsLoading(true);
+    //         url = "/" + currentCategory;
+    //         const hasSubBrands = ["PDA Accesssories", "Barcode Printer Accessories"];
+    //         if (hasSubBrands.includes(currentCategory)) {
+    //             url += "/" + selectedBrand;
+    //         }
+    //         if (DropDownData[activeIndex].models.length > 0) {
+    //             url += "/" + selectedProductValue;
+    //         }
+    //         imageUrls = await fetchImages(url);
+    //         setImageUrls(imageUrls);
+    //         setCurrentPage(1); // Reset to first page whenever images are loaded
+    //         setIsLoading(false);
+    //     // }
+    // };
+
+    const loadImages = async (selectedProductValue,activeBrand) => {
         let url = '';
-        const isProductsAvailable = dropDownValues.length > 0;
-        if ((isProductsAvailable && selectedProduct !== null) || !isProductsAvailable) {
-            setIsLoading(true);
-            url = "/" + currentCategory;
-            const hasSubBrands = ["PDA Accesssories", "Barcode Printer Accessories"];
-            if (hasSubBrands.includes(currentCategory)) {
-                url += "/" + selectedBrand;
+
+        url = "/" + currentCategory;
+        const hasSubBrands = ["PDA Accesssories", "Barcode Printer Accessories"];
+        if (hasSubBrands.includes(currentCategory)) {
+            url += "/" + activeBrand;
+        }
+        if ( DropDownData[activeIndex].models.length > 0 ) {
+            url += "/" + selectedProductValue;
+        }
+
+        const cachedImageUrls = await getImageUrls(url);
+        if (cachedImageUrls) {
+            setImageUrls(cachedImageUrls); 
+            console.log("Using cached images:");
+        } else {
+            setIsLoading(true); 
+            const fetchedImageUrls = await fetchImages(url); 
+            if(fetchedImageUrls.length > 0){
+                const db = await openDatabase();
+                await db.put('images', { url: url, imageUrls: fetchedImageUrls });
             }
-            if (dropDownValues.length > 0) {
-                url += "/" + selectedProduct;
-            }
-            const checkifUrlsExist = localStorage.getItem(url);
-            if( url !== null){
-                console.log(checkifUrlsExist);
-                imageUrls = checkifUrlsExist;
-            }else{
-                // imageUrls = await fetchImages(url);
-            } 
-            imageUrls = await fetchImages(url);
-            localStorage.setItem(url, imageUrls);
-            setImageUrls(imageUrls);
-            setCurrentPage(1); // Reset to first page whenever images are loaded
-            setIsLoading(false);
+            
+            setImageUrls(fetchedImageUrls); // Use newly fetched URLs
+            console.log("Fetched and stored new images:");
+            setIsLoading(false); // Reset loading state
         }
     };
 
@@ -114,9 +141,9 @@ export default function Product() {
                 activeIndex = 0;
             }
 
-            const selectedProduct = localStorage.getItem('selectedProduct');
-            if (selectedProduct !== null) {
-                setSelectedProduct(selectedProduct);
+            let selectedProductValue = localStorage.getItem('selectedProduct');
+            if (selectedProductValue !== "null") {
+                setSelectedProduct(selectedProductValue);
             } else {
                 let value = null;
                 if (DropDownData[activeIndex].models.length > 0) {
@@ -124,6 +151,7 @@ export default function Product() {
                 }
                 setSelectedProduct(value);
                 localStorage.setItem("selectedProduct", value);
+                selectedProductValue = value;
             }
 
             // console.log(DropDownData[activeIndex].models)
@@ -133,10 +161,11 @@ export default function Product() {
                     model => model.company === activeCompanyIndex
                 );
                 setDropDownValues(filteredModels);
+                selectedProductValue = filteredModels[0].value;
             } else {
                 setDropDownValues(DropDownData[activeIndex].models);
             }
-            loadImages();
+            loadImages(selectedProductValue,activeCompanyIndex);
         }
     }, [selectedBrand,activeIndex]);
 
@@ -147,7 +176,7 @@ export default function Product() {
         if (selectedProduct === null) {
             alert("Please select a product.");
         }
-        loadImages();
+        loadImages(selectedProduct,selectedBrand);
     };
 
     const totalPages = Math.ceil(imageUrls.length / imagesPerPage);
