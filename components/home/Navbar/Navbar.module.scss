@@ -25,6 +25,12 @@
         @extend .flexRow !optional;
         gap:3rem;
         justify-content: center;
+        p{
+            transition: all .3s ease-in-out;
+        }
+        p:hover{
+            color: gray;
+        }
         .active{
             color: $color-primary;
         }

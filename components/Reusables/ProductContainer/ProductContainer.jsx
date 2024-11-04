@@ -68,8 +68,8 @@ export default function ProductContainer({ url,popover,isPopped,setIsPopped }) {
   const { name, numericPrice } = extractNameAndPrice(url);
 
   return (
-    <div className={styles.main} onClick={()=>setIsPopped(url)}>
-      <div className={styles.imgContainer}>
+    <div className={styles.main}>
+      <div className={styles.imgContainer} onClick={()=>setIsPopped(url)}>
         <Image src={url} alt="product-image" height={300} width={300} />
       </div>
       <div className={styles.content}>

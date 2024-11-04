@@ -113,16 +113,17 @@
     align-items: center;
     justify-content: center;
     .imgContainer{
-        height: 600px;
-        width: 500px;
+        height: 500px;
+        width: 400px;
         img{
             object-fit: contain;
         }
+        position: relative;
     }
-    svg{
+    .close{
         position: absolute;
-        top: 10%;
-        right: 10%;
+        top: 0%;
+        right: 0;
         background-color: $color-primary;
         border-radius: 10px;
         cursor: pointer;

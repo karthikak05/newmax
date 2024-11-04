@@ -204,12 +204,13 @@ export default function Product() {
                             <div className={styles.gridContainer}>
                             {isPopped!==null && (
                                 <div className={styles.bg}>
-                                    <div onClick={()=>handlePopped(null)}>
+                                    <div className={styles.imgContainer}>
+                                    <div onClick={()=>handlePopped(null)} className={styles.close}>
                                         <svg width="52" height="52" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M16 16L12 12M12 12L8 8M12 12L16 8M12 12L8 16" stroke="#F8F8F8" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
                                         </svg>
                                     </div>
-                                    <div className={styles.imgContainer}><Image src={isPopped} alt="bg-cover" height={300} width={300}/></div>
+                                        <Image src={isPopped} alt="bg-cover" height={300} width={300}/></div>
                                 </div>
                             )}
                             {currentImages.map((image, i) => (

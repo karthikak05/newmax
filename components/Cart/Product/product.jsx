@@ -5,9 +5,10 @@ import Image from 'next/image';
 import { useCartStore } from '@/store/cartStore';
 
 export default function Product() {
-  const { cartItems, total, add, remove, clearCart, isLoading,totalQuantity } = useCartStore();
+  const { cartItems, add, remove, updateQuantity } = useCartStore();
   const [currency,setCurrency] = useState("USD") 
   const [currencySymbol,setCurrecySymbol] = useState("$") ;
+  const [error,setError] = useState("")
 
   useEffect(()=>{
     let currencyValue = localStorage.getItem("currency");
@@ -21,7 +22,18 @@ export default function Product() {
   }
   const addToCart = async(item)=>{
     await add(item);
-  }
+  };
+  const handleQuantityChange = (e, itemName) => {
+    const newQuantity = parseInt(e.target.value, 10);
+    // if( newQuantity <1 )  return;
+    if (newQuantity > 0) {
+      updateQuantity(itemName, newQuantity);
+      setError("");
+    }else{
+      setError("Value must be greater than 0")
+    }
+  };
+  
 
   return (
     <div className={styles.main}>
@@ -44,7 +56,12 @@ export default function Product() {
                       <path d="M6 12H12M12 12H18M12 12V18M12 12V6" stroke="black" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
                       </svg>
                     </div>
-                    <div>{item.quantity}pcs</div>
+                    <input
+                      className={styles.inputBox}
+                      type="text"
+                      value={item.quantity}
+                      onChange={(e) => handleQuantityChange(e, item.name)}
+                    />
                     <div className={styles.minus} onClick={()=>removeFromCart(item)}>
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12 19V5" stroke="black" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>

@@ -107,27 +107,35 @@ export const useCartStore = create((set, get) => ({
     try {
       const state = get();
       const itemToRemove = state.cartItems.find((item) => item.name === name);
-
-      if (itemToRemove.quantity > 1) {
-        itemToRemove.quantity--;
-        await CartStorage.updateItem(itemToRemove);
-        let updatedCartItems = state.cartItems.filter((item) => item.name !== name);
-        updatedCartItems = [...updatedCartItems,itemToRemove];
-        const newTotal = state.calculateTotal(updatedCartItems);
-        const newTotalQuantity = state.calculateTotalQuantity(updatedCartItems);
-        set({ cartItems: updatedCartItems, total: newTotal, totalQuantity: newTotalQuantity });
-      } else {
-        const updatedCartItems = state.cartItems.filter((item) => item.name !== name);
-        const newTotal = state.calculateTotal(updatedCartItems);
-        const newTotalQuantity = state.calculateTotalQuantity(updatedCartItems);
-        set({ cartItems: updatedCartItems, total: newTotal, totalQuantity: newTotalQuantity });
-        await CartStorage.removeItem(name);
-      }
   
+      if (itemToRemove) {
+        let updatedCartItems;
+  
+        if (itemToRemove.quantity > 1) {
+          const updatedItem = { ...itemToRemove, quantity: itemToRemove.quantity - 1 };
+          await CartStorage.updateItem(updatedItem);
+  
+          updatedCartItems = state.cartItems.map((item) =>
+            item.name === name ? updatedItem : item
+          );
+        } else {
+          // Remove the item entirely if quantity is 1
+          updatedCartItems = state.cartItems.filter((item) => item.name !== name);
+          await CartStorage.removeItem(name);
+        }
+  
+        // Recalculate totals without changing the order
+        const newTotal = state.calculateTotal(updatedCartItems);
+        const newTotalQuantity = state.calculateTotalQuantity(updatedCartItems);
+  
+        // Update state with the new cart items and totals
+        set({ cartItems: updatedCartItems, total: newTotal, totalQuantity: newTotalQuantity });
+      }
     } catch (error) {
       console.error('Failed to remove item from cart:', error);
     }
   },
+  
 
   clearCart: async () => {
     try {
@@ -137,6 +145,27 @@ export const useCartStore = create((set, get) => ({
       console.error('Failed to clear cart:', error);
     }
   },
+
+  updateQuantity: async (name, quantity) => {
+    try {
+      const state = get();
+      const updatedCartItems = state.cartItems.map((item) => {
+        return item.name === name ? { ...item, quantity } : item;
+      });
+  
+      const itemToUpdate = updatedCartItems.find((item) => item.name === name);
+      if (itemToUpdate) {
+        await CartStorage.updateItem(itemToUpdate);
+      }
+  
+      const newTotal = state.calculateTotal(updatedCartItems);
+      const newTotalQuantity = state.calculateTotalQuantity(updatedCartItems);
+  
+      set({ cartItems: updatedCartItems, total: newTotal, totalQuantity: newTotalQuantity });
+    } catch (error) {
+      console.error('Failed to update item quantity:', error);
+    }
+  },  
 
   getTotalQuantity: () => {
     const state = get();

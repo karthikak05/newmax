@@ -31,8 +31,12 @@
             }
             .contentMain{
                 margin-top: 1rem;
+                margin-left: 1rem;
                 @extend .flexCol !optional;
                 justify-content: space-between;
+                .inputBox{
+                    width: fit-content;
+                }
                 .name{
                     font-size: 16px;
                 }
