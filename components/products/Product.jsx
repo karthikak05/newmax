@@ -64,7 +64,7 @@ export default function Product() {
         if ((isProductsAvailable && selectedProduct !== null) || !isProductsAvailable) {
             setIsLoading(true);
             url = "/" + currentCategory;
-            const hasSubBrands = ["PDA Accessories", "Barcode Printer Accessories"];
+            const hasSubBrands = ["PDA Accesssories", "Barcode Printer Accessories"];
             if (hasSubBrands.includes(currentCategory)) {
                 url += "/" + selectedBrand;
             }

@@ -10,11 +10,11 @@ export default function Stat() {
         <p>Extensive experience across different business fields.</p>
 
         <div className={styles.numbers}>
-            <p><b>25+</b> Years</p>
-            <div className={styles.gradientDiv}></div>
             <p><b>120+</b> Countries</p>
             <div className={styles.gradientDiv}></div>
-            <p><b>3000+</b> Customers</p>
+            <p><b>1000+</b> Customers</p>
+            <div className={styles.gradientDiv}></div>
+            <p><b>3000+</b> Products</p>
         </div>
 
         <div className={styles.textContent}>

@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import styles from './Hero.module.scss';
 import { heroContent } from '@/data/Hero';
 import { Button } from '@mui/material';
-import { options1,categories } from '@/data/DropDown';
+import { categories } from '@/data/DropDown';
 import Dropdown from '../DropDown/DropDown';
 import { useRouter } from 'next/navigation';
 
