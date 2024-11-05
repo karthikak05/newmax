@@ -91,6 +91,7 @@ export default function Product() {
 
     const loadImages = async (categoryValue,selectedProductValue,activeBrand,activeIndexValue) => {
         let url = '';
+        categoryValue = categoryValue === "PDA Accessories" && "PDA Accesssories";
 
         url = "/" + categoryValue;
         const hasSubBrands = ["PDA Accesssories", "Barcode Printer Accessories"];
@@ -126,8 +127,8 @@ export default function Product() {
                 setCurrentCategory(categoryValue);
             } else {
                 setCurrentCategory("PDA Accessories");
-                localStorage.setItem("currentCategory", "PDA Accesssories");
-                categoryValue = "PDA Accesssories";
+                localStorage.setItem("currentCategory", "PDA Accessories");
+                categoryValue = "PDA Accessories";
             }
 
             let activeCompanyName = localStorage.getItem("activeCompanyName");

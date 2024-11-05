@@ -1,6 +1,6 @@
 export const LeftMenu = [
     {
-      heading: "PDA Accesssories",
+      heading: "PDA Accessories",
       companies: ["Zebra", "Honeywell", "Datalogic", "InterMec", "Pison TekLogic"],
       models: [
         { value: "EC50 EC55 EC30", label: "EC50 EC55 EC30", company: "Zebra" },
@@ -73,7 +73,7 @@ export const LeftMenu = [
         { value: "Dolphin 5100", label: "Dolphin 5100", company: "Honeywell" },
         { value: "Dolphin 6000", label: "Dolphin 6000", company: "Honeywell" },
         { value: "Dolphin 60S", label: "Dolphin 60S", company: "Honeywell" },
-        { value: "Dolphin 6100", label: "Dolphin 6100", company: "Honeywell" },
+        // { value: "Dolphin 6100", label: "Dolphin 6100", company: "Honeywell" },
         { value: "Dolphin 6110", label: "Dolphin 6110", company: "Honeywell" },
         { value: "Dolphin 6500", label: "Dolphin 6500", company: "Honeywell" },
         { value: "Dolphin 6510", label: "Dolphin 6510", company: "Honeywell" },
