@@ -25,6 +25,7 @@ export default function Product() {
     const imagesPerPage = 9;
 
     const handlePopped = (url) => {
+        console.log("in")
         setIsPopped(url);
     };
 
@@ -171,9 +172,9 @@ export default function Product() {
                 setDropDownValues(DropDownData[activeIndexValue].models);
             }
 
-            if (localProductValue !== null && localProductValue!== "null") {
-                selectedProductValue =localProductValue;
-            };
+            // if (localProductValue !== null && localProductValue!== "null") {
+            //     selectedProductValue =localProductValue;
+            // };
 
             loadImages(categoryValue,selectedProductValue,activeCompanyName,activeIndexValue);
         }
@@ -277,7 +278,7 @@ export default function Product() {
                                 )}
                                 {currentImages.map((image, i) => (
                                     <div key={i} className={styles.item}>
-                                        <ProductContainer url={image} popover={handlePopped} />
+                                        <ProductContainer url={image} setIsPopped={handlePopped} />
                                     </div>
                                 ))}
                             </div>
@@ -305,8 +306,6 @@ export default function Product() {
                         </>
                         )
                     )}
-
-                    
                 </div>
             </div>
         </div>
