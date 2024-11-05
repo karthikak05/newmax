@@ -25,13 +25,13 @@ export default function Product() {
     const imagesPerPage = 9;
 
     const handlePopped = (url) => {
+        console.log(url);
         setIsPopped(url);
     };
 
     const handleBrandChange = (value) => {
         setSelectedBrand(value);
         setSelectedProduct(null);
-        setCurrentPage(1);
         if (typeof window !== 'undefined') {
             localStorage.setItem("activeCompanyName", value);
             localStorage.setItem("selectedProduct", null);
@@ -42,7 +42,6 @@ export default function Product() {
         setCurrentCategory(value);
         setSelectedBrand(null);
         setSelectedProduct(null);
-        setCurrentPage(1);
         if (typeof window !== 'undefined') {
             localStorage.setItem("currentCategory", value);
             localStorage.setItem("activeCompanyName", "Zebra");
@@ -51,7 +50,6 @@ export default function Product() {
     };
 
     const handleProductChange = (e) => {
-        setCurrentPage(1);
         setSelectedProduct(e.target.value);
         if (typeof window !== 'undefined') {
             localStorage.setItem("selectedProduct", e.target.value);
@@ -60,7 +58,6 @@ export default function Product() {
 
     const handleActiveIndexChange = (index) => {
         setActiveIndex(index);
-        setCurrentPage(1);
         if (typeof window !== 'undefined') {
             localStorage.setItem("activeIndex", index);
         }
@@ -102,7 +99,7 @@ export default function Product() {
         const cachedImageUrls = await getImageUrls(url);
         if (cachedImageUrls) {
             setImageUrls(cachedImageUrls); 
-            // console.log("Using cached images:");
+            console.log("Using cached images:");
         } else {
             setIsLoading(true); 
             const fetchedImageUrls = await fetchImages(url); 
@@ -112,7 +109,7 @@ export default function Product() {
             }
             
             setImageUrls(fetchedImageUrls); // Use newly fetched URLs
-            // console.log("Fetched and stored new images:");
+            console.log("Fetched and stored new images:");
             setIsLoading(false); // Reset loading state
         }
     };
@@ -146,12 +143,12 @@ export default function Product() {
             }
 
             let selectedProductValue = localStorage.getItem('selectedProduct');
-            const localProductValue = localStorage.getItem('selectedProduct');
             if (selectedProductValue !== null && selectedProductValue!== "null") {
                 setSelectedProduct(selectedProductValue);
             } else {
                 let value = null;
                 if (DropDownData[activeIndexValue].models.length > 0) {
+                    console.log(DropDownData[activeIndexValue].models)
                     value = DropDownData[activeIndexValue].models[0].value;
                 }
                 setSelectedProduct(value);
@@ -169,21 +166,13 @@ export default function Product() {
             } else {
                 setDropDownValues(DropDownData[activeIndexValue].models);
             }
-
-            if (localProductValue !== null && localProductValue!== "null") {
-                selectedProductValue =localProductValue;
-            };
-
             loadImages(categoryValue,selectedProductValue,activeCompanyName,activeIndexValue);
         }
     }, [selectedBrand,activeIndex]);
 
     // console.log(dropDownValues)
 
-    useEffect(()=>{
-        loadImages(currentCategory,selectedProduct,selectedBrand,activeIndex);
-    },[selectedProduct]);
-    
+
     const handleSearch = () => {
         if (selectedProduct === null) {
             alert("Please select a product.");
@@ -191,7 +180,7 @@ export default function Product() {
         loadImages(currentCategory,selectedProduct,selectedBrand,activeIndex);
     };
 
-    let totalPages = Math.ceil(imageUrls.length / imagesPerPage);
+    const totalPages = Math.ceil(imageUrls.length / imagesPerPage);
 
     const currentImages = imageUrls.slice(
         (currentPage - 1) * imagesPerPage,
