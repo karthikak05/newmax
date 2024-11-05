@@ -15,13 +15,13 @@ export default function Companies() {
             </div>
         ))}
 
-        <div className={styles.secondRow}>
+        {/* <div className={styles.secondRow}> */}
             {images.slice(4, 8).map((image, i) => (
             <div className={styles.imgContainer} key={i}>
                 <Image src={`/companies/${image}`} height={96} width={184} />
             </div>
             ))}
-        </div>
+        {/* </div> */}
         </div>
     </div>
   )
