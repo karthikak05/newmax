@@ -5,8 +5,9 @@ import Image from 'next/image';
 import { useCartStore } from '@/store/cartStore';
 
 export default function CheckoutForm({ handleCheckedOut }) {
-  const { cartItems, total,clearCart } = useCartStore();
+  const { cartItems, total,clearCart,getTotalQuantity } = useCartStore();
   
+
   // State for form data
   const [formData, setFormData] = useState({
     name: '',
@@ -92,7 +93,9 @@ export default function CheckoutForm({ handleCheckedOut }) {
     } catch (error) {
       console.error('Error sending email:', error);
     } finally {
-      setIsLoading(false); 
+      setIsLoading(false);
+      localStorage.setItem("isCheckedOut",false)
+      setTimeout(()=>{handleCheckedOut(false);},5000)
     }
   };
 
@@ -198,7 +201,7 @@ export default function CheckoutForm({ handleCheckedOut }) {
             </div>
           </div>
 
-          <button type="submit" className={styles.submitBtn} disabled={isLoading}>
+          <button type="submit" className={styles.submitBtn} disabled={isLoading || getTotalQuantity()<=0}>
             {isLoading ? 'Confirming...' : 'Confirm Order'}
           </button>
         </form>
