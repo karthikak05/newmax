@@ -261,6 +261,7 @@ export default function Product() {
                         imageUrls.length === 0 ? (
                             <h2 className={styles.error}>Error fetching products. Please try again.</h2>
                         ) : (
+                        <>
                             <div className={styles.gridContainer}>
                                 {isPopped !== null && (
                                     <div className={styles.bg}>
@@ -280,29 +281,32 @@ export default function Product() {
                                     </div>
                                 ))}
                             </div>
+
+                            {/* Pagination */}
+                            <div className={styles.pagination}>
+                            <Button
+                                variant="outlined"
+                                className={styles.paginationBtn}
+                                disabled={currentPage === 1}
+                                onClick={handlePrevPage}
+                            >
+                                Previous
+                            </Button>
+                            <span>{currentPage} of {totalPages}</span>
+                            <Button
+                                variant="outlined"
+                                className={styles.paginationBtn}
+                                disabled={currentPage === totalPages}
+                                onClick={handleNextPage}
+                            >
+                                Next
+                            </Button>
+                        </div>
+                        </>
                         )
                     )}
 
-                    {/* Pagination */}
-                    <div className={styles.pagination}>
-                        <Button
-                            variant="outlined"
-                            className={styles.paginationBtn}
-                            disabled={currentPage === 1}
-                            onClick={handlePrevPage}
-                        >
-                            Previous
-                        </Button>
-                        <span>{currentPage} of {totalPages}</span>
-                        <Button
-                            variant="outlined"
-                            className={styles.paginationBtn}
-                            disabled={currentPage === totalPages}
-                            onClick={handleNextPage}
-                        >
-                            Next
-                        </Button>
-                    </div>
+                    
                 </div>
             </div>
         </div>

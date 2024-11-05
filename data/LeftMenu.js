@@ -1,7 +1,7 @@
 export const LeftMenu = [
     {
       heading: "PDA Accesssories",
-      companies: ["Zebra", "HoneyWell", "Datalogic", "InterMec", "Pison TekLogic"],
+      companies: ["Zebra", "Honeywell", "Datalogic", "InterMec", "Pison TekLogic"],
       models: [
         { value: "EC50 EC55 EC30", label: "EC50 EC55 EC30", company: "Zebra" },
         { value: "ET1NO", label: "ET1NO", company: "Zebra" },
