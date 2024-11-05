@@ -37,7 +37,12 @@ export const LeftMenu = [
         { value: "TC56", label: "TC56", company: "Zebra" },
         { value: "TC57", label: "TC57", company: "Zebra" },
         { value: "TC57X", label: "TC57X", company: "Zebra" },
-        { value: "TC70 TC70X", label: "TC70 TC70X", company: "Zebra" }
+        { value: "TC70 TC70X", label: "TC70 TC70X", company: "Zebra" },
+        { value: "FALCON X3+", label: "FALCON X3+", company: "Datalogic" },
+        { value: "FALCON X3", label: "FALCON X3", company: "Datalogic" },
+        { value: "Memor X3", label: "Memor X3", company: "Datalogic" },
+        { value: "Skorpio X3", label: "Skorpio X3", company: "Datalogic" },
+        { value: "Skorpio X4", label: "Skorpio X4", company: "Datalogic" }
       ],               
     },
     {

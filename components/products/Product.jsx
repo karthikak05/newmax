@@ -33,7 +33,7 @@ export default function Product() {
         setSelectedBrand(value);
         setSelectedProduct(null);
         if (typeof window !== 'undefined') {
-            localStorage.setItem("activeCompanyIndex", value);
+            localStorage.setItem("activeCompanyName", value);
             localStorage.setItem("selectedProduct", null);
         }
     };
@@ -44,7 +44,7 @@ export default function Product() {
         setSelectedProduct(null);
         if (typeof window !== 'undefined') {
             localStorage.setItem("currentCategory", value);
-            localStorage.setItem("activeCompanyIndex", "Zebra");
+            localStorage.setItem("activeCompanyName", "Zebra");
             localStorage.setItem("selectedProduct", null);
         }
     };
@@ -84,15 +84,15 @@ export default function Product() {
     //     // }
     // };
 
-    const loadImages = async (selectedProductValue,activeBrand) => {
+    const loadImages = async (categoryValue,selectedProductValue,activeBrand,activeIndexValue) => {
         let url = '';
 
-        url = "/" + currentCategory;
+        url = "/" + categoryValue;
         const hasSubBrands = ["PDA Accesssories", "Barcode Printer Accessories"];
-        if (hasSubBrands.includes(currentCategory)) {
+        if (hasSubBrands.includes(categoryValue)) {
             url += "/" + activeBrand;
         }
-        if ( DropDownData[activeIndex].models.length > 0 ) {
+        if ( DropDownData[activeIndexValue].models.length > 0 ) {
             url += "/" + selectedProductValue;
         }
 
@@ -116,56 +116,57 @@ export default function Product() {
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            const category = localStorage.getItem("currentCategory");
-            if (category !== null) {
-                setCurrentCategory(category);
+            let categoryValue = localStorage.getItem("currentCategory");
+            if (categoryValue !== null && categoryValue!== "null") {
+                setCurrentCategory(categoryValue);
             } else {
                 setCurrentCategory("PDA Accessories");
-                localStorage.setItem("currentCategory", "PDA Accessories");
+                localStorage.setItem("currentCategory", "PDA Accesssories");
+                categoryValue = "PDA Accesssories";
             }
 
-            let activeCompanyIndex = localStorage.getItem("activeCompanyIndex");
-            if (activeCompanyIndex !== null) {
-                setSelectedBrand(activeCompanyIndex);
+            let activeCompanyName = localStorage.getItem("activeCompanyName");
+            if (activeCompanyName !== null && activeCompanyName!== "null") {
+                setSelectedBrand(activeCompanyName);
             } else {
                 setSelectedBrand(0);
-                localStorage.setItem("activeCompanyIndex", "Zebra");
-                activeCompanyIndex = "Zebra";
+                localStorage.setItem("activeCompanyName", "Zebra");
+                activeCompanyName = "Zebra";
             }
 
-            let activeIndex = localStorage.getItem("activeIndex");
-            if (activeIndex !== null) {
-                setActiveIndex(Number(activeIndex));
+            let activeIndexValue = localStorage.getItem("activeIndex");
+            if (activeIndexValue !== null) {
+                setActiveIndex(Number(activeIndexValue));
             } else {
                 localStorage.setItem("activeIndex", 0);
-                activeIndex = 0;
+                activeIndexValue = 0;
             }
 
             let selectedProductValue = localStorage.getItem('selectedProduct');
-            if (selectedProductValue !== "null") {
+            if (selectedProductValue !== null && selectedProductValue!== "null") {
                 setSelectedProduct(selectedProductValue);
             } else {
                 let value = null;
-                if (DropDownData[activeIndex].models.length > 0) {
-                    value = DropDownData[activeIndex].models[0].value;
+                if (DropDownData[activeIndexValue].models.length > 0) {
+                    console.log(DropDownData[activeIndexValue].models)
+                    value = DropDownData[activeIndexValue].models[0].value;
                 }
                 setSelectedProduct(value);
                 localStorage.setItem("selectedProduct", value);
                 selectedProductValue = value;
             }
 
-            // console.log(DropDownData[activeIndex].models)
-            if (activeIndex === "0") {
-                console.log("in")
-                const filteredModels = DropDownData[activeIndex].models.filter(
-                    model => model.company === activeCompanyIndex
+            // console.log(DropDownData[activeIndexValue].models)
+            if (activeIndexValue === "0") {
+                const filteredModels = DropDownData[activeIndexValue].models.filter(
+                    model => model.company === activeCompanyName
                 );
                 setDropDownValues(filteredModels);
-                selectedProductValue = filteredModels[0].value;
+                selectedProductValue = filteredModels[0]?.value;
             } else {
-                setDropDownValues(DropDownData[activeIndex].models);
+                setDropDownValues(DropDownData[activeIndexValue].models);
             }
-            loadImages(selectedProductValue,activeCompanyIndex);
+            loadImages(categoryValue,selectedProductValue,activeCompanyName,activeIndexValue);
         }
     }, [selectedBrand,activeIndex]);
 
@@ -176,7 +177,7 @@ export default function Product() {
         if (selectedProduct === null) {
             alert("Please select a product.");
         }
-        loadImages(selectedProduct,selectedBrand);
+        loadImages(currentCategory,selectedProduct,selectedBrand,activeIndex);
     };
 
     const totalPages = Math.ceil(imageUrls.length / imagesPerPage);
