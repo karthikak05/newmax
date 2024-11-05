@@ -91,7 +91,10 @@ export default function Product() {
 
     const loadImages = async (categoryValue,selectedProductValue,activeBrand,activeIndexValue) => {
         let url = '';
-        categoryValue = categoryValue === "PDA Accessories" && "PDA Accesssories";
+
+        if(categoryValue === "PDA Accessories"){
+            categoryValue ="PDA Accesssories";
+        }
 
         url = "/" + categoryValue;
         const hasSubBrands = ["PDA Accesssories", "Barcode Printer Accessories"];

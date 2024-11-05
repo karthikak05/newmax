@@ -5,13 +5,19 @@ import { Button } from '@mui/material';
 import Image from 'next/image';
 import { categoriesData } from '@/data/Categories';
 import { useRouter } from 'next/navigation';
+import { commonStore } from '@/store/commonProps';
 
 export default function Main() {
-  const router = useRouter()
+  const router = useRouter();
+  const { setActiveHeader } = commonStore();
 
-  const handleClick = (category)=>{
+  const handleClick = (category,i)=>{
+    setActiveHeader("Products");
     localStorage.setItem("currentCategory",category);
-    localStorage.setItem("activeHeader","Products")
+    localStorage.setItem("activeHeader","Products");
+    localStorage.setItem("activeIndex",i);
+    localStorage.setItem("activeCompanyName", "Zebra");
+    localStorage.setItem("selectedProduct", null);
     router.push("/products");
   }
   return (
@@ -25,7 +31,7 @@ export default function Main() {
                     <div className={styles.imgContainer}><Image src={data.image} alt={data.category} height={265} width={384}/></div>
                     <h2>{data.category}</h2>
                     <p>{data.para}</p>
-                    <div onClick={()=>handleClick(data.category)}>
+                    <div onClick={()=>handleClick(data.category,i)}>
                     <Button sx={{ textTransform: 'none' }} variant="contained" className={styles.containedBtn}>View Products</Button>
                     </div>
                 </div>
