@@ -35,7 +35,6 @@ export default function CheckoutForm({ handleCheckedOut }) {
       .map(item => `Product: ${item.name}, Quantity: ${item.quantity}, Price: $${item.price}`)
       .join("\n"); // Join each item with a new line for better readability
   };
-  console.log(cartItems,total)
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent the default form submission
@@ -45,7 +44,8 @@ export default function CheckoutForm({ handleCheckedOut }) {
 
   // Convert cartItems to a readable string format
   const JsonString = convertToString(cartItems);
-
+  const deliveryType = localStorage.getItem("deliveryType");
+  
   const data = {
     service_id: 'contact_us_newmax',
     template_id: 'contact_us_form',
@@ -59,6 +59,7 @@ export default function CheckoutForm({ handleCheckedOut }) {
       zipCode,
       cartItems: JsonString, 
       total,
+      deliveryType
     }
   };
 

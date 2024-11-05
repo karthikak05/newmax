@@ -24,6 +24,12 @@ export default function Total({handleCheckedOut}) {
     if( currencySymbol )  setCurrecySymbol(currencySymbol);  
   },[]);
 
+  const handleDelivery=(value)=>{
+    setDeliveryType(value);
+    if( typeof window !== undefined){
+        localStorage.setItem("deliveryType",value)
+    }
+  }
 
   const calculateTotal = ()=>{
     let totalAmount = total + deliveryFee + Tax;
@@ -46,7 +52,7 @@ export default function Total({handleCheckedOut}) {
 
       <div className={styles.type}>
         {types.map((type,i)=>(
-          <p key={i} className={type === deliveryType ? styles.active : ""} onClick={()=>setDeliveryType(type)}>{type}</p>
+          <p key={i} className={type === deliveryType ? styles.active : ""} onClick={()=>handleDelivery(type)}>{type}</p>
         ))}
       </div>
 
