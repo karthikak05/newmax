@@ -18,11 +18,11 @@
             }
         }
         .secondRow {
-            // grid-column: span 4;                    
-            // display: grid;
-            // grid-template-columns: repeat(4, 184px);  
-            // margin: auto;                       
-            // gap: 3rem;  
+            grid-column: span 4;                    
+            display: grid;
+            grid-template-columns: repeat(4, auto);  
+            margin: auto;                       
+            gap: 3rem;  
         }
     }
 }
