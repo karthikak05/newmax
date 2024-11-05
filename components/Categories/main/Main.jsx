@@ -11,6 +11,7 @@ export default function Main() {
 
   const handleClick = (category)=>{
     localStorage.setItem("currentCategory",category);
+    localStorage.setItem("activeHeader","Products")
     router.push("/products");
   }
   return (

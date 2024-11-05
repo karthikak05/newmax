@@ -20,7 +20,6 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: url("/bg.png");
         background-repeat: repeat;
         background-size: auto;
         opacity: 0.06;  
@@ -55,6 +54,9 @@
         background-color: rgba(255, 255, 255, 0.281);
         position: absolute;
         opacity: 0.3;
+    }
+    .circle1,.circle2,.circle3{
+        z-index: 999;
     }
     
     .content{

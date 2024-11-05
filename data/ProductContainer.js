@@ -29,7 +29,7 @@ export const productContainerDetails = [
     },
     {
         image: "/products/Touch Screen Digitizer Replacement for Symbol MC32N0-G(US $9.30).jpg",
-        name: "Touch Screen Digitizer for MC32N0",
+        name: "Touch Screen Digitizer MC32N0",
         description: "High-quality LCD replacement for Zebra TC51, ensuring clear visibility and sharp display.",
         price: "9.30",
         isBestSelling: false,
