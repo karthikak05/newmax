@@ -25,6 +25,10 @@
                 font-size: 14px;
             }
         }
+        p{
+            width: 100%;
+            word-wrap: break-word;
+        }
     }
     .cart{
         background-color: $color-primary;
