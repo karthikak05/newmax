@@ -1,9 +1,9 @@
 export const productContainerDetails = [
     {
-        image: "/products/sample.jpeg",
-        name: "Personal Shopper Series PS30",
+        image: "/products/Uruvo-DT50.jpeg",
+        name: "Urovo Screen Protector",
         description: "Give your customers a highly personalised, compelling and low-friction in-store shopping experience.",
-        price: "99",
+        price: "5",
         isBestSelling: true,
     },
     {
@@ -21,7 +21,7 @@ export const productContainerDetails = [
         isBestSelling: false,
     },
     {
-        image: "/products/sample.jpeg",
+        image: "/products/Rugged.jpeg",
         name: "Rugged Boot for Urovo DT50",
         description: "Protect your Urovo DT50 with this rugged boot, designed to withstand harsh environments.",
         price: "50",
