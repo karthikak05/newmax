@@ -1,7 +1,7 @@
 export const LeftMenu = [
     {
       heading: "PDA Accessories",
-      companies: ["Zebra", "Honeywell", "Datalogic", "InterMec", "Pison TekLogic"],
+      companies: ["Zebra", "Honeywell", "Datalogic", "InterMec", "Psion Teklogix"],
       models: [
         { value: "EC50 EC55 EC30", label: "EC50 EC55 EC30", company: "Zebra" },
         { value: "ET1NO", label: "ET1NO", company: "Zebra" },
@@ -78,6 +78,13 @@ export const LeftMenu = [
         { value: "Dolphin 6500", label: "Dolphin 6500", company: "Honeywell" },
         { value: "Dolphin 6510", label: "Dolphin 6510", company: "Honeywell" },
         { value: "Dolphin 7800", label: "Dolphin 7800", company: "Honeywell" },
+        //psion
+        { value: "TEKLOGIX 8515", label: "TEKLOGIX 8515", company: "Psion Teklogix" },
+        { value: "TEKLOGIX 8516 VH10F", label: "TEKLOGIX 8516 VH10F", company: "Psion Teklogix" },
+        { value: "TEKLOGIX 8525-G1 G2", label: "TEKLOGIX 8525-G1 G2", company: "Psion Teklogix" },
+        { value: "psion-teklogix-omnii-xt15-7545xa", label: "Omnii XT15 7545XA", company: "Psion Teklogix" },
+        { value: "workabout pro3 7527 series", label: "Workabout Pro3 7527 Series", company: "Psion Teklogix" },
+        { value: "workabout pro4 7528 series", label: "Workabout Pro4 7528 Series", company: "Psion Teklogix" }
       ],               
     },
     {

@@ -68,32 +68,14 @@ export default function Product() {
         }
     };
 
-    // const loadImages = async (selectedProductValue) => {
-    //     let imageUrls = null;
-    //     let url = '';
-    //     const isProductsAvailable = dropDownValues.length > 0;
-    //     // if ((isProductsAvailable && selectedProduct !== null) || !isProductsAvailable) {
-    //         setIsLoading(true);
-    //         url = "/" + currentCategory;
-    //         const hasSubBrands = ["PDA Accesssories", "Barcode Printer Accessories"];
-    //         if (hasSubBrands.includes(currentCategory)) {
-    //             url += "/" + selectedBrand;
-    //         }
-    //         if (DropDownData[activeIndex].models.length > 0) {
-    //             url += "/" + selectedProductValue;
-    //         }
-    //         imageUrls = await fetchImages(url);
-    //         setImageUrls(imageUrls);
-    //         setCurrentPage(1); // Reset to first page whenever images are loaded
-    //         setIsLoading(false);
-    //     // }
-    // };
-
     const loadImages = async (categoryValue,selectedProductValue,activeBrand,activeIndexValue) => {
         let url = '';
 
         if(categoryValue === "PDA Accessories"){
             categoryValue ="PDA Accesssories";
+        }
+        if(activeBrand === "Psion Teklogix"){
+            activeBrand = "Psion Texlogix";
         }
 
         url = "/" + categoryValue;
