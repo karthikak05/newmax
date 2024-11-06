@@ -134,7 +134,6 @@ export default function Product() {
             }
 
             let selectedProductValue = localStorage.getItem('selectedProduct');
-            const localProductValue = localStorage.getItem('selectedProduct');
             if (selectedProductValue !== null && selectedProductValue!== "null") {
                 setSelectedProduct(selectedProductValue);
             } else {

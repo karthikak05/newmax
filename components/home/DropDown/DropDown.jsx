@@ -2,21 +2,21 @@ import React, { useState, useRef, useEffect } from 'react';
 import styles from './Dropdown.module.scss';
 
 const Dropdown = ({ label, value, onChange, options }) => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState(value);
   const [filteredOptions, setFilteredOptions] = useState(options);
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    };
+  // useEffect(() => {
+  //   const handleClickOutside = (event) => {
+  //     if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+  //       setIsOpen(false);
+  //     }
+  //   };
 
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
+  //   document.addEventListener('mousedown', handleClickOutside);
+  //   return () => document.removeEventListener('mousedown', handleClickOutside);
+  // }, []);
 
   useEffect(()=>{
       setFilteredOptions(options);
@@ -47,7 +47,7 @@ const Dropdown = ({ label, value, onChange, options }) => {
         <input
           type="text"
           className={styles.dropdownSearch}
-          value={searchTerm}
+          value={searchTerm||value}
           onChange={handleSearchChange}
           onClick={() => setIsOpen(!isOpen)}
           placeholder=" "
