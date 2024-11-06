@@ -1,7 +1,7 @@
 export const LeftMenu = [
     {
       heading: "PDA Accessories",
-      companies: ["Zebra", "Honeywell", "Datalogic", "InterMec", "Psion Teklogix"],
+      companies: ["Zebra", "Honeywell", "Datalogic", "Intermec", "Psion Teklogix"],
       models: [
         { value: "EC50 EC55 EC30", label: "EC50 EC55 EC30", company: "Zebra" },
         { value: "ET1NO", label: "ET1NO", company: "Zebra" },
@@ -107,6 +107,17 @@ export const LeftMenu = [
         { value: "psion-teklogix-omnii-xt15-7545xa", label: "Omnii XT15 7545XA", company: "Psion Teklogix" },
         { value: "workabout pro3 7527 series", label: "Workabout Pro3 7527 Series", company: "Psion Teklogix" },
         { value: "workabout pro4 7528 series", label: "Workabout Pro4 7528 Series", company: "Psion Teklogix" },
+        //intermec
+        { value: "CK 71", label: "CK 71", company: "Intermec" },
+        { value: "CK 75", label: "CK 75", company: "Intermec" },
+        { value: "CK3R", label: "CK3R", company: "Intermec" },
+        { value: "CK3X", label: "CK3X", company: "Intermec" },
+        { value: "CK30", label: "CK30", company: "Intermec" },
+        { value: "CK70", label: "CK70", company: "Intermec" },
+        { value: "CN50", label: "CN50", company: "Intermec" },
+        { value: "CN51", label: "CN51", company: "Intermec" },
+        { value: "CN70 CN70E Series", label: "CN70 CN70E Series", company: "Intermec" },
+        { value: "CS 40", label: "CS 40", company: "Intermec" },
       ],               
     },
     {
