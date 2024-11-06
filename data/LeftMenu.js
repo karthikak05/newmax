@@ -124,14 +124,15 @@ export const LeftMenu = [
       heading: "Scanner Accessories",
       companies: [],
       models: [
-        { value: "HC100", label: "HC100" },
-        { value: "ZC100", label: "ZC100" },
-        { value: "ZXP1", label: "ZXP1" },
-        { value: "ZXP3", label: "ZXP3" },
-        { value: "ZXP7", label: "ZXP7" },
-        { value: "ZXP8", label: "ZXP8" },
-        { value: "ZXP9", label: "ZXP9" },
-      ],
+        { value: "DS3508DS3408LS3408", label: "DS3508DS3408LS3408" },
+        { value: "DS3578DS3478LS3578LS3478", label: "DS3578DS3478LS3578LS3478" },
+        { value: "DS3608LI3608", label: "DS3608LI3608" },
+        { value: "DS3678LI3678", label: "DS3678LI3678" },
+        { value: "DS4208 LS4208", label: "DS4208 LS4208" },
+        { value: "DS4308", label: "DS4308" },
+        { value: "DS6878 LS4278", label: "DS6878 LS4278" },
+        { value: "DS8108", label: "DS8108" }
+    ],    
     },
     {
       heading: "Barcode Printer Accessories",
