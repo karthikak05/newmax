@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState,useRef } from 'react';
 import styles from "./Product.module.scss";
 import LeftMenu from './LeftMenu/LeftMenu';
 import Dropdown from '../home/DropDown/DropDown';
@@ -22,6 +22,7 @@ export default function Product() {
     const [isLoading, setIsLoading] = useState(false);
     const [currentPage, setCurrentPage] = useState(1); 
     const [isPopped, setIsPopped] = useState(null);
+    const scrollRef = useRef()
     const imagesPerPage = 9;
 
     const handlePopped = (url) => {
@@ -183,12 +184,18 @@ export default function Product() {
 
     const handleNextPage = () => {
         if (currentPage < totalPages) {
+            if( scrollRef.current){
+                scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
             setCurrentPage(currentPage + 1);
         }
     };
 
     const handlePrevPage = () => {
         if (currentPage > 1) {
+            if( scrollRef.current){
+                scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
             setCurrentPage(currentPage - 1);
         }
     };
@@ -249,7 +256,7 @@ export default function Product() {
                             <h2 className={styles.error}>Error fetching products. Please try again.</h2>
                         ) : (
                         <>
-                            <div className={styles.gridContainer}>
+                            <div className={styles.gridContainer} ref={scrollRef}>
                                 {isPopped !== null && (
                                     <div className={styles.bg}>
                                         <div className={styles.imgContainer}>
