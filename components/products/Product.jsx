@@ -153,6 +153,7 @@ export default function Product() {
                 );
                 setDropDownValues(filteredModels);
                 selectedProductValue = filteredModels[0]?.value;
+                setSelectedProduct(selectedProductValue)
             } else {
                 setDropDownValues(DropDownData[activeIndexValue].models);
             }
