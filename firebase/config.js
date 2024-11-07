@@ -5,14 +5,15 @@ import {getAuth} from "firebase/auth"
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDFy-elBHdIwJxIUUE7s1aaYJMofck3oIg",
-  authDomain: "newmax-repair.firebaseapp.com",
-  projectId: "newmax-repair",
-  storageBucket: "newmax-repair.appspot.com",
-  messagingSenderId: "609625582219",
-  appId: "1:609625582219:web:4cb5cdd588a1a7abc8828e",
-  measurementId: "G-HF81Z2Q7F0"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
+
 
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);

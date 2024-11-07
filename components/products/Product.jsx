@@ -1,4 +1,6 @@
+'use client'
 import React, { useEffect, useState,useRef } from 'react';
+import { useSearchParams, useRouter } from 'next/navigation';
 import styles from "./Product.module.scss";
 import LeftMenu from './LeftMenu/LeftMenu';
 import Dropdown from '../home/DropDown/DropDown';
@@ -24,9 +26,10 @@ export default function Product() {
     const [isPopped, setIsPopped] = useState(null);
     const scrollRef = useRef()
     const imagesPerPage = 9;
+    const router = useRouter();
+    const searchParams = useSearchParams();
 
     const handlePopped = (url) => {
-        console.log("in")
         setIsPopped(url);
     };
 
@@ -69,6 +72,38 @@ export default function Product() {
         }
     };
 
+
+    const getSelectedCategory = (selectedCategory)=>{
+        const categories = [
+            'PDA Accessories',
+            'Scanner Accessories',
+            'Barcode Printer Accessories',
+            'Card Printer Accessories',
+            'Mobile Computers'
+        ];        
+        return categories.indexOf(selectedCategory);
+    }
+
+    const handleQueryParams =()=>{
+        const category = searchParams.get('category');
+        const index= getSelectedCategory(category)
+        loadImages(category,searchParams.get('company'),searchParams.get('model'),index);
+        const pageNo = searchParams.get('page');
+        if(pageNo){
+            setCurrentPage(pageNo);
+        }
+    }
+
+    const setQueryParams = ( categoryValue,selectedProductValue,activeBrand,pageNo)=>{
+        const query = new URLSearchParams(searchParams);
+        query.set('category', encodeURIComponent(categoryValue));
+        query.set('COMPANY', encodeURIComponent(activeBrand));
+        query.set('MODEL', encodeURIComponent(selectedProductValue));
+        query.set('page', encodeURIComponent(pageNo));
+
+        router.push(`?${query.toString()}`, undefined, { shallow: true });
+    }
+
     const loadImages = async (categoryValue,selectedProductValue,activeBrand,activeIndexValue) => {
         let url = '';
 
@@ -108,6 +143,12 @@ export default function Product() {
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
+            // const isQueryParamsAvailable =  new URLSearchParams(window.location.search) !== null;
+            // if(isQueryParamsAvailable){
+            //     handleQueryParams();
+            //     return;
+            // }
+
             let categoryValue = localStorage.getItem("currentCategory");
             if (categoryValue !== null && categoryValue!== "null") {
                 setCurrentCategory(categoryValue);
@@ -162,7 +203,7 @@ export default function Product() {
             // if (localProductValue !== null && localProductValue!== "null") {
             //     selectedProductValue =localProductValue;
             // };
-
+            // setQueryParams(categoryValue,selectedProductValue,activeCompanyName,1);
             loadImages(categoryValue,selectedProductValue,activeCompanyName,activeIndexValue);
         }
     }, [selectedBrand,activeIndex]);
