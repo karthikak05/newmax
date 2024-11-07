@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Button } from '@mui/material';
 import { useCartStore } from '@/store/cartStore';
 import { encryptData,decryptData } from '@/store/dataHandler';
+import { getNameAndPrice } from '@/functions/getName';
 
 export default function ProductContainer({ url,popover,isPopped,setIsPopped }) {
   const { add } = useCartStore();
@@ -50,22 +51,7 @@ export default function ProductContainer({ url,popover,isPopped,setIsPopped }) {
     }
   };
 
-  function extractNameAndPrice(url) {
-    const decodedString = decodeURIComponent(url);
-    const nameWithPrice = decodedString.substring(decodedString.lastIndexOf('/') + 1);
-    const name = nameWithPrice.substring(0, nameWithPrice.lastIndexOf('(')).trim();
-    
-    let price = nameWithPrice.substring(nameWithPrice.lastIndexOf('(')+2,nameWithPrice.lastIndexOf(')'));
-    let numericPrice = '';
-    for (let ch of price) {
-        if (!isNaN(ch) && ch !== ' ') { 
-            numericPrice += ch;
-        }
-    }   
-    return { name, numericPrice };
-  }
-
-  const { name, numericPrice } = extractNameAndPrice(url);
+  const { name, numericPrice } = getNameAndPrice(url);
 
   return (
     <div className={styles.main}>

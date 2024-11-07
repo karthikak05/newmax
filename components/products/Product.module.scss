@@ -101,31 +101,3 @@
         border-radius: 10px;
     }
 }
-
-
-.bg{
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background-color: rgba(63, 62, 62, 0.651);
-    z-index: 99;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .imgContainer{
-        height: 500px;
-        width: 400px;
-        img{
-            object-fit: contain;
-        }
-        position: relative;
-    }
-    .close{
-        position: absolute;
-        top: 0%;
-        right: 0;
-        background-color: $color-primary;
-        border-radius: 10px;
-        cursor: pointer;
-    }
-}

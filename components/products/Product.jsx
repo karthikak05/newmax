@@ -12,6 +12,7 @@ import { Button } from '@mui/material';
 import Image from 'next/image';
 import { openDatabase } from '@/store/imageStore';
 import { getImageUrls } from '@/store/imageStore';
+import Popover from '../Reusables/Popover/Popover';
 
 export default function Product() {
     const { fetchImages } = useStorage();
@@ -30,9 +31,16 @@ export default function Product() {
     const searchParams = useSearchParams();
 
     const handlePopped = (url) => {
+        const query = new URLSearchParams(searchParams);
+        if (url) {
+            query.set('image', encodeURIComponent(btoa(url)));
+        } else {
+            query.delete('image');
+        }
+        router.push(`?${query.toString()}`, undefined, { shallow: true });
         setIsPopped(url);
     };
-
+    
     const handleBrandChange = (value) => {
         setSelectedBrand(value);
         setSelectedProduct(null);
@@ -128,7 +136,14 @@ export default function Product() {
         const index = getSelectedCategory(categoryValue);
 
         router.push(`?${query.toString()}`, undefined, { shallow: true });
-        loadImages(categoryValue,selectedProductValue,activeBrand,index)
+        loadImages(categoryValue,selectedProductValue,activeBrand,index);
+        const imageParam = searchParams.get('image');
+    
+        if (imageParam) {
+            const decodedImage = decodeURIComponent(imageParam);
+            const imageUrl = atob(decodedImage);
+            setIsPopped(imageUrl);
+        }
     }
 
     const loadImages = async (categoryValue,selectedProductValue,activeBrand,activeIndexValue) => {
@@ -331,16 +346,17 @@ export default function Product() {
                         <>
                             <div className={styles.gridContainer} ref={scrollRef}>
                                 {isPopped !== null && (
-                                    <div className={styles.bg}>
-                                        <div className={styles.imgContainer}>
-                                            <div onClick={() => handlePopped(null)} className={styles.close}>
-                                                <svg width="52" height="52" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M16 16L12 12M12 12L8 8M12 12L16 8M12 12L8 16" stroke="#F8F8F8" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-                                                </svg>
-                                            </div>
-                                            <Image src={isPopped} alt="bg-cover" height={300} width={300} />
-                                        </div>
-                                    </div>
+                                    // <div className={styles.bg}>
+                                    //     <div className={styles.imgContainer}>
+                                    //         <div onClick={() => handlePopped(null)} className={styles.close}>
+                                    //             <svg width="52" height="52" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    //                 <path d="M16 16L12 12M12 12L8 8M12 12L16 8M12 12L8 16" stroke="#F8F8F8" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
+                                    //             </svg>
+                                    //         </div>
+                                    //         <Image src={isPopped} alt="bg-cover" height={300} width={300} />
+                                    //     </div>
+                                    // </div>
+                                    <Popover url={isPopped} handlePopped={handlePopped} />
                                 )}
                                 {currentImages.map((image, i) => (
                                     <div key={i} className={styles.item}>

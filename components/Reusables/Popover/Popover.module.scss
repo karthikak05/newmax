@@ -1,0 +1,93 @@
+@import "/styles/app.scss";
+@import "/styles/variables.scss";
+
+.bg{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(63, 62, 62, 0.651);
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .main{
+        background-color: white;
+        position: relative;
+        padding: 50px 25px;
+        border-radius: 1rem;
+        width: 80%;
+        @extend .flexRow !optional;
+        gap: 50px;
+    }
+    .imgContainer{
+        height: 300px;
+        width: 400px;
+        border: 1px solid #494949;
+        border-radius: 1rem;
+        img{
+            object-fit: contain;
+        }
+    }
+    .close{
+        position: absolute;
+        top: 0%;
+        right: 0;
+        color: $color-primary;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    .content{
+        @extend .flexCol !optional;
+        justify-content: space-evenly;
+        h2{
+            word-wrap: break-word;
+            width: 95%;
+            font-size: 32px;
+        }
+        .price{
+            color: $color-primary;
+            font-weight: 600;
+            font-size: 32px;
+            margin: 5px 0;
+            span{
+                color: gray;
+                font-size: 14px;
+            }
+        }
+        .btnContainer{
+            width: 100%;
+            button{
+                width: 200px;
+            }
+        }
+        .cart{
+            background-color: $color-primary;
+            color: white;
+            width: 100%;
+            padding: 10px 24px;
+            border-radius: 8px;
+        }
+        .buttons{
+            color: black;
+            @extend .flexRow !optional;
+            gap: 1rem;
+            .plus,.minus{
+                cursor: pointer;
+                font-size: 16px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .minus{
+                svg{
+                    transform: rotate(90deg);
+                }
+            }
+            div{
+                border: 1px solid #E4E4E4;
+                border-radius: 4px;
+                padding:3px 7px;
+            }
+        }
+    }
+}
