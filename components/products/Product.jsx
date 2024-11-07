@@ -72,6 +72,19 @@ export default function Product() {
         }
     };
 
+    const filterValues = (activeIndexValue,activeCompanyName)=>{
+        if (activeIndexValue === "0") {
+            const filteredModels = DropDownData[activeIndexValue].models.filter(
+                model => model.company === activeCompanyName
+            );
+            setDropDownValues(filteredModels);
+            const selectedProductValue = filteredModels[0]?.value;
+            setSelectedProduct(selectedProductValue)
+        } else {
+            setDropDownValues(DropDownData[activeIndexValue].models);
+        }
+    }
+
 
     const getSelectedCategory = (selectedCategory)=>{
         const categories = [
@@ -85,23 +98,37 @@ export default function Product() {
     }
 
     const handleQueryParams =()=>{
-        const category = searchParams.get('category');
-        const index= getSelectedCategory(category)
-        loadImages(category,searchParams.get('company'),searchParams.get('model'),index);
-        const pageNo = searchParams.get('page');
-        if(pageNo){
-            setCurrentPage(pageNo);
+        const category = decodeURIComponent(searchParams.get('category'));
+        const company = decodeURIComponent(searchParams.get('company'));
+        const model = decodeURIComponent(searchParams.get('model'));
+        const index = getSelectedCategory(category);
+
+        setSelectedBrand(company);
+        setCurrentCategory(category);
+        setActiveIndex(index);
+        if( index !== 4){
+            filterValues(index,company);
         }
+        loadImages(category, model, company, index);
+    
+        const pageNo = decodeURIComponent(searchParams.get('page'));
+        if (pageNo) {
+            setCurrentPage(pageNo);
+        }        
     }
 
-    const setQueryParams = ( categoryValue,selectedProductValue,activeBrand,pageNo)=>{
+    const setQueryParams = ( categoryValue,selectedProductValue,activeBrand)=>{
         const query = new URLSearchParams(searchParams);
         query.set('category', encodeURIComponent(categoryValue));
-        query.set('COMPANY', encodeURIComponent(activeBrand));
-        query.set('MODEL', encodeURIComponent(selectedProductValue));
-        query.set('page', encodeURIComponent(pageNo));
+        if(categoryValue !== "Mobile Computers"){
+            query.set('company', encodeURIComponent(activeBrand));
+            query.set('model', encodeURIComponent(selectedProductValue));
+        }
+        query.set('page', encodeURIComponent(currentPage));
+        const index = getSelectedCategory(categoryValue);
 
         router.push(`?${query.toString()}`, undefined, { shallow: true });
+        loadImages(categoryValue,selectedProductValue,activeBrand,index)
     }
 
     const loadImages = async (categoryValue,selectedProductValue,activeBrand,activeIndexValue) => {
@@ -143,11 +170,6 @@ export default function Product() {
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            // const isQueryParamsAvailable =  new URLSearchParams(window.location.search) !== null;
-            // if(isQueryParamsAvailable){
-            //     handleQueryParams();
-            //     return;
-            // }
 
             let categoryValue = localStorage.getItem("currentCategory");
             if (categoryValue !== null && categoryValue!== "null") {
@@ -203,10 +225,17 @@ export default function Product() {
             // if (localProductValue !== null && localProductValue!== "null") {
             //     selectedProductValue =localProductValue;
             // };
-            // setQueryParams(categoryValue,selectedProductValue,activeCompanyName,1);
-            loadImages(categoryValue,selectedProductValue,activeCompanyName,activeIndexValue);
+            setQueryParams(categoryValue,selectedProductValue,activeCompanyName);
+            // loadImages(categoryValue,selectedProductValue,activeCompanyName,activeIndexValue);
         }
     }, [selectedBrand,activeIndex]);
+
+    useEffect(()=>{
+        const isQueryParamsAvailable =  new URLSearchParams(searchParams).size > 0;
+        if(isQueryParamsAvailable){
+            handleQueryParams();
+        }
+    },[])
     
     
     const handleSearch = () => {
@@ -229,15 +258,18 @@ export default function Product() {
                 scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
             setCurrentPage(currentPage + 1);
+            const query = new URLSearchParams(searchParams);
+            query.set('page', encodeURIComponent(currentPage+1));
+            router.push(`?${query.toString()}`, undefined, { shallow: true });
         }
     };
 
     const handlePrevPage = () => {
         if (currentPage > 1) {
-            if( scrollRef.current){
-                scrollRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
             setCurrentPage(currentPage - 1);
+            const query = new URLSearchParams(searchParams);
+            query.set('page', encodeURIComponent(currentPage-1));
+            router.push(`?${query.toString()}`, undefined, { shallow: true });
         }
     };
 
