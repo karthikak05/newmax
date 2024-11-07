@@ -38,9 +38,14 @@ export default function Hero() {
             'Mobile Computers'
         ];        
         const activeIndex = categories.indexOf(selectedCategory);
+        localStorage.setItem('selectedProduct',null);
         if( typeof window !== undefined){
             localStorage.setItem('currentCategory',selectedCategory);
-            localStorage.setItem("activeCompanyName", "Zebra");
+            if(activeIndex === 0 || activeIndex=== 2){
+                localStorage.setItem("activeCompanyName", "Zebra");
+            }else{
+                localStorage.setItem("activeCompanyName", null);
+            }
             localStorage.setItem("activeIndex", activeIndex);
         }
         router.push("/products");
