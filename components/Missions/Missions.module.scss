@@ -2,38 +2,41 @@
 @import "/styles/variables.scss";
 
 .main{
-    margin-top: 10vh;
-    @extend .flexRow !optional;
+    margin-top: 100px;
+    @extend .flexCol !optional;
     align-items: center;
-    gap:10%;
-    .imgContainer{
-        height: 450px;
-        width: 423px;
-        background-color: rgb(200,230,201);
-        border-radius: 1rem;
-        position: relative;
-        .circle{
-            position: absolute;
-            border:20px solid white;
-            height: 150px;
-            width: 150px;
-            background-color: transparent;
-            right: -100px;
-            top: -100px;
-            border-radius: 50%;
-        }
-        img{
-            height: 90%;
-            position: absolute;
-            bottom: 0;
-        }
-    }
-    .left{
-        width: 60%;
-        border: 1px solid #dfdfdf80;
-        border-radius: 1rem;
-        padding: 4rem 2rem;
-    }
+    justify-content: center;
+    border: 1px solid #dfdfdf80;
+    border-radius: 1rem;
+    padding: 4rem 2rem;
+    // .imgContainer{
+    //     height: 450px;
+    //     width: 423px;
+    //     background-color: rgb(200,230,201);
+    //     border-radius: 1rem;
+    //     position: relative;
+    //     .circle{
+    //         position: absolute;
+    //         border:20px solid white;
+    //         height: 150px;
+    //         width: 150px;
+    //         background-color: transparent;
+    //         right: -100px;
+    //         top: -100px;
+    //         border-radius: 50%;
+    //     }
+    //     img{
+    //         height: 90%;
+    //         position: absolute;
+    //         bottom: 0;
+    //     }
+    // }
+    // .left{
+    //     width: 60%;
+    //     border: 1px solid #dfdfdf80;
+    //     border-radius: 1rem;
+    //     padding: 4rem 2rem;
+    // }
     .textContainer{
         line-height: 1.5;
         h2{

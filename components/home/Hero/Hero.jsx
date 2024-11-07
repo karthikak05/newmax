@@ -11,7 +11,7 @@ export default function Hero() {
     const router = useRouter();
     const [activeContainer, setActiveContainer] = useState(0);
     const scrollContainer = useRef(null);
-    const [selectedCategory, setSelectedCategory] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState('PDA Accessories');
 
     const handleCategory = (event) => {
         setSelectedCategory(event.target.value);

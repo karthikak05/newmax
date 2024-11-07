@@ -3,8 +3,8 @@
 
 .page{
     section{
-        min-height: 100vh;
-        margin: 0 64px 10vh 64px;
+        min-height: fit-content;
+        margin: 0 64px 100px 64px;
     }
 
     .main{
@@ -18,6 +18,6 @@
     }
 
     .recommended,.checkout{
-        margin: 0 64px 10vh 64px;
+        margin: 0 64px 100px 64px;
     }
 }

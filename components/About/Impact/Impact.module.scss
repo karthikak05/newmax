@@ -5,7 +5,7 @@
     background-color: #F3F3F3;
     @extend .flexRow !optional;
     padding: 2rem;
-    gap: 1rem;
+    gap: 100px;
     .circle{
         position: absolute;
         top: -300px;

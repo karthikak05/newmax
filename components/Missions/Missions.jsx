@@ -1,6 +1,5 @@
 import React from 'react'
 import styles from "./Missions.module.scss";
-import Image from 'next/image';
 
 export default function Missions() {
     const paras = [
@@ -21,7 +20,7 @@ export default function Missions() {
     ]
   return (
     <div className={styles.main}>
-        <div className={styles.left}>
+        {/* <div className={styles.left}> */}
             {paras.map((para,i)=>(
             <div className={styles.textContainer} key={i}>
             <h2>{para.heading}</h2>
@@ -30,11 +29,11 @@ export default function Missions() {
                 ))}
             </div>
              ))}
-            </div>
-        <div className={styles.imgContainer}>
+            {/* </div> */}
+        {/* <div className={styles.imgContainer}>
             <div className={styles.circle}></div>
             <Image src="/Ceo.png" alt="ceo-image" height={500} width={450}/>
-        </div>
+        </div> */}
     </div>
   )
 }

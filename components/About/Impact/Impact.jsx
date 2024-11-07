@@ -19,9 +19,9 @@ export default function Impact() {
         <h2 className={styles.subHeading}>Impact that we created!</h2>
         <p>At Newmax, our commitment to delivering top-quality mobile and computer spare parts has transformed the way people approach device repairs and upgrades.</p>
         <div className={styles.numbers}>
-        <p><span>29</span> <br />Years</p>
-        <p><span>120</span> <br />Countries</p>
-        <p><span>3000</span> <br />Customers</p>
+        <p><span>120+</span> <br />Countries</p>
+        <p><span>1000+</span> <br />Customers</p>
+        <p><span>3000+</span> <br />Products</p>
         </div>
         <div className={styles.itemsWrapper}>
           {paras.map((para,i)=>(

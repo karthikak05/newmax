@@ -19,13 +19,9 @@ export default function Navbar() {
     setActiveHeader(item);
     router.push(link);
   }
-
-  const handleHome = ()=>{
-    router.push("/");
-    setActiveHeader(null)
-  }
-  const handleContact = ()=>{
-    router.push("/contact-us");
+  const handleRedirect=(value)=>{
+    setActiveHeader(null);
+    router.push(value);
   }
 
   useEffect(()=>{
@@ -35,7 +31,7 @@ export default function Navbar() {
   
   return (
     <nav className={styles.navbar}>
-      <div className={styles.imgContainer} onClick={handleHome} style={{cursor:"pointer"}}>
+      <div className={styles.imgContainer} onClick={()=>handleRedirect("/")} style={{cursor:"pointer"}}>
         <Image src="/logo.png" alt='logo' width={195} height={25}/>
       </div>
       <div className={styles.itemsContainer}>
@@ -44,7 +40,7 @@ export default function Navbar() {
         ))}
       </div>
       <div className={styles.buttons}>
-        <button className={styles.outlinedButton} onClick={()=>(router.push("/cart"))}>
+        <button className={styles.outlinedButton} onClick={()=>handleRedirect("/cart")}>
           <span className={styles.cartQuantity}>{totalQuantity}</span>
           <span className={styles.svgContainer}>
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,7 +50,7 @@ export default function Navbar() {
           </span>
           Cart
         </button>
-        <div onClick={handleContact}>
+        <div onClick={()=>handleRedirect("/contact-us")}>
           <Button sx={{ textTransform: 'none' }} variant="contained" className={styles.containedBtn} >Contact Us</Button>
         </div>
       </div>

@@ -10,21 +10,32 @@ import {useRouter} from 'next/navigation'
 
 export default function Products() {
     const router = useRouter()
-    const [selectedValue, setSelectedValue] = useState('');
-
+    const [selectedValue, setSelectedValue] = useState('PDA Accessories');
 
     const handleChange = (event) => {
         setSelectedValue(event.target.value);
-        if (typeof window !== 'undefined') {
-            localStorage.setItem('currentCategory',event.target.value)   
-        }
     };
 
     const handleClick = ()=>{
-        if(selectedValue === ""){
-            localStorage.setItem('currentCategory','PDA Accessories')
+        const categories = [
+            'PDA Accessories',
+            'Scanner Accessories',
+            'Barcode Printer Accessories',
+            'Card Printer Accessories',
+            'Mobile Computers'
+        ];        
+        const activeIndex = categories.indexOf(selectedValue);
+        localStorage.setItem('selectedProduct',null);
+        if( typeof window !== undefined){
+            localStorage.setItem('currentCategory',selectedValue);
+            if(activeIndex === 0 || activeIndex=== 2){
+                localStorage.setItem("activeCompanyName", "Zebra");
+            }else{
+                localStorage.setItem("activeCompanyName", null);
+            }
+            localStorage.setItem("activeIndex", activeIndex);
         }
-        router.push("/products")
+        router.push("/products");
     };
 
     return (
