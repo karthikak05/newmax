@@ -12,14 +12,9 @@ export default function Hero() {
     const [activeContainer, setActiveContainer] = useState(0);
     const scrollContainer = useRef(null);
     const [selectedCategory, setSelectedCategory] = useState('');
-    const [selectedProduct, setSelectedProduct] = useState('');
 
     const handleCategory = (event) => {
         setSelectedCategory(event.target.value);
-    };
-
-    const handleProduct = (event) => {
-        setSelectedProduct(event.target.value);
     };
 
     const handleNext = () => {
@@ -35,10 +30,20 @@ export default function Hero() {
     };
 
     const handleClick = ()=>{
+        const categories = [
+            'PDA Accessories',
+            'Scanner Accessories',
+            'Barcode Printer Accessories',
+            'Card Printer Accessories',
+            'Mobile Computers'
+        ];        
+        const activeIndex = categories.indexOf(selectedCategory);
         if( typeof window !== undefined){
             localStorage.setItem('currentCategory',selectedCategory);
+            localStorage.setItem("activeCompanyName", "Zebra");
+            localStorage.setItem("activeIndex", activeIndex);
         }
-        router.push("/products")
+        router.push("/products");
     }
 
     useEffect(() => {
