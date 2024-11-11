@@ -136,7 +136,8 @@ export const LeftMenu = [
     },
     {
       heading: "Barcode Printer Spare Parts",
-      companies: ["Zebra", "HoneyWell", "DataMax", "Toshiba"],
+      // companies: ["Zebra", "HoneyWell", "Datamax", "Toshiba"],
+      companies: ["Zebra", "Honeywell", "Datamax"],
       models: [
           { company: "Zebra", value: "P4T RP4T", label: "P4T RP4T" },
           { company: "Zebra", value: "RW 220 RW 420", label: "RW 220 RW 420" },
@@ -144,7 +145,15 @@ export const LeftMenu = [
           { company: "Zebra", value: "ZQ520 ZQ521", label: "ZQ520 ZQ521" },
           { company: "Zebra", value: "ZQ610 ZQ610 PLUS", label: "ZQ610 ZQ610 PLUS" },
           { company: "Zebra", value: "ZQ620 ZQ620 PLUS", label: "ZQ620 ZQ620 PLUS" },
-          { company: "Zebra", value: "ZQ630 ZQ630 PLUS", label: "ZQ630 ZQ630 PLUS" }
+          { company: "Zebra", value: "ZQ630 ZQ630 PLUS", label: "ZQ630 ZQ630 PLUS" },
+          { company: "Zebra", value: "KR203", label: "KR203" },
+          { company: "Zebra", value: "KR403", label: "KR403" },
+          { company: "Zebra", value: "TTP2000", label: "TTP2000" },
+          { company: "Zebra", value: "TTP2100", label: "TTP2100" },
+          { company: "Datamax", value: "I4210", label: "I4210" },
+          { company: "Datamax", value: "I4208 I4206", label: "I4208 I4206" },
+          { company: "Honeywell", value: "PM43 PM42", label: "PM43 PM42" },
+          { company: "Honeywell", value: "PM45", label: "PM45" }
       ],      
     },
     {
