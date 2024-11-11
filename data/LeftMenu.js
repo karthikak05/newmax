@@ -1,6 +1,6 @@
 export const LeftMenu = [
     {
-      heading: "PDA Accessories",
+      heading: "PDA Spare Parts",
       companies: ["Zebra", "Honeywell", "Datalogic", "Intermec", "Psion Teklogix"],
       models: [
         { value: "EC50 EC55 EC30", label: "EC50 EC55 EC30", company: "Zebra" },
@@ -121,7 +121,7 @@ export const LeftMenu = [
       ],               
     },
     {
-      heading: "Scanner Accessories",
+      heading: "Scanner Spare Parts",
       companies: [],
       models: [
         { value: "DS3508DS3408LS3408", label: "DS3508DS3408LS3408" },
@@ -135,20 +135,20 @@ export const LeftMenu = [
     ],    
     },
     {
-      heading: "Barcode Printer Accessories",
+      heading: "Barcode Printer Spare Parts",
       companies: ["Zebra", "HoneyWell", "DataMax", "Toshiba"],
       models: [
-        { value: "HC100", label: "HC100" },
-        { value: "ZC100", label: "ZC100" },
-        { value: "ZXP1", label: "ZXP1" },
-        { value: "ZXP3", label: "ZXP3" },
-        { value: "ZXP7", label: "ZXP7" },
-        { value: "ZXP8", label: "ZXP8" },
-        { value: "ZXP9", label: "ZXP9" },
-      ],     
+          { company: "Zebra", value: "P4T RP4T", label: "P4T RP4T" },
+          { company: "Zebra", value: "RW 220 RW 420", label: "RW 220 RW 420" },
+          { company: "Zebra", value: "ZQ510 ZQ511", label: "ZQ510 ZQ511" },
+          { company: "Zebra", value: "ZQ520 ZQ521", label: "ZQ520 ZQ521" },
+          { company: "Zebra", value: "ZQ610 ZQ610 PLUS", label: "ZQ610 ZQ610 PLUS" },
+          { company: "Zebra", value: "ZQ620 ZQ620 PLUS", label: "ZQ620 ZQ620 PLUS" },
+          { company: "Zebra", value: "ZQ630 ZQ630 PLUS", label: "ZQ630 ZQ630 PLUS" }
+      ],      
     },
     {
-      heading: "Card Printer Accessories",
+      heading: "Card Printer Spare Parts",
       companies: [],
       models: [
         { value: "HC100", label: "HC100" },
@@ -158,6 +158,7 @@ export const LeftMenu = [
         { value: "ZXP7", label: "ZXP7" },
         { value: "ZXP8", label: "ZXP8" },
         { value: "ZXP9", label: "ZXP9" },
+        
       ],
     },
     {

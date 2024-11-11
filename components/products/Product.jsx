@@ -96,10 +96,10 @@ export default function Product() {
 
     const getSelectedCategory = (selectedCategory)=>{
         const categories = [
-            'PDA Accessories',
-            'Scanner Accessories',
-            'Barcode Printer Accessories',
-            'Card Printer Accessories',
+            'PDA Spare Parts',
+            'Scanner Spare Parts',
+            'Barcode Printer Spare Parts',
+            'Card Printer Spare Parts',
             'Mobile Computers'
         ];        
         return categories.indexOf(selectedCategory);
@@ -109,11 +109,17 @@ export default function Product() {
         const category = decodeURIComponent(searchParams.get('category'));
         const company = decodeURIComponent(searchParams.get('company'));
         const model = decodeURIComponent(searchParams.get('model'));
-        const index = getSelectedCategory(category);
+        const index = getSelectedCategory(category).toString();
 
         setSelectedBrand(company);
         setCurrentCategory(category);
         setActiveIndex(index);
+
+        localStorage.setItem("currentCategory", category);
+        localStorage.setItem("activeIndex", index);
+        localStorage.setItem("activeCompanyName", company);
+        localStorage.setItem("selectedProduct", DropDownData[index].models[0]);
+
         if( index !== 4){
             filterValues(index,company);
         }
@@ -135,6 +141,11 @@ export default function Product() {
         query.set('page', encodeURIComponent(currentPage));
         const index = getSelectedCategory(categoryValue);
 
+        localStorage.setItem("currentCategory", categoryValue);
+        localStorage.setItem("activeIndex", index);
+        localStorage.setItem("activeCompanyName", activeBrand);
+        localStorage.setItem("selectedProduct", selectedProductValue);
+
         router.push(`?${query.toString()}`, undefined, { shallow: true });
         loadImages(categoryValue,selectedProductValue,activeBrand,index);
         const imageParam = searchParams.get('image');
@@ -149,15 +160,19 @@ export default function Product() {
     const loadImages = async (categoryValue,selectedProductValue,activeBrand,activeIndexValue) => {
         let url = '';
 
-        if(categoryValue === "PDA Accessories"){
+        if(categoryValue === "PDA Spare Parts"){
             categoryValue ="PDA Accesssories";
+        }else if(categoryValue === "Barcode Printer Spare Parts"){
+            categoryValue = "Barcode Accessories"
         }
+        categoryValue = categoryValue.replace("Spare Parts", "Accessories");
+
         if(activeBrand === "Psion Teklogix"){
             activeBrand = "Psion Texlogix";
         }
 
         url = "/" + categoryValue;
-        const hasSubBrands = ["PDA Accesssories", "Barcode Printer Accessories"];
+        const hasSubBrands = ["PDA Accesssories", "Barcode Accessories"];
         if (hasSubBrands.includes(categoryValue)) {
             url += "/" + activeBrand;
         }
@@ -185,14 +200,20 @@ export default function Product() {
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
+            const isQueryParamsAvailable =  new URLSearchParams(searchParams).size > 0;
+            const isFirstTimeLoaded = sessionStorage.getItem('loaded');
+            if(isQueryParamsAvailable && isFirstTimeLoaded == null){
+                sessionStorage.setItem('loaded',"true")
+                handleQueryParams();
+            }else{
 
             let categoryValue = localStorage.getItem("currentCategory");
             if (categoryValue !== null && categoryValue!== "null") {
                 setCurrentCategory(categoryValue);
             } else {
-                setCurrentCategory("PDA Accessories");
-                localStorage.setItem("currentCategory", "PDA Accessories");
-                categoryValue = "PDA Accessories";
+                setCurrentCategory("PDA Spare Parts");
+                localStorage.setItem("currentCategory", "PDA Spare Parts");
+                categoryValue = "PDA Spare Parts";
             }
 
             let activeCompanyName = localStorage.getItem("activeCompanyName");
@@ -204,9 +225,9 @@ export default function Product() {
                 activeCompanyName = "Zebra";
             }
 
-            let activeIndexValue = localStorage.getItem("activeIndex");
-            if (activeIndexValue !== null) {
-                setActiveIndex(Number(activeIndexValue));
+            let activeIndexValue = Number(localStorage.getItem("activeIndex"));
+            if (activeIndexValue !== null && activeIndexValue > 0) {
+                setActiveIndex(activeIndexValue);
             } else {
                 localStorage.setItem("activeIndex", 0);
                 activeIndexValue = 0;
@@ -226,7 +247,7 @@ export default function Product() {
             }
 
             // console.log(DropDownData[activeIndexValue].models)
-            if (activeIndexValue === "0") {
+            if (activeIndexValue === 0 || activeIndexValue === 2) {
                 const filteredModels = DropDownData[activeIndexValue].models.filter(
                     model => model.company === activeCompanyName
                 );
@@ -234,13 +255,15 @@ export default function Product() {
                 selectedProductValue = filteredModels[0]?.value;
                 setSelectedProduct(selectedProductValue)
             } else {
+                console.log(DropDownData[0].models)
                 setDropDownValues(DropDownData[activeIndexValue].models);
             }
+            setQueryParams(categoryValue,selectedProductValue,activeCompanyName);
+        }
 
             // if (localProductValue !== null && localProductValue!== "null") {
             //     selectedProductValue =localProductValue;
             // };
-            setQueryParams(categoryValue,selectedProductValue,activeCompanyName);
             // loadImages(categoryValue,selectedProductValue,activeCompanyName,activeIndexValue);
         }
     }, [selectedBrand,activeIndex]);
