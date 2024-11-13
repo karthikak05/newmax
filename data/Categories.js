@@ -1,22 +1,22 @@
 export const categoriesData = [
     {
         image : "/categories/pda.jpeg",
-        category: "PDA Accessories",
+        category: "PDA Spare Parts",
         para : "Repair parts, spare parts and accessories for Mobile computers, handheld, PDA and AIDC devices",
     },
     {
         image : "/categories/Scanner.jpeg",
-        category: "Scanner Accessories",
+        category: "Scanner Spare Parts",
         para : "Repair parts, spare parts and accessories for Mobile computers, handheld, PDA and AIDC devices",
     },
     {
         image : "/categories/Barcode.jpeg",
-        category: "Barcode Printer Accessories",
+        category: "Barcode Printer Spare Parts",
         para : "Repair parts, spare parts and accessories for Mobile computers, handheld, PDA and AIDC devices",
     },
     {
         image : "/categories/card.jpeg",
-        category: "Card Printer Accessories",
+        category: "Card Printer Spare Parts",
         para : "Repair parts, spare parts and accessories for Mobile computers, handheld, PDA and AIDC devices",
     },
     {

@@ -9,13 +9,12 @@ import ProductContainer from '../Reusables/ProductContainer/ProductContainer';
 import { LeftMenu as DropDownData } from '@/data/LeftMenu';
 import CustomLoader from '../Reusables/CustomLoader';
 import { Button } from '@mui/material';
-import Image from 'next/image';
 import { openDatabase } from '@/store/imageStore';
 import { getImageUrls } from '@/store/imageStore';
 import Popover from '../Reusables/Popover/Popover';
 
 export default function Product() {
-    const { fetchImages } = useStorage();
+    const { fetchImages,fetchDropDown } = useStorage();
     const [currentCategory, setCurrentCategory] = useState(null);
     const [selectedBrand, setSelectedBrand] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
@@ -32,7 +31,7 @@ export default function Product() {
 
     const handlePopped = (url) => {
         const query = new URLSearchParams(searchParams);
-        if (url) {
+        if (url!==null) {
             query.set('image', encodeURIComponent(btoa(url)));
         } else {
             query.delete('image');
@@ -45,6 +44,7 @@ export default function Product() {
         setSelectedBrand(value);
         setSelectedProduct(null);
         setCurrentPage(1);
+        handlePopped(null);
         if (typeof window !== 'undefined') {
             localStorage.setItem("activeCompanyName", value);
             localStorage.setItem("selectedProduct", null);
@@ -56,6 +56,7 @@ export default function Product() {
         setSelectedBrand(null);
         setSelectedProduct(null);
         setCurrentPage(1);
+        handlePopped(null);
         if (typeof window !== 'undefined') {
             localStorage.setItem("currentCategory", value);
             localStorage.setItem("activeCompanyName", "Zebra");
@@ -66,9 +67,13 @@ export default function Product() {
     const handleProductChange = (e) => {
         setCurrentPage(1);
         setSelectedProduct(e.target.value);
+        handlePopped(null);
         if (typeof window !== 'undefined') {
             localStorage.setItem("selectedProduct", e.target.value);
         }
+        const query = new URLSearchParams(searchParams);
+        query.set('model', encodeURIComponent(e.target.value));
+        router.push(`?${query.toString()}`, undefined, { shallow: true }); 
         loadImages(currentCategory, e.target.value, selectedBrand, activeIndex);
     };
 
@@ -80,19 +85,6 @@ export default function Product() {
         }
     };
 
-    const filterValues = (activeIndexValue,activeCompanyName)=>{
-        if (activeIndexValue === "0") {
-            const filteredModels = DropDownData[activeIndexValue].models.filter(
-                model => model.company === activeCompanyName
-            );
-            setDropDownValues(filteredModels);
-            const selectedProductValue = filteredModels[0]?.value;
-            setSelectedProduct(selectedProductValue)
-        } else {
-            setDropDownValues(DropDownData[activeIndexValue].models);
-        }
-    }
-
 
     const getSelectedCategory = (selectedCategory)=>{
         const categories = [
@@ -103,27 +95,35 @@ export default function Product() {
             'Mobile Computers'
         ];        
         return categories.indexOf(selectedCategory);
-    }
+    };
 
-    const handleQueryParams =()=>{
+    const handleQueryParams =async()=>{
         const category = decodeURIComponent(searchParams.get('category'));
         const company = decodeURIComponent(searchParams.get('company'));
         const model = decodeURIComponent(searchParams.get('model'));
         const index = getSelectedCategory(category).toString();
+        const selectedProduct = await getDropDownValues(category,company);
 
         setSelectedBrand(company);
         setCurrentCategory(category);
         setActiveIndex(index);
+        if(model==null){
+            setSelectedProduct(selectedProduct);
+            localStorage.setItem("selectedProduct",selectedProduct);
+        }else{
+            setSelectedProduct(model);
+            localStorage.setItem("selectedProduct",model);
+        }
 
         localStorage.setItem("currentCategory", category);
         localStorage.setItem("activeIndex", index);
         localStorage.setItem("activeCompanyName", company);
-        localStorage.setItem("selectedProduct", DropDownData[index].models[0]);
 
-        if( index !== 4){
-            filterValues(index,company);
+        if(model==null){
+            loadImages(category, selectedProduct, company, index);
+        }else{
+            loadImages(category, model, company, index);
         }
-        loadImages(category, model, company, index);
     
         const pageNo = decodeURIComponent(searchParams.get('page'));
         if (pageNo) {
@@ -133,11 +133,21 @@ export default function Product() {
 
     const setQueryParams = ( categoryValue,selectedProductValue,activeBrand)=>{
         const query = new URLSearchParams(searchParams);
+        query.delete('page')
         query.set('category', encodeURIComponent(categoryValue));
-        if(categoryValue !== "Mobile Computers"){
+        if (categoryValue === "Mobile Computers") {
+            query.delete('company');
+            query.delete('model');
+        } else {
             query.set('company', encodeURIComponent(activeBrand));
             query.set('model', encodeURIComponent(selectedProductValue));
         }
+        if( categoryValue === "PDA Spare Parts" || categoryValue === "Barcode Spare Parts"){
+            query.set('company', encodeURIComponent(activeBrand));
+        }else{
+            query.delete('company');
+        }
+
         query.set('page', encodeURIComponent(currentPage));
         const index = getSelectedCategory(categoryValue);
 
@@ -148,10 +158,10 @@ export default function Product() {
 
         router.push(`?${query.toString()}`, undefined, { shallow: true });
         loadImages(categoryValue,selectedProductValue,activeBrand,index);
-        const imageParam = searchParams.get('image');
-    
-        if (imageParam) {
-            const decodedImage = decodeURIComponent(imageParam);
+        const image = query.get('image');
+        
+        if (image!=null) {
+            const decodedImage = decodeURIComponent(image);
             const imageUrl = atob(decodedImage);
             setIsPopped(imageUrl);
         }
@@ -185,8 +195,8 @@ export default function Product() {
             setImageUrls(cachedImageUrls); 
             // console.log("Using cached images:");
         } else {
-            setIsLoading(true); 
             const fetchedImageUrls = await fetchImages(url); 
+            setIsLoading(true); 
             if(fetchedImageUrls.length > 0){
                 const db = await openDatabase();
                 await db.put('images', { url: url, imageUrls: fetchedImageUrls });
@@ -194,86 +204,155 @@ export default function Product() {
             
             setImageUrls(fetchedImageUrls); // Use newly fetched URLs
             // console.log("Fetched and stored new images:");
-            setIsLoading(false); // Reset loading state
+            setIsLoading(false)
         }
     };
+    const getLastPathValues = (array) => {
+        return array.map((item) => {
+          const parts = item.split("/");
+          return parts[parts.length - 1];
+        });
+      };
+      
+    const getDropDownValues = async(category,brand)=>{
+        const key = category + "_dropdown";
+        let brandKey = category+"_"+brand+"_dropdown";
+        let localValues;
+        if(category === "PDA Spare Parts" || category === "Barcode Printer Spare Parts"){
+            localValues = JSON.parse(localStorage.getItem(brandKey));
+        }else{
+            JSON.parse(localStorage.getItem(key));
+        }
+
+        if( localValues!==null && localValues!== undefined){
+            setDropdown(localValues);
+            return localValues[0];
+        }
+        if(category === "PDA Spare Parts"){
+            category ="PDA Accesssories";
+        }else if(category === "Barcode Printer Spare Parts"){
+            category = "Barcode Accessories"
+        }
+        category = category.replace("Spare Parts", "Accessories");
+
+        if(brand === "Psion Teklogix"){
+            brand = "Psion Texlogix";
+        }
+        let url = category;
+
+        const noBrands = ["Card Printer Accessories","Mobile Computers","Scanner Accessories"]
+        if( !noBrands.includes(category)){
+            url += "/" + brand;
+        }
+
+        let result = await fetchDropDown(url);
+        let dropDownValues = getLastPathValues(result);
+        if(category === "PDA Accesssories" || category === "Barcode Accesssories"){
+            localStorage.setItem(brandKey,JSON.stringify(dropDownValues));
+        }else{
+            localStorage.setItem(key,JSON.stringify(dropDownValues));
+        }
+        if( dropDownValues!==null && dropDownValues!==undefined){
+            setDropdown(dropDownValues);
+        }
+        return dropDownValues[0];
+    };
+
+    const setDropdown= (dropDownValues)=>{
+        const formattedDropDownValues = dropDownValues.map((item) => ({
+            value: item,
+            label: item,
+        }));        
+          
+        setDropDownValues(formattedDropDownValues);
+        // setSelectedProduct(dropDownValues[0]);
+    }
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const isQueryParamsAvailable =  new URLSearchParams(searchParams).size > 0;
-            const isFirstTimeLoaded = sessionStorage.getItem('loaded');
-            if(isQueryParamsAvailable && isFirstTimeLoaded == null){
-                sessionStorage.setItem('loaded',"true")
-                handleQueryParams();
-            }else{
-
-            let categoryValue = localStorage.getItem("currentCategory");
-            if (categoryValue !== null && categoryValue!== "null") {
-                setCurrentCategory(categoryValue);
-            } else {
-                setCurrentCategory("PDA Spare Parts");
-                localStorage.setItem("currentCategory", "PDA Spare Parts");
-                categoryValue = "PDA Spare Parts";
-            }
-
-            let activeCompanyName = localStorage.getItem("activeCompanyName");
-            if (activeCompanyName !== null && activeCompanyName!== "null") {
-                setSelectedBrand(activeCompanyName);
-            } else {
-                setSelectedBrand(0);
-                localStorage.setItem("activeCompanyName", "Zebra");
-                activeCompanyName = "Zebra";
-            }
-
-            let activeIndexValue = Number(localStorage.getItem("activeIndex"));
-            if (activeIndexValue !== null && activeIndexValue > 0) {
-                setActiveIndex(activeIndexValue);
-            } else {
-                localStorage.setItem("activeIndex", 0);
-                activeIndexValue = 0;
-            }
-
-            let selectedProductValue = localStorage.getItem('selectedProduct');
-            if (selectedProductValue !== null && selectedProductValue!== "null") {
-                setSelectedProduct(selectedProductValue);
-            } else {
-                let value = null;
-                if (DropDownData[activeIndexValue].models.length > 0) {
-                    value = DropDownData[activeIndexValue].models[0].value;
+        const handleUseEffect = async()=>{
+            if (typeof window !== 'undefined') {
+                const isQueryParamsAvailable =  new URLSearchParams(searchParams).size > 0;
+                const isFirstTimeLoaded = sessionStorage.getItem('loaded');
+                if(isQueryParamsAvailable && isFirstTimeLoaded == null){
+                    sessionStorage.setItem('loaded',"true")
+                    handleQueryParams();
+                }else{
+    
+                let categoryValue = localStorage.getItem("currentCategory");
+                if (categoryValue !== null && categoryValue!== "null") {
+                    setCurrentCategory(categoryValue);
+                } else {
+                    setCurrentCategory("PDA Spare Parts");
+                    localStorage.setItem("currentCategory", "PDA Spare Parts");
+                    categoryValue = "PDA Spare Parts";
                 }
-                setSelectedProduct(value);
-                localStorage.setItem("selectedProduct", value);
-                selectedProductValue = value;
+    
+                let activeCompanyName = localStorage.getItem("activeCompanyName");
+                if (activeCompanyName !== null && activeCompanyName!== "null") {
+                    setSelectedBrand(activeCompanyName);
+                } else {
+                    setSelectedBrand(0);
+                    localStorage.setItem("activeCompanyName", "Zebra");
+                    activeCompanyName = "Zebra";
+                }
+                //Get the dynamic dropdown
+                // const productValue = getDropDownValues(categoryValue,activeCompanyName);
+    
+                let activeIndexValue = Number(localStorage.getItem("activeIndex"));
+                if (activeIndexValue !== null && activeIndexValue > 0) {
+                    setActiveIndex(activeIndexValue);
+                } else {
+                    localStorage.setItem("activeIndex", 0);
+                    activeIndexValue = 0;
+                }
+    
+                let selectedProductValue = localStorage.getItem('selectedProduct');
+                if (selectedProductValue !== null && selectedProductValue!== "null") {
+                    setSelectedProduct(selectedProductValue);
+                    await getDropDownValues(categoryValue,activeCompanyName)
+                } else {
+                    let value = null;
+                    // if (DropDownData[activeIndexValue].models.length > 0) {
+                    //     value = DropDownData[activeIndexValue].models[0].value;
+                    // }
+                    value = await getDropDownValues(categoryValue,activeCompanyName);
+                    setSelectedProduct(value);
+                    selectedProductValue = value;
+                    localStorage.setItem('selectedProduct',value)
+                }
+    
+                // console.log(DropDownData[activeIndexValue].models)
+                // if (activeIndexValue === 0 || activeIndexValue === 2) {
+                //     const filteredModels = DropDownData[activeIndexValue].models.filter(
+                //         model => model.company === activeCompanyName
+                //     );
+                //     setDropDownValues(filteredModels);
+                //     selectedProductValue = filteredModels[0]?.value;
+                //     setSelectedProduct(selectedProductValue);
+                // } else {
+                //     console.log(DropDownData[0].models)
+                //     setDropDownValues(DropDownData[activeIndexValue].models);
+                // }
+                setQueryParams(categoryValue,selectedProductValue,activeCompanyName);
             }
-
-            // console.log(DropDownData[activeIndexValue].models)
-            if (activeIndexValue === 0 || activeIndexValue === 2) {
-                const filteredModels = DropDownData[activeIndexValue].models.filter(
-                    model => model.company === activeCompanyName
-                );
-                setDropDownValues(filteredModels);
-                selectedProductValue = filteredModels[0]?.value;
-                setSelectedProduct(selectedProductValue)
-            } else {
-                console.log(DropDownData[0].models)
-                setDropDownValues(DropDownData[activeIndexValue].models);
+    
+                // if (localProductValue !== null && localProductValue!== "null") {
+                //     selectedProductValue =localProductValue;
+                // };
+                // loadImages(categoryValue,selectedProductValue,activeCompanyName,activeIndexValue);
             }
-            setQueryParams(categoryValue,selectedProductValue,activeCompanyName);
-        }
-
-            // if (localProductValue !== null && localProductValue!== "null") {
-            //     selectedProductValue =localProductValue;
-            // };
-            // loadImages(categoryValue,selectedProductValue,activeCompanyName,activeIndexValue);
-        }
+        };
+        handleUseEffect();
     }, [selectedBrand,activeIndex]);
 
-    useEffect(()=>{
-        const isQueryParamsAvailable =  new URLSearchParams(searchParams).size > 0;
-        if(isQueryParamsAvailable){
-            handleQueryParams();
-        }
-    },[])
+    // useEffect(()=>{
+    //     const isQueryParamsAvailable =  new URLSearchParams(searchParams).size > 0;
+    //     if(isQueryParamsAvailable){
+    //         setIsLoading(true);
+    //         handleQueryParams();
+    //         setIsLoading(false)
+    //     }
+    // },[]);
     
     
     const handleSearch = () => {
@@ -368,17 +447,7 @@ export default function Product() {
                         ) : (
                         <>
                             <div className={styles.gridContainer} ref={scrollRef}>
-                                {isPopped !== null && (
-                                    // <div className={styles.bg}>
-                                    //     <div className={styles.imgContainer}>
-                                    //         <div onClick={() => handlePopped(null)} className={styles.close}>
-                                    //             <svg width="52" height="52" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    //                 <path d="M16 16L12 12M12 12L8 8M12 12L16 8M12 12L8 16" stroke="#F8F8F8" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-                                    //             </svg>
-                                    //         </div>
-                                    //         <Image src={isPopped} alt="bg-cover" height={300} width={300} />
-                                    //     </div>
-                                    // </div>
+                                {isPopped !== null &&(
                                     <Popover url={isPopped} handlePopped={handlePopped} />
                                 )}
                                 {currentImages.map((image, i) => (
