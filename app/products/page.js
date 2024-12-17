@@ -1,8 +1,6 @@
-'use client';
 import React from 'react';
 import styles from "./products.module.scss";
 import dynamic from 'next/dynamic';
-import Head from 'next/head';
 
 const Product = dynamic(
     ()=> import("../../components/products/Product"),
