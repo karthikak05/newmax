@@ -28,6 +28,8 @@ export const metadata = {
     "fast gadget repairs",
     "hardware troubleshooting",
     "software solutions",
+    "newmax",
+    "Newmax spare parts",
   ],
   author: "NewMax Repair Team",
   robots: "index, follow",
