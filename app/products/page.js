@@ -2,6 +2,8 @@
 import React from 'react';
 import styles from "./products.module.scss";
 import dynamic from 'next/dynamic';
+import Head from 'next/head';
+
 const Product = dynamic(
     ()=> import("../../components/products/Product"),
     {ssr: false}
@@ -51,25 +53,6 @@ export const metadata = {
 const Products = () => {
     return (
         <main className={styles.page}>
-            <Head>
-            <title>{metadata.title}</title>
-            <meta name="description" content={metadata.description} />
-            <meta name="keywords" content={metadata.keywords.join(', ')} />
-            <meta name="robots" content={metadata.robots} />
-            
-            {/* Open Graph for social sharing */}
-            <meta property="og:title" content={metadata.openGraph.title} />
-            <meta property="og:description" content={metadata.openGraph.description} />
-            <meta property="og:image" content={metadata.openGraph.images[0].url} />
-            <meta property="og:url" content={metadata.openGraph.url} />
-            <meta property="og:type" content={metadata.openGraph.type} />
-            
-            {/* Twitter Card for social sharing */}
-            <meta name="twitter:card" content={metadata.twitter.card} />
-            <meta name="twitter:title" content={metadata.twitter.title} />
-            <meta name="twitter:description" content={metadata.twitter.description} />
-            <meta name="twitter:image" content={metadata.twitter.images[0]} />
-            </Head>
             {/* Structured Data (JSON-LD) for Products */}
             <script type="application/ld+json">
             {`
