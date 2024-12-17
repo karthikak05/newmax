@@ -16,7 +16,7 @@ const nunitoSemiBold = localFont({
 
 export const metadata = {
   title: "NewMax Repair - Mobile & Computer Repairs",
-  description: "Professional mobile and computer repair services. Fast, affordable, and reliable solutions for all your tech repair needs.",
+  description: "Professional mobile and computer repair services. Fast, affordable, and reliable solutions for all your tech repair needs.Check out the products here.https://www.newmaxrepair.com/products",
   keywords: [
     "mobile repair",
     "computer repair",
