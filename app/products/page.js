@@ -7,46 +7,46 @@ const Product = dynamic(
     {ssr: false}
 );
 // Updated SEO metadata with additional categories and keywords
-export const metadata = {
-    title: "NewMax Repair - High-Quality Mobile and Computer Accessories",
-    description: "Discover top-notch mobile and computer accessories at NewMax Repair. Browse our wide selection of products designed for performance and durability.",
-    keywords: [
-      "mobile accessories",
-      "computer accessories",
-      "tech accessories",
-      "gadgets",
-      "performance accessories",
-      "durable mobile accessories",
-      "computer tech products",
-      "PDA accessories",
-      "scanner accessories",
-      "barcode printer accessories",
-      "card printer accessories",
-      "mobile computers",
-    ],
-    robots: "index, follow",
-    openGraph: {
-      title: "NewMax Repair - Quality Mobile and Computer Accessories",
-      description: "Shop premium mobile and computer accessories from NewMax Repair. Find the best products for your devices at affordable prices.",
-      url: "https://www.newmaxrepair.com/products",
-      siteName: "NewMax Repair",
-      images: [
-        {
-          url: "https://www.newmaxrepair.com/assets/og-image.jpg",
-          width: 1200,
-          height: 630,
-          alt: "NewMax Repair - Quality Mobile and Computer Accessories",
-        },
-      ],
-      type: "website",
-    },
-    twitter: {
-      card: "summary_large_image",
-      title: "NewMax Repair - Fast and Affordable Mobile & Computer Repairs",
-      description: "Fast, reliable mobile and computer repair services with NewMax Repair. Your one-stop solution for all tech repairs.",
-      images: ["https://www.newmaxrepair.com/assets/repair-cover.jpg"],
-    },
-  };
+// export const metadata = {
+//     title: "NewMax Repair - High-Quality Mobile and Computer Accessories",
+//     description: "Discover top-notch mobile and computer accessories at NewMax Repair. Browse our wide selection of products designed for performance and durability.",
+//     keywords: [
+//       "mobile accessories",
+//       "computer accessories",
+//       "tech accessories",
+//       "gadgets",
+//       "performance accessories",
+//       "durable mobile accessories",
+//       "computer tech products",
+//       "PDA accessories",
+//       "scanner accessories",
+//       "barcode printer accessories",
+//       "card printer accessories",
+//       "mobile computers",
+//     ],
+//     robots: "index, follow",
+//     openGraph: {
+//       title: "NewMax Repair - Quality Mobile and Computer Accessories",
+//       description: "Shop premium mobile and computer accessories from NewMax Repair. Find the best products for your devices at affordable prices.",
+//       url: "https://www.newmaxrepair.com/products",
+//       siteName: "NewMax Repair",
+//       images: [
+//         {
+//           url: "https://www.newmaxrepair.com/assets/og-image.jpg",
+//           width: 1200,
+//           height: 630,
+//           alt: "NewMax Repair - Quality Mobile and Computer Accessories",
+//         },
+//       ],
+//       type: "website",
+//     },
+//     twitter: {
+//       card: "summary_large_image",
+//       title: "NewMax Repair - Fast and Affordable Mobile & Computer Repairs",
+//       description: "Fast, reliable mobile and computer repair services with NewMax Repair. Your one-stop solution for all tech repairs.",
+//       images: ["https://www.newmaxrepair.com/assets/repair-cover.jpg"],
+//     },
+//   };
 
 const Products = () => {
     return (
