@@ -11,7 +11,6 @@ export default function Home() {
     <div className={styles.page}>
       
       <main>
-        
         <section>
           <Hero/>
         </section>

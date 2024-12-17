@@ -61,10 +61,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <Head>
-        <meta 
-          name="google-site-verification" 
-          content="ft7UO9Xmj7HPiDCKIzR7d1WdcviC78MxxdpqGy2hm2w" 
-        />
+        <meta name="google-site-verification" content="ft7UO9Xmj7HPiDCKIzR7d1WdcviC78MxxdpqGy2hm2w" />
       </Head>
       <body className={`${nunito.variable} ${nunitoSemiBold.variable}`}>
         <div className="navbar">
