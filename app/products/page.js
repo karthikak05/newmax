@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from "./products.module.scss";
-import Product from '@/components/products/Product';
+import Script from 'next/script';
+const Product = dynamic(() => import("@/components/products/Product"), { ssr: false });
 
 // Updated SEO metadata with additional categories and keywords
 export const metadata = {
@@ -48,7 +49,7 @@ const Products = () => {
     return (
         <main className={styles.page}>
             {/* Structured Data (JSON-LD) for Products */}
-            <script type="application/ld+json">
+            <Script id="structured-data" type="application/ld+json">
             {`
             {
                 "@context": "https://schema.org",
@@ -66,7 +67,7 @@ const Products = () => {
                 }
             }
             `}
-            </script>
+            </Script>
             <section>
                 <Product/>
             </section>
