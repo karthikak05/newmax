@@ -168,6 +168,7 @@ export default function Product() {
     }
 
     const loadImages = async (categoryValue,selectedProductValue,activeBrand,activeIndexValue) => {
+        setIsLoading(true); 
         let url = '';
 
         if(categoryValue === "PDA Spare Parts"){
@@ -196,7 +197,6 @@ export default function Product() {
             // console.log("Using cached images:");
         } else {
             const fetchedImageUrls = await fetchImages(url); 
-            setIsLoading(true); 
             if(fetchedImageUrls.length > 0){
                 const db = await openDatabase();
                 await db.put('images', { url: url, imageUrls: fetchedImageUrls });
@@ -204,8 +204,8 @@ export default function Product() {
             
             setImageUrls(fetchedImageUrls); // Use newly fetched URLs
             // console.log("Fetched and stored new images:");
-            setIsLoading(false)
         }
+        setIsLoading(false);
     };
     const getLastPathValues = (array) => {
         return array.map((item) => {
@@ -442,9 +442,9 @@ export default function Product() {
                     {isLoading ? (
                         <div className={styles.loader}><CustomLoader color="red" /></div>
                     ) : (
-                        imageUrls.length === 0 ? (
-                            <h2 className={styles.error}>Error fetching products. Please try again.</h2>
-                        ) : (
+                        // imageUrls.length === 0 ? (
+                        //     <h2 className={styles.error}>Error fetching products. Please try again.</h2>
+                        // ) : (
                         <>
                             <div className={styles.gridContainer} ref={scrollRef}>
                                 {isPopped !== null &&(
@@ -477,8 +477,8 @@ export default function Product() {
                                 Next
                             </Button>
                         </div>
-                        </>
-                        )
+                         </>
+                        // )
                     )}
                 </div>
             </div>
