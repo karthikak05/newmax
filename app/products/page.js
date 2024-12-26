@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from "./products.module.scss";
 import Script from 'next/script';
+import dynamic from 'next/dynamic';
 const Product = dynamic(() => import("@/components/products/Product"), { ssr: false });
 
 // Updated SEO metadata with additional categories and keywords
