@@ -12,6 +12,10 @@
     box-shadow: 0 2px 8px rgba(136, 136, 136, 0.2); 
     font-family: var(--semibold);
 
+    a{
+        text-decoration: none;
+        color: black;
+    }
     .imgContainer{
         height: 26px;
         width: 195px;
